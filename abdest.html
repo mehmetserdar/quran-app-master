@@ -1,109 +1,416 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" dir="ltr">
 
 <head>
-    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bismillahirrahmanirrahim</title>
-    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdest Nasıl Alınır? - Kuran-ı Kerim</title>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="İslam'a uygun şekilde abdest alma rehberi, adım adım abdest nasıl alınır">
+    <meta name="keywords" content="abdest, namaz abdesti, abdest alma, abdest nasıl alınır, abdest farzları, abdest sünnetleri">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #e53e3e;
+            --main-font: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--main-font);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .abdest-step {
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .abdest-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26, 147, 111, 0.1);
+        }
+
+        .abdest-step::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-top-left-radius: 16px;
+            border-bottom-left-radius: 16px;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(26, 147, 111, 0.3);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.5rem;
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .intro-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(26, 147, 111, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, rgba(143, 209, 158, 0.2) 50%);
+            border-radius: 0 0 0 150px;
+        }
+
+        .list-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .list-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+        }
+
+        .tip-box {
+            background: rgba(26, 147, 111, 0.05);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .besmele {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--accent-color);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .farz-list, .sunnet-list {
+            counter-reset: item;
+        }
+
+        .farz-item, .sunnet-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.5rem;
+            counter-increment: item;
+        }
+
+        .farz-item::before {
+            content: counter(item) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .sunnet-item::before {
+            content: counter(item) ".";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .loading-animation {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-content {
+            padding-left: 1rem;
+        }
+    </style>
 </head>
 
-<body class="bg-light">
-    <header class="header-quran bg-dark text-light m-0">
-        <a class="text-white pb-1 pl-3 pt-1" href='javascript:history.back();'><i class="fas fa-arrow-left    "></i></a>   <span class="baslik">Abdest nasıl alınır? </span>
-    </header>
-    <main class="">
-        <div class="container p-2">           
-            <div class="yazi-turk">
-                <br>
-                <h3>Abdest nasıl alınır?</h3>
-                <p><b>Abdest</b>, namaz gibi belli ibadetleri yapabilmek için bir düzen içerisinde bazı organları yıkayıp bazılarını mesh ederek fiziki arınma ile  yapılan hükmi bir temizliktir. Namaz kılmak, Kur&#039anı Kerim okumak, Tilâvet secdesi yapmak, Cenaze namazı kılmak ve Kâbe’yi tavaf etmek için abdest gereklidir.
-                    <section class="wrapper">
-                    
-                    <p>Abdestin alınışı; Abdest, almaya başlamadan önce <b>"Niyet ettim Allah rızası için abdest almaya"</b> diye niyet ederiz.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p><b>"Eûzübillahimineşşeytanirracim. Bismillahirrahmanirrahim"</b> Önce eller bileklere kadar ve parmak araları da ovuşturularak üç defa yıkanır.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Sağ elimize üç defa su alarak ağzımıza veririz. Her su alışta ağzımızı çalkalayarak ağızdaki suyu dökeriz.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Tekrar avucumuza su alarak üç defa burnumuza veririz. Sol el ile de sümkürür temizleriz.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Sonra iki avucumuza su alarak saç bitiminden çene altına kadar yüzümüzü üç defa yıkarız.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Önce sağ kolu dirsekle beraber üçer defa yıkarız.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Sonra sol kolu dirsekle beraber üçer defa yıkarız.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Sağ elimizle başımızın dörtte birini mesh ederiz. Yani sağ elimizi ıslatıp başın dörtte birini sıvazlayarak ıslatırız.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Her iki eli de ıslatıp serçe parmaklarımızla kulaklarımızın içini mesh ederiz. Kulakların arka kısmını ise baş parmaklarımızla mesh ederiz.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Sonra baş ve serçe parmaklarımızı kullanmadan işaret, orta ve yüzük parmaklarımızın dışı ile boynumuzu da mesh ederiz.
-                    </section>
-                    <section class="wrapper">
-                    
-                    <p>Ayaklara gelince, parmaklardan başlayarak önce sağ sonra sol ayağımızı topuk kemiği ile beraber üçer kez yıkarız.
-                    <p>Ayaklarımızı yıkarken parmak aralarımızın iyice yıkanmasına dikkat etmemiz gerekir. 
-                    </section>
-                                        
-                    <h3>Abdestin Farzları</h3>
-                    <p><b>1.</b> Elleri dirseklere kadar kollarla birlikte yıkamak. 
-                    <p><b>2.</b> Yüzü yıkamak. 
-                    <p><b>3.</b> Başın dörtte birini meshetmek. 
-                    <p><b>4.</b> Topuklarıyla birlikte ayakları yıkamak. 
-                    <h3>Abdestin Sünnetleri</h3>
-                    <p><b>1.</b> Abdest almaya niyet etmek 
-                    <p><b>2.</b> Abdeste eûzü besmele ile başlamak. 
-                    <p><b>3.</b> Abdeste başlamadan önce elleri bileklere kadar yıkamak 
-                    <p><b>4.</b> Dişleri misvak veya fırça ile, yoksa parmaklar ile temizlemek. 
-                    <p><b>5.</b> Abdest organlarını peş peşe ara vermeden yıkamak. 
-                    <p><b>6.</b> Yıkanan organları ovmak. 
-                    <p><b>7.</b> Ağza üç kere su almak. 
-                    <p><b>8.</b> Oruçlu olmadığı zamanlarda gargara yapmak. 
-                    <p><b>9.</b> Burna üç kere su vermek ve sol elle sümkürmek. 
-                    <p><b>10.</b> Yıkanan her organı üç kere yıkamak. 
-                    <p><b>11.</b> Abdestte çift organları yıkamaya sağ organdan başlamak. 
-                    <p><b>12.</b> Eller ve ayaklarda yıkamaya parmak uçlarından başlamak. 
-                    <p><b>13.</b> Sakalı olanların sakalını hilallemesi. 
-                    <p><b>14.</b> Parmaktaki yüzüğü oynatarak suyun altına ulaşmasını temin etmek. 
-                    <p><b>15.</b> Kulakları meshetmek. 
-                    <p><b>16.</b> Boynu meshetmek. 
-                    <p><b>17.</b> Başın tamamını meshetmek. 
-                    <p><b>18.</b> Parmakların arasını hilallemek.  
+<body>
+    <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div>
+                        <h1 class="text-2xl font-bold">Abdest Nasıl Alınır?</h1>
+                        <p class="text-green-100 text-sm">İslami usullere göre abdest alma rehberi</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button id="shareBtn" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
             </div>
-            <br>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Intro Card -->
+        <div class="intro-card loading-animation">
+            <h2 class="text-2xl font-bold text-center mb-4">Abdest</h2>
+            <p class="text-gray-600">Namaz gibi belli ibadetleri yapabilmek için bir düzen içerisinde bazı organları yıkayıp bazılarını mesh ederek fiziki arınma ile yapılan hükmi bir temizliktir.</p>
+            <div class="flex flex-wrap justify-center gap-3 mt-6">
+                <div class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Namaz kılmak</div>
+                <div class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Kur'anı Kerim okumak</div>
+                <div class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Tilâvet secdesi</div>
+                <div class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Cenaze namazı</div>
+                <div class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Kâbe'yi tavaf</div>
+            </div>
+        </div>
+
+        <!-- Abdest Steps -->
+        <section class="mb-8">
+            <h2 class="section-title loading-animation">Abdestin Alınışı</h2>
+            
+            <div class="section-content">
+                <p class="mb-4 loading-animation">Abdest almaya başlamadan önce <b>"Niyet ettim Allah rızası için abdest almaya"</b> diye niyet ederiz.</p>
+                
+                <div class="besmele loading-animation">"Eûzübillahimineşşeytanirracim. Bismillahirrahmanirrahim"</div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.1s;">
+                    <div class="step-number">1</div>
+                    <p>Önce eller bileklere kadar ve parmak araları da ovuşturularak üç defa yıkanır.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.2s;">
+                    <div class="step-number">2</div>
+                    <p>Sağ elimize üç defa su alarak ağzımıza veririz. Her su alışta ağzımızı çalkalayarak ağızdaki suyu dökeriz.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.3s;">
+                    <div class="step-number">3</div>
+                    <p>Tekrar avucumuza su alarak üç defa burnumuza veririz. Sol el ile de sümkürür temizleriz.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.4s;">
+                    <div class="step-number">4</div>
+                    <p>Sonra iki avucumuza su alarak saç bitiminden çene altına kadar yüzümüzü üç defa yıkarız.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.5s;">
+                    <div class="step-number">5</div>
+                    <p>Önce sağ kolu dirsekle beraber üçer defa yıkarız.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.6s;">
+                    <div class="step-number">6</div>
+                    <p>Sonra sol kolu dirsekle beraber üçer defa yıkarız.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.7s;">
+                    <div class="step-number">7</div>
+                    <p>Sağ elimizle başımızın dörtte birini mesh ederiz. Yani sağ elimizi ıslatıp başın dörtte birini sıvazlayarak ıslatırız.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.8s;">
+                    <div class="step-number">8</div>
+                    <p>Her iki eli de ıslatıp serçe parmaklarımızla kulaklarımızın içini mesh ederiz. Kulakların arka kısmını ise baş parmaklarımızla mesh ederiz.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 0.9s;">
+                    <div class="step-number">9</div>
+                    <p>Sonra baş ve serçe parmaklarımızı kullanmadan işaret, orta ve yüzük parmaklarımızın dışı ile boynumuzu da mesh ederiz.</p>
+                </div>
+                
+                <div class="abdest-step loading-animation" style="animation-delay: 1.0s;">
+                    <div class="step-number">10</div>
+                    <p>Ayaklara gelince, parmaklardan başlayarak önce sağ sonra sol ayağımızı topuk kemiği ile beraber üçer kez yıkarız.</p>
+                    <p class="mt-2">Ayaklarımızı yıkarken parmak aralarımızın iyice yıkanmasına dikkat etmemiz gerekir.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abdestin Farzları -->
+        <section class="mb-8">
+            <h2 class="section-title loading-animation">Abdestin Farzları</h2>
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm loading-animation">
+                <ol class="farz-list">
+                    <li class="farz-item">Elleri dirseklere kadar kollarla birlikte yıkamak.</li>
+                    <li class="farz-item">Yüzü yıkamak.</li>
+                    <li class="farz-item">Başın dörtte birini meshetmek.</li>
+                    <li class="farz-item">Topuklarıyla birlikte ayakları yıkamak.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Abdestin Sünnetleri -->
+        <section class="mb-8">
+            <h2 class="section-title loading-animation">Abdestin Sünnetleri</h2>
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm loading-animation">
+                <ol class="sunnet-list">
+                    <li class="sunnet-item">Abdest almaya niyet etmek</li>
+                    <li class="sunnet-item">Abdeste eûzü besmele ile başlamak</li>
+                    <li class="sunnet-item">Abdeste başlamadan önce elleri bileklere kadar yıkamak</li>
+                    <li class="sunnet-item">Dişleri misvak veya fırça ile, yoksa parmaklar ile temizlemek</li>
+                    <li class="sunnet-item">Abdest organlarını peş peşe ara vermeden yıkamak</li>
+                    <li class="sunnet-item">Yıkanan organları ovmak</li>
+                    <li class="sunnet-item">Ağza üç kere su almak</li>
+                    <li class="sunnet-item">Oruçlu olmadığı zamanlarda gargara yapmak</li>
+                    <li class="sunnet-item">Burna üç kere su vermek ve sol elle sümkürmek</li>
+                    <li class="sunnet-item">Yıkanan her organı üç kere yıkamak</li>
+                    <li class="sunnet-item">Abdestte çift organları yıkamaya sağ organdan başlamak</li>
+                    <li class="sunnet-item">Eller ve ayaklarda yıkamaya parmak uçlarından başlamak</li>
+                    <li class="sunnet-item">Sakalı olanların sakalını hilallemesi</li>
+                    <li class="sunnet-item">Parmaktaki yüzüğü oynatarak suyun altına ulaşmasını temin etmek</li>
+                    <li class="sunnet-item">Kulakları meshetmek</li>
+                    <li class="sunnet-item">Boynu meshetmek</li>
+                    <li class="sunnet-item">Başın tamamını meshetmek</li>
+                    <li class="sunnet-item">Parmakların arasını hilallemek</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Tip Box -->
+        <div class="tip-box loading-animation">
+            <div class="flex items-start">
+                <i class="fas fa-lightbulb text-green-600 text-xl mr-3 mt-1"></i>
+                <div>
+                    <h3 class="font-semibold mb-1">Önemli Bilgi</h3>
+                    <p>Abdest alırken her bir adımı dikkatle ve niyet ederek yapmaya özen gösterin. Abdest, sadece fiziksel bir temizlik değil, manevi bir hazırlık ve arınma sürecidir.</p>
+                </div>
+            </div>
         </div>
     </main>
+
+    <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="./assets/data/dua.js"></script>
     <script src="./assets/script.js"></script>
     
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Share functionality
+            document.getElementById('shareBtn').addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Abdest Nasıl Alınır?',
+                        text: 'İslami usullere göre abdest alma rehberi',
+                        url: window.location.href
+                    }).then(() => {
+                        console.log('Paylaşım başarılı');
+                    }).catch(error => {
+                        console.log('Paylaşım hatası:', error);
+                    });
+                } else {
+                    // Fallback
+                    alert('Tarayıcınız paylaşım özelliğini desteklemiyor. Linki kopyalayıp paylaşabilirsiniz.');
+                }
+            });
 
+            // Animation on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loading-animation');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.abdest-step, .section-title, .tip-box').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
 </html>

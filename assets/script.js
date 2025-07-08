@@ -1,7 +1,5 @@
 const indexPage = () => {
-  $("#quran").click(() => {
-    document.location.href = "quran.html";
-  });
+ 
   $("#time").click(() => {
     mevcutDegil();
   });
@@ -17,14 +15,11 @@ const indexPage = () => {
   $("#sayac").click(() => {
     document.location.href = "counter.html";
   });
-  $("#settings").click(() => {
-    mevcutDegil();
-  });
   $("#bookmark").click(() => {
     document.location.href = "bookmark.html";
   });
-  $("#about").click(() => {
-    document.location.href = "about.html";
+  $("#settings").click(() => {
+    document.location.href = "settings.html";
   });
   $("#app").click(() => {
     document.location.href =
@@ -298,59 +293,59 @@ const surahPage = () => {
   /*  ,  de.khoury  ,  */
   switch (lang) {
     case "id":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,id.indonesian`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,id.indonesian`;
       break;
     case "de":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,de.khoury`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,de.khoury`;
       break;
     case "es":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,es.cortes`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,es.cortes`;
       break;
     case "ru":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,ru.kuliev`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,ru.kuliev`;
       break;
     case "fr":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,fr.hamidullah`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,fr.hamidullah`;
       break;
     case "en":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,en.asad`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,en.asad`;
       break;
     case "ur":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,ur.ahmedali`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,ur.ahmedali`;
       break;
     case "hi":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,hi.farooq`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,hi.farooq`;
       break;
     case "bs":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,bs.korkut`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,bs.korkut`;
       break;
     case "az":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,az.musayev`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,az.musayev`;
       break;
     case "ug":
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,ug.saleh`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,ug.saleh`;
       break;
     default:
-      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,tr.diyanet`;
+      var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,tr.diyanet`;
       break;
   }
 
   if (lang == "tr") {
     switch (meal) {
       case "vakfi":
-        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,tr.vakfi`;
+        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,tr.vakfi`;
         break;
       case "yazir":
-        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,tr.yazir`;
+        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,tr.yazir`;
         break;
       case "golpinar":
-        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,tr.golpinarli`;
+        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,tr.golpinarli`;
         break;
       case "ozturk":
-        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,tr.ozturk`;
+        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,tr.ozturk`;
         break;
       case "ates":
-        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.saoodshuraym,tr.ates`;
+        var url_api = `https://api.alquran.cloud/v1/surah/${no_s}/editions/ar.alafasy,tr.ates`;
         break;
     }
   }
@@ -655,12 +650,7 @@ const surahPage = () => {
 
       i++;
     });
-    const footer = `<footer id="footer" class=" py-1 bg-dark text-white-50" style="font-family: 'mequran'; z-index:-1">
-      <img src="./assets/image/line.png" style="max-width: 250px; padding-bottom: 20px;"></img><br>
-     <span>صَدَقَ اللّهُ العَظِيمُ</span> 
-  
-  </footer>`
-    $("#list-ayah").append(footer);
+    
 
     $(".no-ayat").click((e) => {
       methodPlay2(e);
@@ -1103,7 +1093,7 @@ const bookmarkPage = () => {
   ];
   data.forEach((d) => {
     if (lang == "tr") {
-      const html = `<li class="bookmark list-group-item list-group-item-dark d-flex justify-content-between align-items-center " data-surah="${
+      const html = `<li class="bookmark list-group-item list-group-item d-flex justify-content-between align-items-center " data-surah="${
         d.surah
       }" data-ayat="${d.ayat}" index="${i}" id="${i}">
         ${sureler[d.surah]}:${d.ayat}
@@ -1112,7 +1102,7 @@ const bookmarkPage = () => {
       $("#list-bookmark").append(html);
       i++;
     } else {
-      const html = `<li class="bookmark list-group-item list-group-item-dark d-flex justify-content-between align-items-center " data-surah="${
+      const html = `<li class="bookmark list-group-item list-group-item d-flex justify-content-between align-items-center " data-surah="${
         d.surah
       }" data-ayat="${d.ayat}" index="${i}" id="${i}">
         ${surahNames[d.surah]}:${d.ayat}
@@ -1145,4 +1135,361 @@ if (isAndroid) {
   nav.style.display = "none";
 }
 
+$(document).ready(function() {
+    // Loading screen
+    setTimeout(function() {
+        $('#loadingOverlay').addClass('fade-out');
+        setTimeout(function() {
+            $('#loadingOverlay').remove();
+        }, 500);
+    }, 1500);
+    
+    // Initialize language and meal
+    if (typeof loadLanguage === 'function') {
+        loadLanguage();
+    }
+    if (typeof loadMeal === 'function') {
+        loadMeal();
+    }
+    
+    // Günün ayetini yükle - FIX: Fonksiyon tanımlandıktan sonra çağır
+    if (typeof getDailyVerseWithCache === 'function') {
+        getDailyVerseWithCache();
+    }
+    
+    // Hero section main buttons
+    $('#startReadingBtn').off('click').on('click', function(e) {
+        e.preventDefault();
+        console.log('Start Reading button clicked!');
+        window.location.href = 'quran.html';
+    });
+    
+    $('#tasbeehBtn').off('click').on('click', function(e) {
+        e.preventDefault();
+        console.log('Tasbeeh button clicked!');
+        window.location.href = 'counter.html';
+    });
+    
+    // Alternative method using direct event binding
+    const startBtn = document.getElementById('startReadingBtn');
+    const tasbeehBtn = document.getElementById('tasbeehBtn');
+    
+    if (startBtn) {
+        startBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Direct event: Start Reading clicked!');
+            window.location.href = 'quran.html';
+        });
+    }
+    
+    if (tasbeehBtn) {
+        tasbeehBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Direct event: Tasbeeh clicked!');
+            window.location.href = 'counter.html';
+        });
+    }
+    
+    // ...rest of existing code...
+});
 
+// Günün Ayeti Fonksiyonları - Başta tanımlanmalı
+function getDailyVerse() {
+    // Rastgele sure ve ayet seçimi
+    const randomSurah = Math.floor(Math.random() * 114) + 1;
+    
+    // Her sure için ayet sayıları (yaklaşık değerler)
+    const surahAyahCounts = {
+        1: 7, 2: 286, 3: 200, 4: 176, 5: 120, 6: 165, 7: 206, 8: 75, 9: 129, 10: 109,
+        11: 123, 12: 111, 13: 43, 14: 52, 15: 99, 16: 128, 17: 111, 18: 110, 19: 98, 20: 135,
+        21: 112, 22: 78, 23: 118, 24: 64, 25: 77, 26: 227, 27: 93, 28: 88, 29: 69, 30: 60,
+        31: 34, 32: 30, 33: 73, 34: 54, 35: 45, 36: 83, 37: 182, 38: 88, 39: 75, 40: 85,
+        41: 54, 42: 53, 43: 89, 44: 59, 45: 37, 46: 35, 47: 38, 48: 29, 49: 18, 50: 45,
+        51: 60, 52: 49, 53: 62, 54: 55, 55: 78, 56: 96, 57: 29, 58: 22, 59: 24, 60: 13,
+        61: 14, 62: 11, 63: 11, 64: 18, 65: 12, 66: 12, 67: 30, 68: 52, 69: 52, 70: 44,
+        71: 28, 72: 28, 73: 20, 74: 56, 75: 40, 76: 31, 77: 50, 78: 40, 79: 46, 80: 42,
+        81: 29, 82: 19, 83: 36, 84: 25, 85: 22, 86: 17, 87: 19, 88: 26, 89: 30, 90: 20,
+        91: 15, 92: 21, 93: 11, 94: 8, 95: 8, 96: 19, 97: 5, 98: 8, 99: 8, 100: 11,
+        101: 11, 102: 8, 103: 3, 104: 9, 105: 5, 106: 4, 107: 7, 108: 3, 109: 6, 110: 3,
+        111: 5, 112: 4, 113: 5, 114: 6
+    };
+    
+    const maxAyah = surahAyahCounts[randomSurah] || 10;
+    const randomAyah = Math.floor(Math.random() * maxAyah) + 1;
+    
+    // Sure isimleri
+    const surahNames = {
+        1: "Fatiha", 2: "Bakara", 3: "Ali İmran", 4: "Nisa", 5: "Maide", 6: "Enam", 7: "Araf", 8: "Enfal", 9: "Tevbe", 10: "Yunus",
+        11: "Hud", 12: "Yusuf", 13: "Rad", 14: "İbrahim", 15: "Hicr", 16: "Nahl", 17: "İsra", 18: "Kehf", 19: "Meryem", 20: "Taha",
+        21: "Enbiya", 22: "Hacc", 23: "Muminun", 24: "Nur", 25: "Furkan", 26: "Şuara", 27: "Neml", 28: "Kasas", 29: "Ankebut", 30: "Rum",
+        31: "Lokman", 32: "Secde", 33: "Ahzab", 34: "Sebe", 35: "Fatır", 36: "Yasin", 37: "Saffat", 38: "Sad", 39: "Zümer", 40: "Mümin",
+        41: "Fussilet", 42: "Şura", 43: "Zuhruf", 44: "Duhan", 45: "Casiye", 46: "Ahkaf", 47: "Muhammed", 48: "Fetih", 49: "Hucurat", 50: "Kaf",
+        51: "Zariyat", 52: "Tur", 53: "Necm", 54: "Kamer", 55: "Rahman", 56: "Vakıa", 57: "Hadid", 58: "Mücadele", 59: "Haşr", 60: "Mümtahine",
+        61: "Saff", 62: "Cuma", 63: "Münafikun", 64: "Tegabun", 65: "Talak", 66: "Tahrim", 67: "Mülk", 68: "Kalem", 69: "Hakka", 70: "Mearic",
+        71: "Nuh", 72: "Cinn", 73: "Müzzemmil", 74: "Müddessir", 75: "Kıyamet", 76: "İnsan", 77: "Mürselat", 78: "Nebe", 79: "Naziat", 80: "Abese",
+        81: "Tekvir", 82: "İnfitar", 83: "Mutaffifin", 84: "İnşikak", 85: "Buruc", 86: "Tarık", 87: "Ala", 88: "Gaşiye", 89: "Fecr", 90: "Beled",
+        91: "Şems", 92: "Leyl", 93: "Duha", 94: "İnşirah", 95: "Tin", 96: "Alak", 97: "Kadir", 98: "Beyyine", 99: "Zilzal", 100: "Adiyat",
+        101: "Karia", 102: "Tekasur", 103: "Asr", 104: "Hümeze", 105: "Fil", 106: "Kureyş", 107: "Maun", 108: "Kevser", 109: "Kafirun", 110: "Nasr",
+        111: "Leheb", 112: "İhlas", 113: "Felak", 114: "Nas"
+    };
+    
+    // Meal türü kontrolü
+    const mealType = localStorage.getItem("mealValue") || "diyanet";
+    let mealIdentifier = "tr.diyanet";
+    
+    switch (mealType) {
+        case "vakfi":
+            mealIdentifier = "tr.vakfi";
+            break;
+        case "yazir":
+            mealIdentifier = "tr.yazir";
+            break;
+        case "golpinar":
+            mealIdentifier = "tr.golpinarli";
+            break;
+        case "ozturk":
+            mealIdentifier = "tr.ozturk";
+            break;
+        case "ates":
+            mealIdentifier = "tr.ates";
+            break;
+        default:
+            mealIdentifier = "tr.diyanet";
+    }
+    
+    // API URL'si
+    const apiUrl = `https://api.alquran.cloud/v1/ayah/${randomSurah}:${randomAyah}/editions/ar.alafasy,${mealIdentifier}`;
+    
+    // Loading state
+    if (document.getElementById('dailyVerseCard')) {
+        document.getElementById('dailyVerseCard').innerHTML = `
+            <div class="text-center py-8">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4"></div>
+                <p class="text-gray-600">Günün ayeti yükleniyor...</p>
+            </div>
+        `;
+    }
+    
+    // API çağrısı
+    if (typeof $ !== 'undefined') {
+        $.get(apiUrl)
+            .done(function(data) {
+                if (data.code === 200 && data.data && data.data.length >= 2) {
+                    const arabicText = data.data[0].text;
+                    const turkishText = data.data[1].text;
+                    const surahName = surahNames[randomSurah] || "Bilinmeyen";
+                    
+                    updateDailyVerse(arabicText, turkishText, surahName, randomSurah, randomAyah);
+                } else {
+                    showDefaultVerse();
+                }
+            })
+            .fail(function() {
+                showDefaultVerse();
+            });
+    } else {
+        // Fetch API fallback
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === 200 && data.data && data.data.length >= 2) {
+                    const arabicText = data.data[0].text;
+                    const turkishText = data.data[1].text;
+                    const surahName = surahNames[randomSurah] || "Bilinmeyen";
+                    
+                    updateDailyVerse(arabicText, turkishText, surahName, randomSurah, randomAyah);
+                } else {
+                    showDefaultVerse();
+                }
+            })
+            .catch(() => {
+                showDefaultVerse();
+            });
+    }
+}
+
+// Günün ayetini güncelle
+function updateDailyVerse(arabicText, turkishText, surahName, surahNumber, ayahNumber) {
+    const dailyVerseHtml = `
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Günün Ayeti</h3>
+            <div class="w-20 h-1 bg-green-600 rounded mx-auto"></div>
+        </div>
+        <div class="arabic-text text-center mb-6 text-gray-800 leading-relaxed">
+            ${arabicText}
+        </div>
+        <p class="text-gray-600 text-center mb-6 italic">
+            "${turkishText}"
+        </p>
+        <div class="flex justify-between items-center">
+            <span class="text-sm text-gray-500">${surahName} Suresi ${surahNumber}:${ayahNumber}</span>
+            <div class="flex space-x-2">
+                <button class="text-green-600 hover:text-green-800 transition" onclick="bookmarkVerse(${surahNumber}, ${ayahNumber})" title="Favorilere Ekle">
+                    <i class="fas fa-bookmark text-lg"></i>
+                </button>
+                <button class="text-blue-600 hover:text-blue-800 transition" onclick="shareVerse('${surahName}', ${surahNumber}, ${ayahNumber})" title="Paylaş">
+                    <i class="fas fa-share-alt text-lg"></i>
+                </button>
+                <button class="text-purple-600 hover:text-purple-800 transition" onclick="goToVerse(${surahNumber}, ${ayahNumber})" title="Tam Sayfaya Git">
+                    <i class="fas fa-external-link-alt text-lg"></i>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    if (document.getElementById('dailyVerseCard')) {
+        document.getElementById('dailyVerseCard').innerHTML = dailyVerseHtml;
+    }
+    
+    // Önbelleğe kaydet
+    cacheDailyVerse(arabicText, turkishText, surahName, surahNumber, ayahNumber);
+}
+
+// Varsayılan ayet göster
+function showDefaultVerse() {
+    const defaultVerseHtml = `
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Günün Ayeti</h3>
+            <div class="w-20 h-1 bg-green-600 rounded mx-auto"></div>
+        </div>
+        <div class="arabic-text text-center mb-6 text-gray-800">
+            بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+        </div>
+        <p class="text-gray-600 text-center mb-4 italic">
+            "Rahman ve Rahim olan Allah'ın adıyla"
+        </p>
+        <div class="flex justify-between items-center">
+            <span class="text-sm text-gray-500">Fatiha Suresi 1:1</span>
+            <div class="flex space-x-2">
+                <button class="text-green-600 hover:text-green-800 transition" onclick="bookmarkVerse(1, 1)" title="Favorilere Ekle">
+                    <i class="fas fa-bookmark text-lg"></i>
+                </button>
+                <button class="text-blue-600 hover:text-blue-800 transition" onclick="shareVerse('Fatiha', 1, 1)" title="Paylaş">
+                    <i class="fas fa-share-alt text-lg"></i>
+                </button>
+                <button class="text-purple-600 hover:text-purple-800 transition" onclick="goToVerse(1, 1)" title="Tam Sayfaya Git">
+                    <i class="fas fa-external-link-alt text-lg"></i>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    if (document.getElementById('dailyVerseCard')) {
+        document.getElementById('dailyVerseCard').innerHTML = defaultVerseHtml;
+    }
+}
+
+// Önbellek sistemi
+function cacheDailyVerse(arabicText, turkishText, surahName, surahNumber, ayahNumber) {
+    const today = new Date().toDateString();
+    const verseData = {
+        arabic: arabicText,
+        turkish: turkishText,
+        surahName: surahName,
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber
+    };
+    
+    localStorage.setItem("dailyVerseDate", today);
+    localStorage.setItem("dailyVerse", JSON.stringify(verseData));
+}
+
+// Cache kontrolü
+function getDailyVerseWithCache() {
+    const today = new Date().toDateString();
+    const cachedDate = localStorage.getItem("dailyVerseDate");
+    const cachedVerse = localStorage.getItem("dailyVerse");
+    
+    if (cachedDate === today && cachedVerse) {
+        try {
+            const verseData = JSON.parse(cachedVerse);
+            updateDailyVerse(verseData.arabic, verseData.turkish, verseData.surahName, verseData.surahNumber, verseData.ayahNumber);
+        } catch (e) {
+            console.error("Cache parse error:", e);
+            getDailyVerse();
+        }
+    } else {
+        getDailyVerse();
+    }
+}
+
+// Etkileşim fonksiyonları
+function bookmarkVerse(surahNumber, ayahNumber) {
+    const bookmarkObj = {
+        surah: surahNumber.toString(),
+        ayat: ayahNumber.toString()
+    };
+    
+    const existingBookmarks = JSON.parse(localStorage.getItem("bookmark") || "[]");
+    const isBookmarked = existingBookmarks.some(bookmark => 
+        bookmark.surah === bookmarkObj.surah && bookmark.ayat === bookmarkObj.ayat
+    );
+    
+    if (!isBookmarked) {
+        existingBookmarks.push(bookmarkObj);
+        localStorage.setItem("bookmark", JSON.stringify(existingBookmarks));
+        showToast("Ayet favorilere eklendi!", "success");
+    } else {
+        showToast("Bu ayet zaten favorilerinizde!", "warning");
+    }
+}
+
+function shareVerse(surahName, surahNumber, ayahNumber) {
+    const shareText = `${surahName} Suresi ${surahNumber}:${ayahNumber} - Kuran-ı Kerim`;
+    const shareUrl = `${window.location.origin}/surah.html?${surahNumber}#${ayahNumber}`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: shareText,
+            url: shareUrl
+        });
+    } else {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(`${shareText}\n${shareUrl}`).then(() => {
+                showToast("Ayet bağlantısı kopyalandı!", "success");
+            });
+        } else {
+            showToast("Paylaşım desteklenmiyor!", "warning");
+        }
+    }
+}
+
+function goToVerse(surahNumber, ayahNumber) {
+    window.location.href = `surah.html?${surahNumber}#${ayahNumber}`;
+}
+
+function showToast(message, type = "info") {
+    const colors = {
+        success: "bg-green-500",
+        warning: "bg-yellow-500",
+        error: "bg-red-500",
+        info: "bg-blue-500"
+    };
+    
+    const icons = {
+        success: "fa-check-circle",
+        warning: "fa-exclamation-triangle",
+        error: "fa-times-circle",
+        info: "fa-info-circle"
+    };
+    
+    const toastHtml = `
+        <div class="toast-notification fixed top-4 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg z-50">
+            <div class="flex items-center">
+                <i class="fas ${icons[type]} mr-2"></i>
+                <span>${message}</span>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', toastHtml);
+    
+    setTimeout(() => {
+        const toast = document.querySelector('.toast-notification');
+        if (toast) {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(100%)';
+            setTimeout(() => toast.remove(), 300);
+        }
+    }, 3000);
+}

@@ -11,15 +11,82 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="assets/style.css">
+     <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #e53e3e;
+            --arabic-font: 'Amiri', 'Scheherazade New', serif;
+            --main-font: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--main-font);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+            .list-group {
+			background: white;
+			border-radius: 16px;
+			padding: 1.5rem;
+			margin-bottom: 1rem;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+			transition: all 0.3s ease;
+			cursor: pointer;
+			border: 1px solid rgba(26, 147, 111, 0.1);
+		
+            
+        }</style>
 </head>
 
 <body class="bg-light">
-    <header class="header-quran bg-dark text-light m-0">
-        <a class="text-white pb-1 pl-3 pt-1" href='javascript:history.back();'><i class="fas fa-arrow-left    "></i></a>  <span class="baslik">Favoriler</span>
+       <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left text-dark"></i>
+                    </button>
+                    <div>
+                        <h1 id="header-title" class="text-2xl font-bold">Favoriler</h1>
+                    </div>
+                </div>
+                
+               
+            </div>
+        </div>
     </header>
-    <main class="">
-        <ul id="list-bookmark" class="list-group">
+    <main class="container mx-auto px-4 py-6">
+        <ul id="list-bookmark" class="list-group space-y-4">
         </ul>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

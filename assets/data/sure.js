@@ -1,45 +1,160 @@
-const sure = [
-	{
-		name : "Fatiha Sûresi",
-		arab : "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ١﴾ اَلْحَمْدُ لِلّٰهِ رَبِّ الْعَالَم۪ينَۙ ﴿٢﴾ اَلرَّحْمٰنِ الرَّح۪يمِۙ ﴿٣﴾ مَالِكِ يَوْمِ الدّ۪ينِۜ ﴿٤﴾ اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَع۪ينُۜ ﴿٥﴾ اِهْدِنَا الصِّرَاطَ الْمُسْتَق۪يمَۙ ﴿٦﴾ صِرَاطَ الَّذ۪ينَ اَنْعَمْتَ عَلَيْهِمْۙ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّٓالّ۪ينَ ﴿٧",
-		turk : "1- Bismillâhi’r-Rahmâni’r-Rahîm. 2- Elhamdulillâhi Rabbi’l-âlemîn. 3- Er-Rahmâni’r-Rahîm. 4- Mâliki yevmi’d-dîn. 5- İyyâke na’budu ve iyyâke neste’în. 6- İhdine’s-sırâta’l-mustakîm. 7- Sırâta’l-lezîne en’amte aleyhim. Ğayri’l-meğdûbi aleyhim ve le’d-dâllîn",
-		en : "1- Rahmân ve Rahîm olan Allah’ın adıyla. 2- Hamd; Âlemlerin Rabbi olan Allah’a aittir. 3- (O Allah) Rahmân ve Rahîm’dir. 4- Din (ödül ve ceza) gününün sahibidir. 5- (Ey Allah’ım) Biz yalnızca Sana ibadet eder ve yalnızca Sen’den yardım dileriz. 6- Bizi dosdoğru yola ilet. 7- Kendilerine nimet verdiğin kimselerin yoluna ilet, gazaba uğrayanların ve sapıkların yoluna değil",	
-	},
-	{
-		name : "Fil Sûresi",
-		arab : "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يم اَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِاَصْحَابِ الْف۪يلِۜ ﴿١﴾ اَلَمْ يَجْعَلْ كَيْدَهُمْ ف۪ي تَضْل۪يلٍۙ ﴿٢﴾ وَاَرْسَلَ عَلَيْهِمْ طَيْراً اَبَاب۪يلَۙ ﴿٣﴾ تَرْم۪يهِمْ بِحِجَارَةٍ مِنْ سِجّ۪يلٍۖۙ ﴿٤﴾ فَجَعَلَهُمْ كَعَصْفٍ مَأْكُولٍ",
-		turk : "Bismillâhi’r-Rahmâni’r-Rahîm. 1- “Elemtera keyfe fe’ale Rabbuke bi-ashâbi’l-fîl. 2- Elem yec’al keydehum fî tadlîl. 3- Ve ersele ’aleyhim tayran ebâbîl. 4- Termîhim bi-hicâratin min siccîl. 5- Fece’alehum ke’asfin me’kûl.",
-		en : "Rahmân ve Rahîm olan Allah’ın adıyla. 1- “Rabbin fil sahiplerine neler etti, görmedin mi? 2- Onların kötü planlarını boşa çıkarmadı mı? 3- Onların üstüne ebabil kuşları gönderdi. 4- O kuşlar, onların üzerlerine pişkin tuğladan yapılmış taşlar atıyordu. 5- Böylece Allah onları yenilip çiğnenmiş ekine çevirdi.",		
-	},
-	{
-		name : "Kureyş Sûresi",
-		arab : "لِا۪يلَافِ قُرَيْشٍۙ ﴿١﴾ ا۪يلَافِهِمْ رِحْلَةَ الشِّتَٓاءِ وَالصَّيْفِۚ ﴿٢﴾ فَلْيَعْبُدُوا رَبَّ هٰذَا الْبَيْتِۙ ﴿٣﴾ اَلَّذ۪ٓي اَطْعَمَهُمْ مِنْ جُوعٍ وَاٰمَنَهُمْ مِنْ خَوْفٍ",
-		turk : "Bismillâhi’r-Rahmâni’r-Rahîm. 1- Li îlâfi kurayş. 2- Îlâfihim rihlete’ş-şitâi ve’s-sayf. 3- Felya’budû Rabbe hâze’l-beyt. 4- Ellezî et’amehum min cû’in ve âmenehum min havf.",
-		en : "Rahmân ve Rahîm olan Allah’ın adıyla. 1- “Kureyş’in emniyetini sağladığı, 2- Yaz ve kış yolculuğunda onları (güvenliğe ulaştırıp başkalarıyla) ısındırıp yakınlaştırdığı için onlar, 3- Bu evin (mabed’in, Kâbe’nin) Rabbine kulluk etsinler. 4- Ki O (Allah) kendilerini açlıktan (kurtarıp) doyuran ve her çeşit korkudan güvenliğe kavuşturandır.",		
-	},
-	{
-		name : "Mâun Sûresi",
-		arab : "اَرَاَيْتَ الَّذ۪ي يُكَذِّبُ بِالدّ۪ينِۜ ﴿١﴾ فَذٰلِكَ الَّذ۪ي يَدُعُّ الْيَت۪يمَۙ ﴿٢﴾ وَلَا يَحُضُّ عَلٰى طَعَامِ الْمِسْك۪ينِۜ ﴿٣﴾ فَوَيْلٌ لِلْمُصَلّ۪ينَۙ ﴿٤﴾ اَلَّذ۪ينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَۙ ﴿٥﴾ اَلَّذ۪ينَ هُمْ يُرَٓاؤُ۫نَۙ ﴿٦﴾ وَيَمْنَعُونَ الْمَاعُونَ",
-		turk : "Bismillâhi’r-Rahmâni’r-Rahîm. 1- “Eraeytellezî yukezzibu bi’d-dîn. 2- Fezâlike’l-lezî yedu’ul-yetîm. 3- Ve lâ yehuddu alâ ta’âmi’l-miskîn. 4- Feveylun lil-musallîn. 5- Ellezînehum an salâtihim sâhûn. 6- Ellezînehum yurâûn. 7- Ve yemne’ûne’l-mâ’ûn.",
-		en : "Rahmân ve Rahîm olan Allah’ın adıyla. 1- “Din gününü (İslam’ı, ahirette ceza ve mükâfatı) yalanlayanı gördün mü? 2- İşte o, yetimi itip kakar. 3- Yoksulu doyurmayı teşvik etmez (önayak olmaz). 4- Şu namaz kılanların vay haline! 5- Onlar namazlarından gafildirler (önem vermezler). 6- Onlar gösteriş (için ibadet) yaparlar. 7- Ve onlar en küçük bir yardımı (zekâtı) da engellerler.",		
-	},	
-	{
-		name : "Kevser Sûresi",
-		arab : "اِنَّٓا اَعْطَيْنَاكَ الْـكَوْثَرَۜ ﴿١﴾ فَصَلِّ لِرَبِّكَ وَانْحَرْۜ ﴿٢﴾ اِنَّ شَانِئَكَ هُوَ الْاَبْتَرُ ",
-		turk : "Bismillâhi’r-Rahmâni’r-Rahîm. 1- “İnnâ a’taynâ ke’l-kevser. 2- Fesalli li-Rabbike ve’nhar. 3- İnne şâni’eke huve’l-ebter",
-		en : "Rahmân ve Rahîm olan Allah’ın adıyla. 1- “Şüphesiz biz sana Kevser’i verdik. 2- Öyleyse Rabbin için namaz kıl ve kurban kes. 3- Asıl sonu kesik olan, senin düşmanın (sana buğzeden)dir",		
-	},
-	{
-		name : "Kâfirûn Sûresi",
-		arab : "قُلْ يَٓا اَيُّهَا الْـكَافِرُونَۙ ﴿١﴾ لَٓا اَعْبُدُ مَا تَعْبُدُونَۙ ﴿٢﴾ وَلَٓا اَنْتُمْ عَابِدُونَ مَٓا اَعْبُدُۚ ﴿٣﴾ وَلَٓا اَنَا۬ عَابِدٌ مَا عَبَدْتُمْۙ ﴿٤﴾ وَلَٓا اَنْتُمْ عَابِدُونَ مَٓا اَعْبُدُۜ ﴿٥﴾ لَـكُمْ د۪ينُكُمْ وَلِيَ د۪ينِ",
-		turk : "Bismillâhi’r-Rahmâni’r-Rahîm. 1- “Gul yâ eyyuhe’l-kâfirûn. 2- Lâ a’budu mâ ta’budûn. 3- Ve lâ entum âbidûne mâ a’bud. 4- Velâ ene âbidun mâ abettum. 5- Velâ entum âbidûne mâ a’bud. 6- Lekum dînukum veliye dîn.",
-		en : "Rahmân ve Rahîm olan Allah’ın adıyla. 1- “De ki: Ey kâfirler. 2- Ben sizin taptıklarınıza tapmam. 3- Siz de benim ibadet ettiğime ibadet edecek değilsiniz. 4- Ben de sizin taptıklarınıza tapacak değilim. 5- Siz de benim ibadet ettiğime, ibadet edecek değilsiniz. 6- Sizin dininiz size, benim dinim bana.",		
-	},
-	{
-		name : "Ayet-el Kûrsi",
-		arab : "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلاَّ بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاو ;َاتِ وَالأَرْضَ وَلاَ يَئُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ٢٥٥",
-		turk : "Allâhu lâ ilâhe illâ huve’l-hayyu’l-kayyûm. Lâ te’huzuhû sinetun ve lâ nevm. Lehû mâ fi’s-semâvâti ve mâ fi’l-ardı men zellezî yeşfe’u ‘ındehû illâ bi iznih. Ya’lemu mâ beyne eydîhim ve mâ halfehum ve lâ yuhîtûne bi şey’in min ‘ılmihî illâ bimâ şâe vesi’a kursiyyuhu’s-semâvâti ve’larda ve lâ yeûduhû hıfzuhumâ ve huve’l-‘aliyyu’l-‘azîm.",
-		en : "O'ndan başka ilah olmayan Allah, hay ve kayyumdur (ezel ve ebedidir). O'nu uyuklama ve uyku tutmaz. Göklerde ve yerlerde olan şeyler O'nundur. İzni olmaksızın O'nun yanında şefaat eden yoktur. Halkın önünde ve arkasında olanı (istikbal ve maziyi) bilir. İnsanlar O'nun ilminden, O'nun isteğinden başkasını ihata edemezler. Kürsisi semaları ve yeri içine alır. Onların hıfzı O'nu (Cenab-ı Ecelli Ala'yı) yormaz. O, pek yüksek ve büyüktür.",		
-	},
-	
+const sureData = [
+    {
+        id: 1,
+        name: "Fatiha",
+        meaning: "Açılış",
+        arabic: "الفاتحة",
+        ayat: 7,
+        type: "mekki",
+        order: 1,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. Elhamdulillâhi rabbil-âlemîn. Er-rahmânir-rahîm. Mâliki yevmiddîn. İyyâke na'budu ve iyyâke nesteîn. İhdinâs-sırâtal-mustekîm. Sırâtal-lezîne en'amte aleyhim gayril-magdûbi aleyhim velâd-dâllîn.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. Hamd, âlemlerin Rabbi olan Allah'a mahsustur. Rahman, Rahim. Din gününün (ceza ve mükâfat gününün) sahibi. Ancak sana kulluk ederiz ve ancak senden yardım dileriz. Bizi doğru yola ilet. Kendilerine nimet verdiklerinin yoluna; gazaba uğrayanların ve sapıtanların yoluna değil.",
+        category: "prayer",
+        difficulty: "easy",
+        readingTime: 1
+    },
+    {
+        id: 2,
+        name: "İhlas",
+        meaning: "Samimiyet",
+        arabic: "الإخلاص",
+        ayat: 4,
+        type: "mekki",
+        order: 2,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ ﴿٤﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. Kul huvallâhu ehad. Allâhus-samed. Lem yelid ve lem yûled. Ve lem yekün lehû kufuven ehad.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. De ki: O Allah birdir. Allah Samed'dir (Her şey O'na muhtaçtır, O hiçbir şeye muhtaç değildir). O doğurmamış ve doğmamıştır. O'nun hiçbir dengi yoktur.",
+        category: "prayer",
+        difficulty: "easy",
+        readingTime: 1
+    },
+    {
+        id: 3,
+        name: "Nas",
+        meaning: "İnsanlar",
+        arabic: "الناس",
+        ayat: 6,
+        type: "mekki",
+        order: 3,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَهِ النَّاسِ ﴿٣﴾ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. Kul a'ûzu bi-rabbin-nâs. Melikin-nâs. İlâhin-nâs. Min şarril-vesvâsil-hannâs. Ellezî yuvesvisu fî sudûrin-nâs. Minel-cinneti ven-nâs.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. De ki: İnsanların Rabbine sığınırım. İnsanların Kralına. İnsanların İlahına. Sinsi vesvesecinin şerrinden. O ki, insanların kalplerine vesvese verir. Cinlerden de insanlardan da.",
+        category: "protection",
+        difficulty: "easy",
+        readingTime: 1
+    },
+    {
+        id: 4,
+        name: "Felak",
+        meaning: "Sabah",
+        arabic: "الفلق",
+        ayat: 5,
+        type: "mekki",
+        order: 4,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِنْ شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. Kul a'ûzu bi-rabbil-felak. Min şarri mâ halak. Ve min şarri ğâsıkın izâ vakab. Ve min şarrin-neffâsâti fil-ukad. Ve min şarri hâsidin izâ hasad.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. De ki: Sabahın (aydınlığın) Rabbine sığınırım. Yarattığı şeylerin şerrinden. Karanlığın çöktüğü zaman gecenin şerrinden. Düğümlere üfleyenlerin şerrinden. Haset ettiği zaman hasedinin şerrinden.",
+        category: "protection",
+        difficulty: "easy",
+        readingTime: 1
+    },
+    {
+        id: 5,
+        name: "Asr",
+        meaning: "Zaman",
+        arabic: "العصر",
+        ayat: 3,
+        type: "mekki",
+        order: 5,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ وَالْعَصْرِ ﴿١﴾ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ ﴿٢﴾ إِلَّا الَّذِينَ آَمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ ﴿٣﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. Vel-asr. İnnel-insâne le-fî husr. İllellezîne âmenû ve amilus-sâlihâti ve tevâsav bil-hakkı ve tevâsav bis-sabr.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. Zamana andolsun. Muhakkak ki insan ziyan içindedir. Ancak iman edip salih ameller işleyenler, birbirlerine hakkı tavsiye edenler ve sabrı tavsiye edenler müstesna.",
+        category: "daily",
+        difficulty: "easy",
+        readingTime: 1
+    },
+    {
+        id: 6,
+        name: "Kevser",
+        meaning: "Bolluk",
+        arabic: "الكوثر",
+        ayat: 3,
+        type: "mekki",
+        order: 6,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ ﴿١﴾ فَصَلِّ لِرَبِّكَ وَانْحَرْ ﴿٢﴾ إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ ﴿٣﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. İnnâ a'taynâkel-kevser. Fe-salli li-rabbike venhar. İnne şâni'eke hüvel-ebter.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. Şüphesiz Biz sana Kevser'i verdik. Öyleyse Rabbin için namaz kıl ve kurban kes. Şüphesiz asıl soyu kesik olan, sana buğz edendir.",
+        category: "prayer",
+        difficulty: "easy",
+        readingTime: 1
+    },
+    {
+        id: 7,
+        name: "Maun",
+        meaning: "Ufak Yardım",
+        arabic: "الماعون",
+        ayat: 7,
+        type: "mekki",
+        order: 7,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ ﴿١﴾ فَذَلِكَ الَّذِي يَدُعُّ الْيَتِيمَ ﴿٢﴾ وَلَا يَحُضُّ عَلَى طَعَامِ الْمِسْكِينِ ﴿٣﴾ فَوَيْلٌ لِلْمُصَلِّينَ ﴿٤﴾ الَّذِينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ ﴿٥﴾ الَّذِينَ هُمْ يُرَاءُونَ ﴿٦﴾ وَيَمْنَعُونَ الْمَاعُونَ ﴿٧﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. E-ra'eytelleZî yukezzibu bid-dîn. Fe-zâlikelleZî yedu'ul-yetîm. Ve lâ yahuddu alâ ta'âmil-miskîn. Fe-veylun lil-musallîn. ElleZîne hum an salâtihim sâhûn. ElleZîne hum yürâûn. Ve yemne'ûnel-mâ'ûn.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. Dini yalanlayanı gördün mü? İşte o, yetimi itip kakan kimsedir. Yoksula yemek yedirmeyi teşvik etmez. Vay haline o namaz kılanların ki, onlar namazlarında gaflet içindedirler. Onlar gösteriş yapanlardır. Ve en küçük yardımları bile esirgerler.",
+        category: "daily",
+        difficulty: "medium",
+        readingTime: 2
+    },
+    {
+        id: 8,
+        name: "Kafirun",
+        meaning: "Kafirler",
+        arabic: "الكافرون",
+        ayat: 6,
+        type: "mekki",
+        order: 8,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ قُلْ يَا أَيُّهَا الْكَافِرُونَ ﴿١﴾ لَا أَعْبُدُ مَا تَعْبُدُونَ ﴿٢﴾ وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ ﴿٣﴾ وَلَا أَنَا عَابِدٌ مَا عَبَدْتُمْ ﴿٤﴾ وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ ﴿٥﴾ لَكُمْ دِينُكُمْ وَلِيَ دِينِ ﴿٦﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. Kul yâ eyyühel-kâfirûn. Lâ a'budu mâ ta'budûn. Ve lâ entum âbidûne mâ a'bud. Ve lâ ene âbidun mâ abedtum. Ve lâ entum âbidûne mâ a'bud. Lekum dînukum ve liye dîn.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. De ki: Ey kafirler! Ben sizin taptıklarınıza tapmam. Siz de benim taptığıma tapan değilsiniz. Ben sizin taptıklarınıza tapacak değilim. Siz de benim taptığıma tapacak değilsiniz. Sizin dininiz size, benim dinim banadır.",
+        category: "prayer",
+        difficulty: "medium",
+        readingTime: 2
+    },
+    {
+        id: 9,
+        name: "Nasr",
+        meaning: "Yardım",
+        arabic: "النصر",
+        ayat: 3,
+        type: "medeni",
+        order: 9,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ ﴿١﴾ وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا ﴿٢﴾ فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ إِنَّهُ كَانَ تَوَّابًا ﴿٣﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. İzâ câe nasrullâhi vel-feth. Ve ra'eyten-nâse yedĥulûne fî dînillâhi efvâcâ. Fe-sebbih bi-hamdi rabbike vestağfirhu innehû kâne tevvâbâ.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. Allah'ın yardımı ve fetih geldiği zaman, insanların bölük bölük Allah'ın dinine girdiklerini gördüğün zaman, Rabbini hamd ile tesbih et ve O'ndan mağfiret dile. Çünkü O, tevbeyi çok kabul edendir.",
+        category: "victory",
+        difficulty: "easy",
+        readingTime: 1
+    },
+    {
+        id: 10,
+        name: "Lahab",
+        meaning: "Alevler",
+        arabic: "المسد",
+        ayat: 5,
+        type: "mekki",
+        order: 10,
+        text: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾ تَبَّتْ يَدَا أَبِي لَهَبٍ وَتَبَّ ﴿١﴾ مَا أَغْنَى عَنْهُ مَالُهُ وَمَا كَسَبَ ﴿٢﴾ سَيَصْلَى نَارًا ذَاتَ لَهَبٍ ﴿٣﴾ وَامْرَأَتُهُ حَمَّالَةَ الْحَطَبِ ﴿٤﴾ فِي جِيدِهَا حَبْلٌ مِنْ مَسَدٍ ﴿٥﴾",
+        turkish: "Bismillâhir-rahmânir-rahîm. Tebbet yedâ Ebî Lahebin ve tebb. Mâ ağnâ anhu mâluhû ve mâ keseb. Se-yaslâ nâran zâte leheb. Vemra'etuhû hammâletel-hatab. Fî cîdihâ hablun min mesed.",
+        translation: "Rahman ve Rahim olan Allah'ın adıyla. Ebu Leheb'in elleri kurusun ve kendisi de kurusun! Malı da kazandığı da ona fayda vermedi. Alevli bir ateşe girecektir. Karısı da, odun taşıyan. Boynunda hurma lifi urgan olduğu halde.",
+        category: "warning",
+        difficulty: "medium",
+        readingTime: 2
+    }
 ];
+
+// Backward compatibility - keep the old variable name
+const sure = sureData;
+
+// Export for Node.js environments
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { sureData, sure };
+}

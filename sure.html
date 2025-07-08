@@ -1,41 +1,985 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" dir="ltr">
 
 <head>
-    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title class="title">Bismillahirrahmanirrahim</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Namaz Suresi - Kuran-ı Kerim</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Namaz sureleri, Türkçe okunuşları ve mealleri ile birlikte">
+    <meta name="keywords" content="namaz suresi, kısa sureler, kuran, fatiha, ihlas, nas, felak">
+    
+    <!-- Favicon -->
     <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/style.css">
-   
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #e53e3e;
+            --arabic-font: 'Amiri', 'Scheherazade New', serif;
+            --main-font: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--main-font);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .sure-header {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(26, 147, 111, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .bismillah {
+            font-family: var(--arabic-font);
+            font-size: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+            color: var(--accent-color);
+            line-height: 2;
+        }
+
+        .sure-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .sure-arabic {
+            font-family: var(--arabic-font);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .sure-meaning {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .sure-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .info-badge {
+            background: rgba(26, 147, 111, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .ayah-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(26, 147, 111, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .ayah-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(26, 147, 111, 0.1);
+        }
+
+        .ayah-number {
+            background: var(--primary-color);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .ayah-arabic {
+            font-family: var(--arabic-font);
+            font-size: 1.8rem;
+            line-height: 2.2;
+            text-align: right;
+            direction: rtl;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            padding-right: 0.5rem;
+            border-right: 3px solid var(--primary-color);
+            padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+            background: rgba(26, 147, 111, 0.03);
+            border-radius: 8px;
+        }
+
+        .ayah-pronunciation {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+        }
+
+        .ayah-translation {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+            background: rgba(113, 128, 150, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        .ayah-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: rgba(26, 147, 111, 0.1);
+            color: var(--primary-color);
+        }
+
+        .action-btn.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            background: var(--accent-color);
+        }
+
+        .reading-controls {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 147, 111, 0.1);
+        }
+
+        .control-group {
+            margin-bottom: 1rem;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .control-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e2e8f0;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .control-slider:hover {
+            opacity: 1;
+        }
+
+        .control-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .control-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+        }
+
+        .audio-progress {
+            background: white;
+            border-radius: 16px;
+            padding: 1rem;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 20;
+            display: none;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+        }
+
+        .play-btn {
+            background: var(--primary-color);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+        }
+
+        .play-btn:hover {
+            background: var(--accent-color);
+        }
+
+        .sure-meta {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(26, 147, 111, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .loading-animation {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 30;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            margin-bottom: 8px;
+        }
+
+        .action-btn:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .floating-action {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            border: none;
+            z-index: 20;
+        }
+
+        .floating-action:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .sure-header {
+                padding: 1.5rem;
+            }
+            
+            .sure-name {
+                font-size: 1.8rem;
+            }
+            
+            .bismillah {
+                font-size: 1.6rem;
+            }
+            
+            .ayah-container {
+                padding: 1.5rem;
+            }
+            
+            .ayah-arabic {
+                font-size: 1.5rem;
+            }
+            
+            .ayah-pronunciation {
+                font-size: 1rem;
+            }
+            
+            .ayah-translation {
+                font-size: 1rem;
+            }
+            
+            .sure-info {
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-light">
-    <header class="header-quran bg-dark text-light m-0">
-        <a class="text-white pb-1 pl-3 pt-1" href='javascript:history.back();'><i class="fas fa-arrow-left    "></i></a> <span class="baslik">Namaz Sureleri </span>
+<body>
+    <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div>
+                        <h1 id="header-title" class="text-2xl font-bold">Namaz Suresi</h1>
+                        <p id="header-subtitle" class="text-green-100 text-sm">Yükleniyor...</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button id="settingsBtn" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button id="favoriteBtn" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
-    <main class="">
-        <div class="container p-2">
-            <div class="yazi-arab mt-5">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div>
-            <br>
-            <div class="yazi-en">Alhamdu lillaahi Rabbilalemin</div>
-            <br>
-            <div class="yazi-turk">Alemlerin Rabbi Allah'a hamdolsun!</div>
-            <br>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Reading Controls -->
+        <div class="reading-controls" id="readingControls" style="display: none;">
+            <h3 class="text-lg font-semibold mb-4">Okuma Ayarları</h3>
+            
+            <div class="control-group">
+                <label class="control-label">Arapça Metin Boyutu</label>
+                <input type="range" min="1" max="3" step="0.1" value="1.8" class="control-slider" id="arabicFontSize">
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Türkçe Metin Boyutu</label>
+                <input type="range" min="0.8" max="1.6" step="0.1" value="1.1" class="control-slider" id="turkishFontSize">
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Satır Aralığı</label>
+                <input type="range" min="1.4" max="2.8" step="0.1" value="2.2" class="control-slider" id="lineHeight">
+            </div>
+            
+            <div class="flex justify-center mt-4">
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition" onclick="toggleReadingControls()">
+                    Kapat
+                </button>
+            </div>
+        </div>
+
+        <!-- Sure Header -->
+        <div class="sure-header loading-animation">
+            <div class="sure-meta" id="sure-type">Mekki</div>
+            <div class="sure-arabic" id="sure-arabic">الفاتحة</div>
+            <div class="sure-name" id="sure-name">Fatiha Suresi</div>
+            <div class="sure-meaning" id="sure-meaning">Açılış</div>
+            
+            <div class="sure-info">
+                <div class="info-item">
+                    <i class="fas fa-book"></i>
+                    <span id="ayat-count">7 Ayet</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="reading-time">1 dk</span>
+                </div>
+                <div class="info-badge" id="difficulty">Kolay</div>
+            </div>
+        </div>
+
+        <!-- Bismillah -->
+        <div class="bismillah loading-animation" id="bismillah">
+            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+        </div>
+
+        <!-- Ayah List -->
+        <div id="ayah-list">
+            <!-- Loading placeholder -->
+            <div class="ayah-container loading-animation">
+                <div class="flex justify-center items-center py-12">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audio Progress -->
+        <div class="audio-progress" id="audioProgress">
+            <button class="play-btn" id="playPauseBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="text-sm text-gray-600" id="progressTime">0:00</span>
         </div>
     </main>
+
+    <!-- Floating Action Button -->
+    <button class="floating-action" id="scrollTopBtn" style="display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="./assets/data/sure.js"></script>
     <script src="./assets/script.js"></script>
+    
     <script>
-        surePage();
+        // Enhanced Sure Page
+        let currentSure = null;
+        let currentAudio = null;
+        let isFavorite = false;
+        let ayahCount = 0;
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing sure page...');
+            
+            // Get sure number from URL
+            const urlParams = window.location.search.substring(1);
+            const sureId = parseInt(urlParams);
+            
+            if (!isNaN(sureId)) {
+                loadSure(sureId);
+                setupEventListeners();
+                checkFavorite(sureId);
+            } else {
+                showToast('Geçersiz sure ID', 'error');
+            }
+            
+            // Original function
+            if (typeof surePage === 'function') {
+                surePage();
+            }
+        });
+        
+        // Load sure data
+        function loadSure(sureId) {
+            console.log('Loading sure:', sureId);
+            
+            // Check if sure data is available
+            if (typeof sureData !== 'undefined' && sureData.length > 0) {
+                currentSure = sureData.find(s => s.id === sureId);
+            } else if (typeof sure !== 'undefined' && sure.length > 0) {
+                currentSure = sure.find(s => s.id === sureId);
+            }
+            
+            if (currentSure) {
+                console.log('Found sure:', currentSure.name);
+                renderSure();
+            } else {
+                console.error('Sure not found:', sureId);
+                showError();
+            }
+        }
+        
+        // Render sure content
+        function renderSure() {
+            // Update header
+            document.getElementById('header-title').textContent = currentSure.name + ' Suresi';
+            document.getElementById('header-subtitle').textContent = currentSure.meaning || 'Namaz Suresi';
+            document.title = currentSure.name + ' Suresi - Namaz Sureleri';
+            
+            // Update sure info
+            document.getElementById('sure-arabic').textContent = currentSure.arabic || '';
+            document.getElementById('sure-name').textContent = currentSure.name + ' Suresi';
+            document.getElementById('sure-meaning').textContent = currentSure.meaning || '';
+            document.getElementById('sure-type').textContent = currentSure.type === 'medeni' ? 'Medeni' : 'Mekki';
+            document.getElementById('ayat-count').textContent = currentSure.ayat + ' Ayet';
+            document.getElementById('reading-time').textContent = currentSure.readingTime + ' dk';
+            document.getElementById('difficulty').textContent = 
+                currentSure.difficulty === 'easy' ? 'Kolay' : 
+                currentSure.difficulty === 'medium' ? 'Orta' : 'Zor';
+            
+            // Hide bismillah for Tawbah
+            if (currentSure.id === 9) {
+                document.getElementById('bismillah').style.display = 'none';
+            }
+            
+            // Process ayahs
+            renderAyahs();
+        }
+        
+        // Render ayahs - split by ayah markers
+        function renderAyahs() {
+            const ayahList = document.getElementById('ayah-list');
+            ayahList.innerHTML = '';
+            
+            const arabicText = currentSure.text;
+            const turkishText = currentSure.turkish;
+            const translationText = currentSure.translation;
+            
+            // Split Arabic text by ayah numbers
+            const arabicAyahs = arabicText.split(/﴿\d+﴾/).filter(text => text.trim() !== '');
+            
+            // Get bismillah if present and remove from first ayah
+            let bismillah = '';
+            if (arabicAyahs[0].includes('بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ')) {
+                bismillah = 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ';
+                arabicAyahs[0] = arabicAyahs[0].replace('بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿﴾', '');
+            }
+            
+            // Try to split Turkish text into ayahs
+            let turkishAyahs = [];
+            if (turkishText) {
+                turkishAyahs = turkishText.split('. ');
+                // Make sure we have matching lengths
+                if (turkishAyahs.length !== arabicAyahs.length) {
+                    turkishAyahs = splitIntoEqualParts(turkishText, arabicAyahs.length);
+                }
+            }
+            
+            // Try to split translation text into ayahs
+            let translationAyahs = [];
+            if (translationText) {
+                translationAyahs = translationText.split('. ');
+                // Make sure we have matching lengths
+                if (translationAyahs.length !== arabicAyahs.length) {
+                    translationAyahs = splitIntoEqualParts(translationText, arabicAyahs.length);
+                }
+            }
+            
+            ayahCount = arabicAyahs.length;
+            
+            // Create ayah elements
+            arabicAyahs.forEach((arabic, index) => {
+                const ayahNumber = index + 1;
+                const turkish = turkishAyahs[index] || '';
+                const translation = translationAyahs[index] || '';
+                
+                const ayahElement = createAyahElement(arabic, turkish, translation, ayahNumber);
+                ayahList.appendChild(ayahElement);
+            });
+        }
+        
+        // Helper to split text into equal parts
+        function splitIntoEqualParts(text, count) {
+            const result = [];
+            const words = text.split(' ');
+            const wordsPerPart = Math.ceil(words.length / count);
+            
+            for (let i = 0; i < count; i++) {
+                const start = i * wordsPerPart;
+                const end = Math.min(start + wordsPerPart, words.length);
+                result.push(words.slice(start, end).join(' '));
+            }
+            
+            return result;
+        }
+        
+        // Create ayah element
+        function createAyahElement(arabic, turkish, translation, ayahNumber) {
+            const div = document.createElement('div');
+            div.className = 'ayah-container loading-animation';
+            div.style.animationDelay = `${ayahNumber * 0.1}s`;
+            div.id = `ayah-${ayahNumber}`;
+            
+            div.innerHTML = `
+                <div class="ayah-number">${ayahNumber}</div>
+                <div class="ayah-arabic">${arabic}</div>
+                <div class="ayah-pronunciation">${turkish}</div>
+                <div class="ayah-translation">${translation}</div>
+                <div class="ayah-actions">
+                    <button class="action-btn" onclick="playAyah(${ayahNumber})" title="Dinle">
+                        <i class="fas fa-play"></i>
+                        <span class="tooltip">Dinle</span>
+                    </button>
+                    <button class="action-btn" onclick="copyAyah(${ayahNumber})" title="Kopyala">
+                        <i class="fas fa-copy"></i>
+                        <span class="tooltip">Kopyala</span>
+                    </button>
+                    <button class="action-btn" onclick="shareAyah(${ayahNumber})" title="Paylaş">
+                        <i class="fas fa-share-alt"></i>
+                        <span class="tooltip">Paylaş</span>
+                    </button>
+                    <button class="action-btn" onclick="bookmarkAyah(${ayahNumber})" title="Favorile">
+                        <i class="fas fa-bookmark"></i>
+                        <span class="tooltip">Favorile</span>
+                    </button>
+                </div>
+            `;
+            
+            return div;
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Settings button
+            document.getElementById('settingsBtn').addEventListener('click', toggleReadingControls);
+            
+            // Favorite button
+            document.getElementById('favoriteBtn').addEventListener('click', toggleFavorite);
+            
+            // Scroll to top button
+            window.addEventListener('scroll', toggleScrollTopButton);
+            document.getElementById('scrollTopBtn').addEventListener('click', scrollToTop);
+            
+            // Font size controls
+            document.getElementById('arabicFontSize').addEventListener('input', function(e) {
+                const size = e.target.value;
+                document.querySelectorAll('.ayah-arabic').forEach(el => {
+                    el.style.fontSize = size + 'rem';
+                });
+            });
+            
+            document.getElementById('turkishFontSize').addEventListener('input', function(e) {
+                const size = e.target.value;
+                document.querySelectorAll('.ayah-pronunciation, .ayah-translation').forEach(el => {
+                    el.style.fontSize = size + 'rem';
+                });
+            });
+            
+            document.getElementById('lineHeight').addEventListener('input', function(e) {
+                const height = e.target.value;
+                document.querySelectorAll('.ayah-arabic').forEach(el => {
+                    el.style.lineHeight = height;
+                });
+            });
+        }
+        
+        // Toggle reading controls
+        function toggleReadingControls() {
+            const controls = document.getElementById('readingControls');
+            controls.style.display = controls.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Toggle favorite
+        function toggleFavorite() {
+            if (!currentSure) return;
+            
+            const favorites = JSON.parse(localStorage.getItem('favoriteSures') || '[]');
+            const sureId = currentSure.id;
+            
+            if (favorites.includes(sureId)) {
+                // Remove from favorites
+                const index = favorites.indexOf(sureId);
+                favorites.splice(index, 1);
+                document.getElementById('favoriteBtn').innerHTML = '<i class="fas fa-heart"></i>';
+                isFavorite = false;
+                showToast('Favorilerden kaldırıldı', 'info');
+            } else {
+                // Add to favorites
+                favorites.push(sureId);
+                document.getElementById('favoriteBtn').innerHTML = '<i class="fas fa-heart" style="color: #f56565;"></i>';
+                isFavorite = true;
+                showToast('Favorilere eklendi', 'success');
+            }
+            
+            localStorage.setItem('favoriteSures', JSON.stringify(favorites));
+        }
+        
+        // Check if sure is favorite
+        function checkFavorite(sureId) {
+            const favorites = JSON.parse(localStorage.getItem('favoriteSures') || '[]');
+            
+            if (favorites.includes(sureId)) {
+                document.getElementById('favoriteBtn').innerHTML = '<i class="fas fa-heart" style="color: #f56565;"></i>';
+                isFavorite = true;
+            }
+        }
+        
+        // Play ayah
+        function playAyah(ayahNumber) {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+            
+            const audioUrl = `https://cdn.islamic.network/quran/audio/128/ar.alafasy/${currentSure.id}_${ayahNumber}.mp3`;
+            currentAudio = new Audio(audioUrl);
+            
+            // Show audio progress
+            document.getElementById('audioProgress').style.display = 'flex';
+            document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
+            
+            currentAudio.play().catch(error => {
+                console.error('Audio play error:', error);
+                showToast('Ses dosyası çalınamadı', 'error');
+                document.getElementById('audioProgress').style.display = 'none';
+            });
+            
+            // Update progress
+            currentAudio.addEventListener('timeupdate', updateProgress);
+            currentAudio.addEventListener('ended', () => {
+                document.getElementById('audioProgress').style.display = 'none';
+            });
+        }
+        
+        // Update audio progress
+        function updateProgress() {
+            const duration = currentAudio.duration;
+            const currentTime = currentAudio.currentTime;
+            const percentage = (currentTime / duration) * 100;
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressTime').textContent = formatTime(currentTime) + ' / ' + formatTime(duration);
+        }
+        
+        // Format time (seconds to MM:SS)
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+        
+        // Copy ayah
+        function copyAyah(ayahNumber) {
+            const ayahElement = document.getElementById(`ayah-${ayahNumber}`);
+            const arabic = ayahElement.querySelector('.ayah-arabic').textContent;
+            const turkish = ayahElement.querySelector('.ayah-pronunciation').textContent;
+            const translation = ayahElement.querySelector('.ayah-translation').textContent;
+            
+            const text = `${arabic}\n\n${turkish}\n\n${translation}\n\n${currentSure.name} Suresi, ${ayahNumber}. Ayet`;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Ayet kopyalandı', 'success');
+            }).catch(() => {
+                showToast('Kopyalama başarısız', 'error');
+            });
+        }
+        
+        // Share ayah
+        function shareAyah(ayahNumber) {
+            const ayahElement = document.getElementById(`ayah-${ayahNumber}`);
+            const arabic = ayahElement.querySelector('.ayah-arabic').textContent;
+            const turkish = ayahElement.querySelector('.ayah-pronunciation').textContent;
+            const translation = ayahElement.querySelector('.ayah-translation').textContent;
+            
+            const text = `${arabic}\n\n${turkish}\n\n${translation}\n\n${currentSure.name} Suresi, ${ayahNumber}. Ayet`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: `${currentSure.name} Suresi, ${ayahNumber}. Ayet`,
+                    text: text
+                });
+            } else {
+                copyAyah(ayahNumber);
+                showToast('Ayet kopyalandı, paylaşabilirsiniz', 'info');
+            }
+        }
+        
+        // Bookmark ayah
+        function bookmarkAyah(ayahNumber) {
+            if (!currentSure) return;
+            
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarkedAyahs') || '[]');
+            const ayahId = `${currentSure.id}-${ayahNumber}`;
+            
+            if (bookmarks.includes(ayahId)) {
+                // Remove from bookmarks
+                const index = bookmarks.indexOf(ayahId);
+                bookmarks.splice(index, 1);
+                showToast('Yer işareti kaldırıldı', 'info');
+            } else {
+                // Add to bookmarks
+                bookmarks.push(ayahId);
+                showToast('Yer işareti eklendi', 'success');
+            }
+            
+            localStorage.setItem('bookmarkedAyahs', JSON.stringify(bookmarks));
+        }
+        
+        // Toggle scroll to top button
+        function toggleScrollTopButton() {
+            if (window.pageYOffset > 300) {
+                document.getElementById('scrollTopBtn').style.display = 'flex';
+            } else {
+                document.getElementById('scrollTopBtn').style.display = 'none';
+            }
+        }
+        
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Show error
+        function showError() {
+            const ayahList = document.getElementById('ayah-list');
+            ayahList.innerHTML = `
+                <div class="ayah-container">
+                    <div class="flex flex-col items-center justify-center py-8">
+                        <i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Sure Bulunamadı</h3>
+                        <p class="text-gray-600 mb-4">İstediğiniz sure bulunamadı veya yüklenemedi.</p>
+                        <button onclick="history.back()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                            Geri Dön
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Update header
+            document.getElementById('header-title').textContent = 'Hata';
+            document.getElementById('header-subtitle').textContent = 'Sure bulunamadı';
+            document.title = 'Sure Bulunamadı - Namaz Sureleri';
+            
+            // Hide bismillah
+            document.getElementById('bismillah').style.display = 'none';
+        }
+        
+        // Show toast message
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            // Set toast color
+            if (type === 'success') {
+                toast.style.background = '#48bb78';
+            } else if (type === 'error') {
+                toast.style.background = '#e53e3e';
+            } else if (type === 'info') {
+                toast.style.background = '#4299e1';
+            } else if (type === 'warning') {
+                toast.style.background = '#ed8936';
+            }
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
     </script>
 </body>
-
 </html>

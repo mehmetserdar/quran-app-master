@@ -39,7 +39,7 @@ a {
     background-size: cover;
     background-position: center;
     transition: all 0.5s ease;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
     min-height: 100vh;
     position: relative;
   }
@@ -151,7 +151,9 @@ footer a {
     border-bottom: 0.02em solid #6C757D;
     padding-bottom: .5rem;
     width: 100%;
+    border-radius: 10px;
 }
+
 
 .list-item:last-child {
     border-bottom: none;
@@ -160,6 +162,7 @@ footer a {
 .item-icon {
     flex-basis: 13%;
     text-align: center;
+    padding-top: 10px;
 }
 
 .item-icon .no-ayat,
@@ -193,10 +196,9 @@ footer a {
 .yazi-arab {
     font-family: 'mequran';
     text-align: right;
-    margin-top: 1.2em;
-    font-size: 2.4em;
-    line-height: 2.6em;
-    margin-bottom: 1em;
+    font-size: 2em;
+    line-height: 2.2em;
+    margin-bottom: 0.5em;
 }
 
 .yazi-arab2 {
@@ -327,7 +329,7 @@ body{
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: green;
+    background-color: #28a745;
     color: white;
     border: none;
     outline: none;
@@ -339,7 +341,7 @@ body{
   }
 
   #playButton.play {
-    background-color: green;
+    background-color: #28a745;
     color: white;
   }
   

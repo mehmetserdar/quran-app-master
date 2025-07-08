@@ -1,51 +1,1242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" dir="ltr">
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Kur'an-ı Kerim</title>
-	<link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-	<link rel="stylesheet" href="assets/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kuran-ı Kerim - Sure Listesi</title>
 
+	<!-- SEO Meta Tags -->
+	<meta name="description"
+		content="Kuran-ı Kerim surelerini okuyun. 114 sure, Türkçe meal, ses kayıtları ve ayet-ayet okuma imkanı.">
+	<meta name="keywords" content="kuran, quran, sure listesi, kuran-ı kerim, meal, tefsir, ayet">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
+
+	<!-- Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	<!-- Styles -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		:root {
+			--primary-color: #1a936f;
+			--secondary-color: #8FD19E;
+			--accent-color: #2d4a3e;
+			--text-dark: #1a202c;
+			--text-light: #718096;
+			--bg-light: #f7fafc;
+		}
+
+		body {
+			font-family: 'Inter', sans-serif;
+			line-height: 1.6;
+			background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+			min-height: 100vh;
+		}
+
+		.arabic-text {
+			font-family: 'Amiri', 'Scheherazade New', serif;
+			font-size: 1.1rem;
+			line-height: 1.8;
+			direction: rtl;
+			text-align: right;
+			font-weight: 400;
+			color: #2d3748;
+		}
+
+		.header-modern {
+			background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+			box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+			position: sticky;
+			top: 0;
+			z-index: 50;
+		}
+
+		.surah-card {
+			background: white;
+			border-radius: 16px;
+			padding: 1.5rem;
+			margin-bottom: 1rem;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+			transition: all 0.3s ease;
+			cursor: pointer;
+			border: 1px solid rgba(26, 147, 111, 0.1);
+		}
+
+		.surah-card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 12px 30px rgba(26, 147, 111, 0.15);
+			border-color: var(--primary-color);
+		}
+
+		.surah-number {
+			background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+			color: white;
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 700;
+			font-size: 1.1rem;
+			flex-shrink: 0;
+		}
+
+		.surah-info {
+			flex: 1;
+			padding: 0 1rem;
+		}
+
+		.surah-name {
+			font-size: 1.25rem;
+			font-weight: 600;
+			color: #1a202c;
+			margin-bottom: 0.25rem;
+		}
+
+		.surah-details {
+			color: #718096;
+			font-size: 0.9rem;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+
+		.surah-icon {
+			color: var(--primary-color);
+			font-size: 1.5rem;
+			transition: all 0.3s ease;
+		}
+
+		.surah-card:hover .surah-icon {
+			transform: scale(1.1);
+			color: var(--secondary-color);
+		}
+
+		.loading-animation {
+			opacity: 0;
+			transform: translateY(20px);
+			animation: fadeInUp 0.6s ease-out forwards;
+		}
+
+		@keyframes fadeInUp {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.search-filters {
+			background: white;
+			border-radius: 16px;
+			padding: 1.5rem;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+			margin-bottom: 2rem;
+		}
+
+		.search-input {
+			width: 100%;
+			border: 2px solid #e2e8f0;
+			border-radius: 12px;
+			padding: 12px 16px;
+			font-size: 1rem;
+			transition: all 0.3s ease;
+		}
+
+		.search-input:focus {
+			outline: none;
+			border-color: var(--primary-color);
+			box-shadow: 0 0 0 3px rgba(26, 147, 111, 0.1);
+		}
+
+		.filter-btn {
+			background: #f7fafc;
+			border: 2px solid #e2e8f0;
+			border-radius: 8px;
+			padding: 8px 16px;
+			font-size: 0.9rem;
+			transition: all 0.3s ease;
+			cursor: pointer;
+		}
+
+		.filter-btn.active {
+			background: var(--primary-color);
+			color: white;
+			border-color: var(--primary-color);
+		}
+
+		.filter-btn:hover {
+			border-color: var(--primary-color);
+			color: var(--primary-color);
+		}
+
+		.filter-btn.active:hover {
+			color: white;
+		}
+
+		.floating-add-btn {
+			position: fixed;
+			bottom: 2rem;
+			right: 2rem;
+			width: 56px;
+			height: 56px;
+			background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-size: 1.5rem;
+			box-shadow: 0 8px 25px rgba(26, 147, 111, 0.3);
+			transition: all 0.3s ease;
+			z-index: 40;
+		}
+
+		.floating-add-btn:hover {
+			transform: scale(1.1);
+			box-shadow: 0 12px 35px rgba(26, 147, 111, 0.4);
+		}
+
+		.stats-card {
+			background: white;
+			border-radius: 12px;
+			padding: 1rem;
+			text-align: center;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+		}
+
+		.revelation-badge {
+			display: inline-block;
+			padding: 4px 8px;
+			border-radius: 12px;
+			font-size: 0.75rem;
+			font-weight: 600;
+			text-transform: uppercase;
+		}
+
+		.mekki {
+			background: #fef3c7;
+			color: #92400e;
+		}
+
+		.medeni {
+			background: #dbeafe;
+			color: #1e40af;
+		}
+
+		.loading-skeleton {
+			background: #f3f4f6;
+			border-radius: 8px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.loading-skeleton::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+			animation: shimmer 1.5s infinite;
+		}
+
+		@keyframes shimmer {
+			0% {
+				left: -100%;
+			}
+
+			100% {
+				left: 100%;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.surah-card {
+				padding: 1rem;
+				margin-bottom: 0.75rem;
+			}
+
+			.surah-number {
+				width: 40px;
+				height: 40px;
+				font-size: 1rem;
+			}
+
+			.surah-name {
+				font-size: 1.1rem;
+			}
+
+			.arabic-text {
+				font-size: 1rem;
+			}
+
+			.search-filters {
+				padding: 1rem;
+			}
+		}
+	</style>
 </head>
 
-<body class="bg-light">
-	<header class="header-quran bg-dark text-light m-0">
-		<a class="text-white pb-1 pl-3 pt-1" href='javascript:history.back();'><i class="fas fa-arrow-left    "></i></a>
-		<span id="baslik" class="baslik">Kuran-ı Kerim</span><span class="ikon text-white"><a><i
-					class="fas fa-bookmark fa-lg"></i></a></span>
-	</header>
-	<main class="">
-		<article>
-			<table class="table">
-				<tbody id="list" class="table-dark">
+<body>
+	<!-- Header -->
+	<header class="header-modern text-white">
+		<div class="container mx-auto px-4 py-4">
+			<div class="flex items-center justify-between">
+				<div class="flex items-center space-x-4">
+					<button onclick="history.back()"
+						class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+						<i class="fas fa-arrow-left text-white"></i>
+					</button>
+					<div>
+						<h1 class="text-2xl font-bold" id="baslik">Kuran-ı Kerim</h1>
+						<p class="text-green-100 text-sm">114 Sure • 6236 Ayet</p>
+					</div>
+				</div>
 
-				</tbody>
-			</table>
-		</article>
+				<div class="flex items-center space-x-3">
+					<button
+						class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition"
+						onclick="toggleBookmarks()">
+						<i class="fas fa-bookmark text-white"></i>
+					</button>
+					<button
+						class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition"
+						onclick="showSettings()">
+						<i class="fas fa-cog text-white"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Main Content -->
+	<main class="container mx-auto px-4 py-6">
+		<!-- Search and Filters -->
+		<div class="search-filters">
+			<div class="mb-4">
+				<div class="flex items-center space-x-3">
+					<i class="fas fa-search text-gray-400"></i>
+					<input type="text" class="search-input" placeholder="Sure ara..." id="searchInput">
+					<button class="text-gray-400 hover:text-red-500 transition-colors" onclick="resetAllFilters()"
+						title="Filtreleri Temizle">
+						<i class="fas fa-times-circle text-lg"></i>
+					</button>
+				</div>
+			</div>
+
+			<div class="flex flex-wrap gap-2">
+				<button class="filter-btn active" data-filter="all">
+					<i class="fas fa-list mr-2"></i>Tümü
+				</button>
+				<button class="filter-btn" data-filter="mekki">
+					<i class="fas fa-kaaba mr-2"></i>Mekki
+				</button>
+				<button class="filter-btn" data-filter="medeni">
+					<i class="fas fa-mosque mr-2"></i>Medeni
+				</button>
+				<button class="filter-btn" data-filter="short">
+					<i class="fas fa-clock mr-2"></i>Kısa
+				</button>
+				<button class="filter-btn" data-filter="favorited">
+					<i class="fas fa-heart mr-2"></i>Favoriler
+				</button>
+			</div>
+		</div>
+
+
+		<!-- Stats Cards -->
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+			<div class="stats-card">
+				<div class="text-2xl font-bold text-gray-900" id="totalSurah">114</div>
+				<div class="text-sm text-gray-600">Toplam Sure</div>
+			</div>
+			<div class="stats-card">
+				<div class="text-2xl font-bold text-green-600" id="makkiSurah">86</div>
+				<div class="text-sm text-gray-600">Mekki</div>
+			</div>
+			<div class="stats-card">
+				<div class="text-2xl font-bold text-blue-600" id="madaniSurah">28</div>
+				<div class="text-sm text-gray-600">Medeni</div>
+			</div>
+			<div class="stats-card">
+				<div class="text-2xl font-bold text-purple-600" id="bookmarkedSurah">0</div>
+				<div class="text-sm text-gray-600">Favoriler</div>
+			</div>
+		</div>
+
+		<!-- Surah List -->
+		<div class="space-y-4" id="list">
+			<!-- Loading Skeleton -->
+			<div id="loadingSkeleton" class="space-y-4">
+				<div class="loading-skeleton h-20 rounded-lg"></div>
+				<div class="loading-skeleton h-20 rounded-lg"></div>
+				<div class="loading-skeleton h-20 rounded-lg"></div>
+				<div class="loading-skeleton h-20 rounded-lg"></div>
+				<div class="loading-skeleton h-20 rounded-lg"></div>
+			</div>
+		</div>
 	</main>
-	<div class="loading">
-		<div class="d-flex justify-content-center">
-			<div class="spinner-border text-dark" style="width: 3rem; height: 3rem;" role="status">
-				<span class="sr-only">Yükleniyor...</span>
+
+	<!-- Floating Action Button -->
+	<button class="floating-add-btn" onclick="showQuickActions()">
+		<i class="fas fa-plus"></i>
+	</button>
+
+	<!-- Quick Actions Modal -->
+	<div id="quickActionsModal"
+		class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+		<div class="bg-white rounded-2xl p-6 m-4 max-w-sm w-full">
+			<h3 class="text-xl font-bold text-gray-900 mb-4">Hızlı İşlemler</h3>
+			<div class="space-y-3">
+				<button
+					class="w-full bg-green-50 text-green-700 p-3 rounded-lg flex items-center space-x-3 hover:bg-green-100 transition"
+					onclick="randomSurah()">
+					<i class="fas fa-random"></i>
+					<span>Rastgele Sure</span>
+				</button>
+				<button
+					class="w-full bg-blue-50 text-blue-700 p-3 rounded-lg flex items-center space-x-3 hover:bg-blue-100 transition"
+					onclick="continuReading()">
+					<i class="fas fa-book-reader"></i>
+					<span>Kaldığın Yerden Devam Et</span>
+				</button>
+				<button
+					class="w-full bg-purple-50 text-purple-700 p-3 rounded-lg flex items-center space-x-3 hover:bg-purple-100 transition"
+					onclick="showBookmarks()">
+					<i class="fas fa-bookmark"></i>
+					<span>Favorilerim</span>
+				</button>
+				<button
+					class="w-full bg-gray-50 text-gray-700 p-3 rounded-lg flex items-center space-x-3 hover:bg-gray-100 transition"
+					onclick="hideQuickActions()">
+					<i class="fas fa-times"></i>
+					<span>Kapat</span>
+				</button>
 			</div>
 		</div>
 	</div>
 
+	<!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="./assets/script.js"></script>
+
 	<script>
-		quranPage();
+		// Enhanced Quran Page functionality
+		let allSurahs = [];
+		let filteredSurahs = [];
+		let currentFilter = 'all';
+
+		// Complete Surah data with detailed information
+		const surahData = {
+			1: { name: "Fatiha", arabic: "الفاتحة", meaning: "Açılış", revelation: "mekki", ayahs: 7 },
+			2: { name: "Bakara", arabic: "البقرة", meaning: "İnek", revelation: "medeni", ayahs: 286 },
+			3: { name: "Ali İmran", arabic: "آل عمران", meaning: "Ali İmran Ailesi", revelation: "medeni", ayahs: 200 },
+			4: { name: "Nisa", arabic: "النساء", meaning: "Kadınlar", revelation: "medeni", ayahs: 176 },
+			5: { name: "Maide", arabic: "المائدة", meaning: "Sofra", revelation: "medeni", ayahs: 120 },
+			6: { name: "Enam", arabic: "الأنعام", meaning: "Hayvanlar", revelation: "mekki", ayahs: 165 },
+			7: { name: "Araf", arabic: "الأعراف", meaning: "Yüksek Yerler", revelation: "mekki", ayahs: 206 },
+			8: { name: "Enfal", arabic: "الأنفال", meaning: "Ganimetler", revelation: "medeni", ayahs: 75 },
+			9: { name: "Tevbe", arabic: "التوبة", meaning: "Tevbe", revelation: "medeni", ayahs: 129 },
+			10: { name: "Yunus", arabic: "يونس", meaning: "Yunus", revelation: "mekki", ayahs: 109 },
+			11: { name: "Hud", arabic: "هود", meaning: "Hud", revelation: "mekki", ayahs: 123 },
+			12: { name: "Yusuf", arabic: "يوسف", meaning: "Yusuf", revelation: "mekki", ayahs: 111 },
+			13: { name: "Rad", arabic: "الرعد", meaning: "Gök Gürültüsü", revelation: "medeni", ayahs: 43 },
+			14: { name: "İbrahim", arabic: "إبراهيم", meaning: "İbrahim", revelation: "mekki", ayahs: 52 },
+			15: { name: "Hicr", arabic: "الحجر", meaning: "Hicr", revelation: "mekki", ayahs: 99 },
+			16: { name: "Nahl", arabic: "النحل", meaning: "Arı", revelation: "mekki", ayahs: 128 },
+			17: { name: "İsra", arabic: "الإسراء", meaning: "Gece Yolculuğu", revelation: "mekki", ayahs: 111 },
+			18: { name: "Kehf", arabic: "الكهف", meaning: "Mağara", revelation: "mekki", ayahs: 110 },
+			19: { name: "Meryem", arabic: "مريم", meaning: "Meryem", revelation: "mekki", ayahs: 98 },
+			20: { name: "Taha", arabic: "طه", meaning: "Taha", revelation: "mekki", ayahs: 135 },
+			21: { name: "Enbiya", arabic: "الأنبياء", meaning: "Peygamberler", revelation: "mekki", ayahs: 112 },
+			22: { name: "Hacc", arabic: "الحج", meaning: "Hac", revelation: "medeni", ayahs: 78 },
+			23: { name: "Muminun", arabic: "المؤمنون", meaning: "Müminler", revelation: "mekki", ayahs: 118 },
+			24: { name: "Nur", arabic: "النور", meaning: "Nur", revelation: "medeni", ayahs: 64 },
+			25: { name: "Furkan", arabic: "الفرقان", meaning: "Furkan", revelation: "mekki", ayahs: 77 },
+			26: { name: "Şuara", arabic: "الشعراء", meaning: "Şairler", revelation: "mekki", ayahs: 227 },
+			27: { name: "Neml", arabic: "النمل", meaning: "Karıncalar", revelation: "mekki", ayahs: 93 },
+			28: { name: "Kasas", arabic: "القصص", meaning: "Kıssalar", revelation: "mekki", ayahs: 88 },
+			29: { name: "Ankebut", arabic: "العنكبوت", meaning: "Örümcek", revelation: "mekki", ayahs: 69 },
+			30: { name: "Rum", arabic: "الروم", meaning: "Rumlar", revelation: "mekki", ayahs: 60 },
+			31: { name: "Lokman", arabic: "لقمان", meaning: "Lokman", revelation: "mekki", ayahs: 34 },
+			32: { name: "Secde", arabic: "السجدة", meaning: "Secde", revelation: "mekki", ayahs: 30 },
+			33: { name: "Ahzab", arabic: "الأحزاب", meaning: "Ahzab", revelation: "medeni", ayahs: 73 },
+			34: { name: "Sebe", arabic: "سبأ", meaning: "Sebe", revelation: "mekki", ayahs: 54 },
+			35: { name: "Fatır", arabic: "فاطر", meaning: "Yaratıcı", revelation: "mekki", ayahs: 45 },
+			36: { name: "Yasin", arabic: "يس", meaning: "Yasin", revelation: "mekki", ayahs: 83 },
+			37: { name: "Saffat", arabic: "الصافات", meaning: "Saf Tutanlar", revelation: "mekki", ayahs: 182 },
+			38: { name: "Sad", arabic: "ص", meaning: "Sad", revelation: "mekki", ayahs: 88 },
+			39: { name: "Zümer", arabic: "الزمر", meaning: "Gruplar", revelation: "mekki", ayahs: 75 },
+			40: { name: "Mümin", arabic: "غافر", meaning: "Mümin", revelation: "mekki", ayahs: 85 },
+			41: { name: "Fussilet", arabic: "فصلت", meaning: "Açıklanmış", revelation: "mekki", ayahs: 54 },
+			42: { name: "Şura", arabic: "الشورى", meaning: "Şura", revelation: "mekki", ayahs: 53 },
+			43: { name: "Zuhruf", arabic: "الزخرف", meaning: "Süs", revelation: "mekki", ayahs: 89 },
+			44: { name: "Duhan", arabic: "الدخان", meaning: "Duman", revelation: "mekki", ayahs: 59 },
+			45: { name: "Casiye", arabic: "الجاثية", meaning: "Çöken", revelation: "mekki", ayahs: 37 },
+			46: { name: "Ahkaf", arabic: "الأحقاف", meaning: "Ahkaf", revelation: "mekki", ayahs: 35 },
+			47: { name: "Muhammed", arabic: "محمد", meaning: "Muhammed", revelation: "medeni", ayahs: 38 },
+			48: { name: "Fetih", arabic: "الفتح", meaning: "Fetih", revelation: "medeni", ayahs: 29 },
+			49: { name: "Hucurat", arabic: "الحجرات", meaning: "Hucuralar", revelation: "medeni", ayahs: 18 },
+			50: { name: "Kaf", arabic: "ق", meaning: "Kaf", revelation: "mekki", ayahs: 45 },
+			51: { name: "Zariyat", arabic: "الذاريات", meaning: "Savuranlar", revelation: "mekki", ayahs: 60 },
+			52: { name: "Tur", arabic: "الطور", meaning: "Tur", revelation: "mekki", ayahs: 49 },
+			53: { name: "Necm", arabic: "النجم", meaning: "Yıldız", revelation: "mekki", ayahs: 62 },
+			54: { name: "Kamer", arabic: "القمر", meaning: "Ay", revelation: "mekki", ayahs: 55 },
+			55: { name: "Rahman", arabic: "الرحمن", meaning: "Rahman", revelation: "mekki", ayahs: 78 },
+			56: { name: "Vakıa", arabic: "الواقعة", meaning: "Vaki Olan", revelation: "mekki", ayahs: 96 },
+			57: { name: "Hadid", arabic: "الحديد", meaning: "Demir", revelation: "medeni", ayahs: 29 },
+			58: { name: "Mücadele", arabic: "المجادلة", meaning: "Mücadele Eden", revelation: "medeni", ayahs: 22 },
+			59: { name: "Haşr", arabic: "الحشر", meaning: "Haşir", revelation: "medeni", ayahs: 24 },
+			60: { name: "Mümtahine", arabic: "الممتحنة", meaning: "İmtihan Edilen", revelation: "medeni", ayahs: 13 },
+			61: { name: "Saff", arabic: "الصف", meaning: "Saf", revelation: "medeni", ayahs: 14 },
+			62: { name: "Cuma", arabic: "الجمعة", meaning: "Cuma", revelation: "medeni", ayahs: 11 },
+			63: { name: "Münafikun", arabic: "المنافقون", meaning: "Münafıklar", revelation: "medeni", ayahs: 11 },
+			64: { name: "Tegabun", arabic: "التغابن", meaning: "Aldatma", revelation: "medeni", ayahs: 18 },
+			65: { name: "Talak", arabic: "الطلاق", meaning: "Boşanma", revelation: "medeni", ayahs: 12 },
+			66: { name: "Tahrim", arabic: "التحريم", meaning: "Yasak", revelation: "medeni", ayahs: 12 },
+			67: { name: "Mülk", arabic: "الملك", meaning: "Mülk", revelation: "mekki", ayahs: 30 },
+			68: { name: "Kalem", arabic: "القلم", meaning: "Kalem", revelation: "mekki", ayahs: 52 },
+			69: { name: "Hakka", arabic: "الحاقة", meaning: "Gerçek", revelation: "mekki", ayahs: 52 },
+			70: { name: "Mearic", arabic: "المعارج", meaning: "Yükseliş Yolları", revelation: "mekki", ayahs: 44 },
+			71: { name: "Nuh", arabic: "نوح", meaning: "Nuh", revelation: "mekki", ayahs: 28 },
+			72: { name: "Cinn", arabic: "الجن", meaning: "Cinler", revelation: "mekki", ayahs: 28 },
+			73: { name: "Müzzemmil", arabic: "المزمل", meaning: "Örtünen", revelation: "mekki", ayahs: 20 },
+			74: { name: "Müddessir", arabic: "المدثر", meaning: "Bürünen", revelation: "mekki", ayahs: 56 },
+			75: { name: "Kıyamet", arabic: "القيامة", meaning: "Kıyamet", revelation: "mekki", ayahs: 40 },
+			76: { name: "İnsan", arabic: "الإنسان", meaning: "İnsan", revelation: "medeni", ayahs: 31 },
+			77: { name: "Mürselat", arabic: "المرسلات", meaning: "Gönderilmiş", revelation: "mekki", ayahs: 50 },
+			78: { name: "Nebe", arabic: "النبأ", meaning: "Haber", revelation: "mekki", ayahs: 40 },
+			79: { name: "Naziat", arabic: "النازعات", meaning: "Koparanlar", revelation: "mekki", ayahs: 46 },
+			80: { name: "Abese", arabic: "عبس", meaning: "Çattı", revelation: "mekki", ayahs: 42 },
+			81: { name: "Tekvir", arabic: "التكوير", meaning: "Dürülme", revelation: "mekki", ayahs: 29 },
+			82: { name: "İnfitar", arabic: "الانفطار", meaning: "Yarılma", revelation: "mekki", ayahs: 19 },
+			83: { name: "Mutaffifin", arabic: "المطففين", meaning: "Ölçüde Hile", revelation: "mekki", ayahs: 36 },
+			84: { name: "İnşikak", arabic: "الانشقاق", meaning: "Çatırdama", revelation: "mekki", ayahs: 25 },
+			85: { name: "Buruc", arabic: "البروج", meaning: "Burçlar", revelation: "mekki", ayahs: 22 },
+			86: { name: "Tarık", arabic: "الطارق", meaning: "Gece Gelen", revelation: "mekki", ayahs: 17 },
+			87: { name: "Ala", arabic: "الأعلى", meaning: "Yüce", revelation: "mekki", ayahs: 19 },
+			88: { name: "Gaşiye", arabic: "الغاشية", meaning: "Kaplar", revelation: "mekki", ayahs: 26 },
+			89: { name: "Fecr", arabic: "الفجر", meaning: "Fecir", revelation: "mekki", ayahs: 30 },
+			90: { name: "Beled", arabic: "البلد", meaning: "Şehir", revelation: "mekki", ayahs: 20 },
+			91: { name: "Şems", arabic: "الشمس", meaning: "Güneş", revelation: "mekki", ayahs: 15 },
+			92: { name: "Leyl", arabic: "الليل", meaning: "Gece", revelation: "mekki", ayahs: 21 },
+			93: { name: "Duha", arabic: "الضحى", meaning: "Kuşluk", revelation: "mekki", ayahs: 11 },
+			94: { name: "İnşirah", arabic: "الشرح", meaning: "Açılma", revelation: "mekki", ayahs: 8 },
+			95: { name: "Tin", arabic: "التين", meaning: "İncir", revelation: "mekki", ayahs: 8 },
+			96: { name: "Alak", arabic: "العلق", meaning: "Kan Pıhtısı", revelation: "mekki", ayahs: 19 },
+			97: { name: "Kadir", arabic: "القدر", meaning: "Kadir", revelation: "mekki", ayahs: 5 },
+			98: { name: "Beyyine", arabic: "البينة", meaning: "Açık Delil", revelation: "medeni", ayahs: 8 },
+			99: { name: "Zilzal", arabic: "الزلزلة", meaning: "Sarsıntı", revelation: "medeni", ayahs: 8 },
+			100: { name: "Adiyat", arabic: "العاديات", meaning: "Koşanlar", revelation: "mekki", ayahs: 11 },
+			101: { name: "Karia", arabic: "القارعة", meaning: "Çarpıcı", revelation: "mekki", ayahs: 11 },
+			102: { name: "Tekasur", arabic: "التكاثر", meaning: "Çoğalma", revelation: "mekki", ayahs: 8 },
+			103: { name: "Asr", arabic: "العصر", meaning: "Asr", revelation: "mekki", ayahs: 3 },
+			104: { name: "Hümeze", arabic: "الهمزة", meaning: "Çekiştiren", revelation: "mekki", ayahs: 9 },
+			105: { name: "Fil", arabic: "الفيل", meaning: "Fil", revelation: "mekki", ayahs: 5 },
+			106: { name: "Kureyş", arabic: "قريش", meaning: "Kureyş", revelation: "mekki", ayahs: 4 },
+			107: { name: "Maun", arabic: "الماعون", meaning: "Maun", revelation: "mekki", ayahs: 7 },
+			108: { name: "Kevser", arabic: "الكوثر", meaning: "Kevser", revelation: "mekki", ayahs: 3 },
+			109: { name: "Kafirun", arabic: "الكافرون", meaning: "Kafirler", revelation: "mekki", ayahs: 6 },
+			110: { name: "Nasr", arabic: "النصر", meaning: "Yardım", revelation: "medeni", ayahs: 3 },
+			111: { name: "Leheb", arabic: "المسد", meaning: "Leheb", revelation: "mekki", ayahs: 5 },
+			112: { name: "İhlas", arabic: "الإخلاص", meaning: "İhlas", revelation: "mekki", ayahs: 4 },
+			113: { name: "Felak", arabic: "الفلق", meaning: "Şafak", revelation: "mekki", ayahs: 5 },
+			114: { name: "Nas", arabic: "الناس", meaning: "İnsanlar", revelation: "mekki", ayahs: 6 }
+		};
+
+		// Get surah name by number
+		function getSurahName(number) {
+			const surahNames = [
+				"", "Fatiha", "Bakara", "Ali İmran", "Nisa", "Maide", "Enam", "Araf", "Enfal", "Tevbe", "Yunus",
+				"Hud", "Yusuf", "Rad", "İbrahim", "Hicr", "Nahl", "İsra", "Kehf", "Meryem", "Taha",
+				"Enbiya", "Hacc", "Muminun", "Nur", "Furkan", "Şuara", "Neml", "Kasas", "Ankebut", "Rum",
+				"Lokman", "Secde", "Ahzab", "Sebe", "Fatır", "Yasin", "Saffat", "Sad", "Zümer", "Mümin",
+				"Fussilet", "Şura", "Zuhruf", "Duhan", "Casiye", "Ahkaf", "Muhammed", "Fetih", "Hucurat", "Kaf",
+				"Zariyat", "Tur", "Necm", "Kamer", "Rahman", "Vakıa", "Hadid", "Mücadele", "Haşr", "Mümtahine",
+				"Saff", "Cuma", "Münafikun", "Tegabun", "Talak", "Tahrim", "Mülk", "Kalem", "Hakka", "Mearic",
+				"Nuh", "Cinn", "Müzzemmil", "Müddessir", "Kıyamet", "İnsan", "Mürselat", "Nebe", "Naziat", "Abese",
+				"Tekvir", "İnfitar", "Mutaffifin", "İnşikak", "Buruc", "Tarık", "Ala", "Gaşiye", "Fecr", "Beled",
+				"Şems", "Leyl", "Duha", "İnşirah", "Tin", "Alak", "Kadir", "Beyyine", "Zilzal", "Adiyat",
+				"Karia", "Tekasur", "Asr", "Hümeze", "Fil", "Kureyş", "Maun", "Kevser", "Kafirun", "Nasr",
+				"Leheb", "İhlas", "Felak", "Nas"
+			];
+			return surahNames[number] || "Bilinmeyen";
+		}
+
+		// Enhanced Quran Page - FIX: Function declaration instead of const
+		function quranPageEnhanced() {
+			// Clear loading skeleton
+			$('#loadingSkeleton').hide();
+
+			// Get surah list from API
+			$.get("https://api.alquran.cloud/v1/surah")
+				.done(function (data) {
+					if (data.code === 200) {
+						allSurahs = data.data;
+						filteredSurahs = allSurahs;
+						renderSurahList();
+						setupEventListeners();
+					} else {
+						showError("Sureler yüklenirken bir hata oluştu.");
+					}
+				})
+				.fail(function () {
+					showError("İnternet bağlantınızı kontrol edin.");
+				});
+		}
+
+		function renderSurahList() {
+            const listContainer = $('#list');
+            listContainer.empty();
+
+            filteredSurahs.forEach((surah, index) => {
+                const surahInfo = surahData[surah.number];
+                const isBookmarked = isInBookmarks(surah.number);
+                const animationDelay = index * 0.05;
+                const isShort = surah.numberOfAyahs <= 20;
+
+                const surahCard = `
+                    <div class="surah-card loading-animation" 
+                         style="animation-delay: ${animationDelay}s" 
+                         data-surah-number="${surah.number}"
+                         data-surah-name="${surahInfo.name}"
+                         data-revelation="${surahInfo.revelation}"
+                         data-ayahs="${surah.numberOfAyahs}"
+                         onclick="goToSurah(${surah.number})">
+                        <div class="flex items-center">
+                            <div class="surah-number">
+                                ${surah.number}
+                            </div>
+                            <div class="surah-info">
+                                <div class="surah-name">
+                                    ${surahInfo.name}
+                                    ${surahInfo.arabic ? `<span class="arabic-text text-sm text-gray-500 ml-2">${surahInfo.arabic}</span>` : ''}
+                                </div>
+                                <div class="surah-details">
+                                    <span class="revelation-badge ${surahInfo.revelation}">
+                                        ${surahInfo.revelation === 'medeni' ? 'Medeni' : 'Mekki'}
+                                    </span>
+                                    <span>•</span>
+                                    <span>${surah.numberOfAyahs} Ayet</span>
+                                    ${isShort ? '<span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Kısa</span>' : ''}
+                                    ${surahInfo.meaning ? `<span>•</span><span class="text-gray-600">${surahInfo.meaning}</span>` : ''}
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <button class="bookmark-btn ${isBookmarked ? 'text-red-500' : 'text-gray-300'} hover:text-red-500" 
+                                        onclick="event.stopPropagation(); toggleBookmark(${surah.number})" 
+                                        data-surah-number="${surah.number}"
+                                        title="${isBookmarked ? 'Favorilerden Çıkar' : 'Favorilere Ekle'}">
+                                    <i class="fas fa-bookmark text-lg hover:scale-110 transition-transform"></i>
+                                </button>
+                                <button class="play-btn text-gray-400 hover:text-green-600 transition-colors" 
+                                        onclick="event.stopPropagation(); playAudio(${surah.number})"
+                                        data-surah-number="${surah.number}"
+                                        title="Sesli Dinle / Durdur">
+                                    <i class="fas fa-play text-lg"></i>
+                                </button>
+                                <div class="surah-icon">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                listContainer.append(surahCard);
+            });
+
+            updateStatsAccurate();
+        }
+		// Go to surah
+		function goToSurah(surahNumber) {
+			const card = $(`[data-surah-number="${surahNumber}"]`);
+			card.addClass('opacity-75');
+
+			// Save reading progress
+			localStorage.setItem('lastReadSurah', surahNumber);
+
+			// Navigate to surah page
+			window.location.href = `surah.html?${surahNumber}`;
+		}
+
+		// Toggle bookmark
+		function toggleBookmark(surahNumber) {
+			const bookmarks = JSON.parse(localStorage.getItem('bookmarkedSurahs') || '[]');
+			const btn = $(`.bookmark-btn[data-surah-number="${surahNumber}"]`);
+
+			if (bookmarks.includes(surahNumber)) {
+				// Remove from bookmarks
+				const index = bookmarks.indexOf(surahNumber);
+				bookmarks.splice(index, 1);
+				btn.removeClass('text-red-500').addClass('text-gray-300');
+				showToast('Favorilerden çıkarıldı', 'info');
+			} else {
+				// Add to bookmarks
+				bookmarks.push(surahNumber);
+				btn.removeClass('text-gray-300').addClass('text-red-500');
+				showToast('Favorilere eklendi', 'success');
+			}
+
+			localStorage.setItem('bookmarkedSurahs', JSON.stringify(bookmarks));
+			updateStatsAccurate();
+		}
+     let currentAudio = null; // Track current playing audio
+        let currentPlayingButton = null; // Track current playing button
+
+		
+		function playAudio(surahNumber) {
+            const playButton = $(`.play-btn[data-surah-number="${surahNumber}"]`);
+            const icon = playButton.find('i');
+            
+            // If there's a currently playing audio and it's the same surah
+            if (currentAudio && currentPlayingButton && currentPlayingButton.data('surah-number') == surahNumber) {
+                // Stop current audio
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                
+                // Reset button state
+                icon.removeClass('fa-stop').addClass('fa-play');
+                playButton.removeClass('text-red-500').addClass('text-gray-400');
+                
+                // Clear references
+                currentAudio = null;
+                currentPlayingButton = null;
+                
+                return;
+            }
+            
+            // Stop any currently playing audio
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                
+                // Reset previous button state
+                if (currentPlayingButton) {
+                    const prevIcon = currentPlayingButton.find('i');
+                    prevIcon.removeClass('fa-stop').addClass('fa-play');
+                    currentPlayingButton.removeClass('text-red-500').addClass('text-gray-400');
+                }
+            }
+            
+            // Create new audio instance
+            const audioUrl = `https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surahNumber}.mp3`;
+            currentAudio = new Audio(audioUrl);
+            currentPlayingButton = playButton;
+            
+            // Update button state to loading
+            icon.removeClass('fa-play').addClass('fa-spinner fa-spin');
+            playButton.removeClass('text-gray-400').addClass('text-blue-500');
+            
+            showToast(`${getSurahName(surahNumber)} suresinin sesi yükleniyor...`, 'info');
+            
+            // Audio event listeners
+            currentAudio.addEventListener('loadstart', () => {
+                icon.removeClass('fa-spinner fa-spin').addClass('fa-circle-notch fa-spin');
+            });
+            
+            currentAudio.addEventListener('canplay', () => {
+                icon.removeClass('fa-circle-notch fa-spin').addClass('fa-stop');
+                playButton.removeClass('text-blue-500').addClass('text-red-500');
+            });
+            
+            currentAudio.addEventListener('ended', () => {
+                // Reset button state when audio ends
+                icon.removeClass('fa-stop').addClass('fa-play');
+                playButton.removeClass('text-red-500').addClass('text-gray-400');
+                currentAudio = null;
+                currentPlayingButton = null;
+                showToast(`${getSurahName(surahNumber)} suresi tamamlandı`, 'success');
+            });
+            
+            currentAudio.addEventListener('error', () => {
+                // Reset button state on error
+                icon.removeClass('fa-spinner fa-spin fa-circle-notch fa-spin fa-stop').addClass('fa-play');
+                playButton.removeClass('text-blue-500text-red-500').addClass('text-gray-400');
+                currentAudio = null;
+                currentPlayingButton = null;
+                showToast('Ses dosyası yüklenemedi', 'error');
+            });
+            
+            // Start playing
+            currentAudio.play().catch(() => {
+                // Reset button state on play error
+                icon.removeClass('fa-spinner fa-spin fa-circle-notch fa-spin fa-stop').addClass('fa-play');
+                playButton.removeClass('text-blue-500text-red-500').addClass('text-gray-400');
+                currentAudio = null;
+                currentPlayingButton = null;
+                showToast('Ses dosyası oynatılamadı', 'error');
+            });
+        }
+
+		// Stop all audio function
+        function stopAllAudio() {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                
+                // Reset button state
+                if (currentPlayingButton) {
+                    const icon = currentPlayingButton.find('i');
+                    icon.removeClass('fa-stop fa-spinner fa-spin fa-circle-notch fa-spin').addClass('fa-play');
+                    currentPlayingButton.removeClass('text-red-500 text-blue-500').addClass('text-gray-400');
+                }
+                
+                currentAudio = null;
+                currentPlayingButton = null;
+                
+                showToast('Ses durduruldu', 'info');
+            }
+        }
+
+		// Check if surah is bookmarked
+		function isInBookmarks(surahNumber) {
+			const bookmarks = JSON.parse(localStorage.getItem('bookmarkedSurahs') || '[]');
+			return bookmarks.includes(surahNumber);
+		}
+
+		// More accurate statistics calculation
+		function updateStatsAccurate() {
+			const bookmarks = JSON.parse(localStorage.getItem('bookmarkedSurahs') || '[]');
+
+			let makkiCount = 0;
+			let madaniCount = 0;
+
+			filteredSurahs.forEach(surah => {
+				const info = surahData[surah.number];
+				if (info.revelation === 'medeni') {
+					madaniCount++;
+				} else {
+					makkiCount++;
+				}
+			});
+
+			$('#totalSurah').text(filteredSurahs.length);
+			$('#makkiSurah').text(makkiCount);
+			$('#madaniSurah').text(madaniCount);
+			$('#bookmarkedSurah').text(bookmarks.length);
+		}
+
+		  // Apply current filter - FIX: Search Turkish surah names
+        function applyFilter() {
+            let filtered = allSurahs; // Always start with all surahs
+
+            // Get current search term
+            const searchTerm = $('#searchInput').val().toLowerCase().trim();
+            
+            // If "all" filter is selected and no search term, show all surahs
+            if (currentFilter === 'all' && searchTerm === '') {
+                filteredSurahs = allSurahs;
+                renderSurahList();
+                return;
+            }
+
+            // Apply search filter first if there's a search term
+            if (searchTerm !== '') {
+                filtered = allSurahs.filter(surah => {
+                    const info = surahData[surah.number];
+                    
+                    // Search in Turkish name (from surahData)
+                    const turkishName = info.name.toLowerCase();
+                    
+                    // Search in API English name (sometimes Turkish)
+                    const apiName = surah.name.toLowerCase();
+                    
+                    // Search in English name from API
+                    const englishName = surah.englishName ? surah.englishName.toLowerCase() : '';
+                    
+                    // Search in meaning
+                    const meaning = info.meaning ? info.meaning.toLowerCase() : '';
+                    
+                    // Search in Arabic name
+                    const arabicName = info.arabic || '';
+                    
+                    // Search in surah number
+                    const surahNumber = surah.number.toString();
+                    
+                    return turkishName.includes(searchTerm) ||
+                           apiName.includes(searchTerm) ||
+                           englishName.includes(searchTerm) ||
+                           meaning.includes(searchTerm) ||
+                           arabicName.includes(searchTerm) ||
+                           surahNumber.includes(searchTerm);
+                });
+
+                // If no results found, show helpful message
+                if (filtered.length === 0) {
+                    showSearchNoResults(searchTerm);
+                }
+            }
+
+            // Then apply category filter (unless it's "all")
+            if (currentFilter !== 'all') {
+                switch (currentFilter) {
+                    case 'mekki':
+                        filtered = filtered.filter(s => {
+                            const info = surahData[s.number];
+                            return info.revelation === 'mekki';
+                        });
+                        break;
+                    case 'medeni':
+                        filtered = filtered.filter(s => {
+                            const info = surahData[s.number];
+                            return info.revelation === 'medeni';
+                        });
+                        break;
+                    case 'short':
+                        filtered = filtered.filter(s => s.numberOfAyahs <= 20);
+                        break;
+                    case 'favorited':
+                        const bookmarks = JSON.parse(localStorage.getItem('bookmarkedSurahs') || '[]');
+                        filtered = filtered.filter(s => bookmarks.includes(s.number));
+                        break;
+                }
+            }
+
+            filteredSurahs = filtered;
+            renderSurahList();
+        }
+
+        // Show no results message
+        function showSearchNoResults(searchTerm) {
+            const listContainer = $('#list');
+            
+            // Get some suggestions based on partial matches
+            const suggestions = getSuggestions(searchTerm);
+            
+            const noResultsHtml = `
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+                    <i class="fas fa-search text-yellow-500 text-3xl mb-4"></i>
+                    <h3 class="text-lg font-semibold text-yellow-800 mb-2">Sonuç bulunamadı</h3>
+                    <p class="text-yellow-700 mb-4">"${searchTerm}" için sonuç bulunamadı.</p>
+                    
+                    ${suggestions.length > 0 ? `
+                        <div class="mb-4">
+                            <p class="text-sm text-yellow-600 mb-2">Şunları deneyin:</p>
+                            <div class="flex flex-wrap gap-2 justify-center">
+                                ${suggestions.map(suggestion => `
+                                    <button class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm hover:bg-yellow-200 transition"
+                                            onclick="searchSuggestion('${suggestion}')">
+                                        ${suggestion}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition"
+                            onclick="resetAllFilters()">
+                        Tüm Sureleri Göster
+                    </button>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                if (filteredSurahs.length === 0) {
+                    listContainer.append(noResultsHtml);
+                }
+            }, 100);
+        }
+
+        // Get search suggestions
+        function getSuggestions(searchTerm) {
+            const suggestions = [];
+            const term = searchTerm.toLowerCase();
+            
+            // Check for partial matches in Turkish names
+            allSurahs.forEach(surah => {
+                const info = surahData[surah.number];
+                const turkishName = info.name.toLowerCase();
+                const meaning = info.meaning ? info.meaning.toLowerCase() : '';
+                
+                // If the search term is a substring of the name
+                if (turkishName.includes(term) || meaning.includes(term)) {
+                    if (!suggestions.includes(info.name)) {
+                        suggestions.push(info.name);
+                    }
+                }
+                
+                // If the name starts with the search term
+                if (turkishName.startsWith(term)) {
+                    if (!suggestions.includes(info.name)) {
+                        suggestions.push(info.name);
+                    }
+                }
+            });
+            
+            // Add some popular surahs as suggestions
+            const popularSurahs = ['Fatiha', 'Bakara', 'Yasin', 'Rahman', 'Kehf', 'Mülk', 'İhlas', 'Felak', 'Nas'];
+            popularSurahs.forEach(name => {
+                if (name.toLowerCase().includes(term) && !suggestions.includes(name)) {
+                    suggestions.push(name);
+                }
+            });
+            
+            return suggestions.slice(0, 5); // Limit to 5 suggestions
+        }
+
+        // Apply suggestion to search
+        function searchSuggestion(suggestion) {
+            $('#searchInput').val(suggestion);
+            applyFilter();
+        }
+
+        // Enhanced search with better Turkish support
+        function enhancedSearch(searchTerm) {
+            // Remove Turkish characters for better matching
+            const normalizedTerm = searchTerm
+                .replace(/ç/g, 'c')
+                .replace(/ğ/g, 'g')
+                .replace(/ı/g, 'i')
+                .replace(/ö/g, 'o')
+                .replace(/ş/g, 's')
+                .replace(/ü/g, 'u')
+                .toLowerCase();
+            
+            return allSurahs.filter(surah => {
+                const info = surahData[surah.number];
+                
+                // Normalize Turkish name
+                const normalizedName = info.name
+                    .replace(/ç/g, 'c')
+                    .replace(/ğ/g, 'g')
+                    .replace(/ı/g, 'i')
+                    .replace(/ö/g, 'o')
+                    .replace(/ş/g, 's')
+                    .replace(/ü/g, 'u')
+                    .toLowerCase();
+                
+                // Normalize meaning
+                const normalizedMeaning = info.meaning
+                    ? info.meaning
+                        .replace(/ç/g, 'c')
+                        .replace(/ğ/g, 'g')
+                        .replace(/ı/g, 'i')
+                        .replace(/ö/g, 'o')
+                        .replace(/ş/g, 's')
+                        .replace(/ü/g, 'u')
+                        .toLowerCase()
+                    : '';
+                
+                return normalizedName.includes(normalizedTerm) ||
+                       normalizedMeaning.includes(normalizedTerm) ||
+                       info.name.toLowerCase().includes(searchTerm) ||
+                       (info.meaning && info.meaning.toLowerCase().includes(searchTerm)) ||
+                       (info.arabic && info.arabic.includes(searchTerm)) ||
+                       surah.number.toString().includes(searchTerm);
+            });
+        }
+
+        // Update search input placeholder
+        function updateSearchPlaceholder() {
+            const placeholders = [
+                'Sure ara... (örn: Fatiha, Bakara, Yasin)',
+                'Sure adı, anlam veya numara girin...',
+                'Türkçe sure adı ile ara...',
+                'Mekki, Medeni, kısa sureler...'
+            ];
+            
+            let currentIndex = 0;
+            setInterval(() => {
+                $('#searchInput').attr('placeholder', placeholders[currentIndex]);
+                currentIndex = (currentIndex + 1) % placeholders.length;
+            }, 3000);
+        }
+
+        // ...existing code...
+
+        // Enhanced Quran Page - FIX: Function declaration instead of const
+        function quranPageEnhanced() {
+            // Clear loading skeleton
+            $('#loadingSkeleton').hide();
+
+            // Get surah list from API
+            $.get("https://api.alquran.cloud/v1/surah")
+                .done(function(data) {
+                    if (data.code === 200) {
+                        allSurahs = data.data;
+                        filteredSurahs = allSurahs;
+                        renderSurahList();
+                        setupEventListeners();
+                        
+                        // Start dynamic placeholder
+                        updateSearchPlaceholder();
+                        
+                        // Focus on search input after page load
+                        setTimeout(() => {
+                            $('#searchInput').focus();
+                        }, 500);
+                    } else {
+                        showError("Sureler yüklenirken bir hata oluştu.");
+                    }
+                })
+                .fail(function() {
+                    showError("İnternet bağlantınızı kontrol edin.");
+                });
+        }
+		// Enhanced search with Arabic names and meanings - FIX: Don't override filter
+		function filterSurahs(searchTerm) {
+			// Don't change filteredSurahs directly, let applyFilter handle it
+			applyFilter();
+		}
+
+		// Setup event listeners - FIX: Better event handling
+		function setupEventListeners() {
+			// Search functionality
+			$('#searchInput').on('input', function () {
+				const searchTerm = $(this).val().toLowerCase().trim();
+				// If search is cleared and current filter is "all", show all surahs
+				if (searchTerm === '' && currentFilter === 'all') {
+					filteredSurahs = allSurahs;
+					renderSurahList();
+				} else {
+					applyFilter();
+				}
+			});
+
+			// Filter buttons
+			$('.filter-btn').on('click', function () {
+				$('.filter-btn').removeClass('active');
+				$(this).addClass('active');
+
+				currentFilter = $(this).data('filter');
+				applyFilter();
+			});
+		}
+
+		// Add a reset all filters function
+		function resetAllFilters() {
+			// Clear search input
+			$('#searchInput').val('');
+
+			// Reset to "all" filter
+			$('.filter-btn').removeClass('active');
+			$('.filter-btn[data-filter="all"]').addClass('active');
+			currentFilter = 'all';
+
+			// Show all surahs
+			filteredSurahs = allSurahs;
+			renderSurahList();
+
+			showToast('Tüm filtreler temizlendi', 'info');
+		}
+
+		// Enhanced Quick Actions with reset option
+		function showQuickActions() {
+			$('#quickActionsModal').removeClass('hidden');
+		}
+
+		function hideQuickActions() {
+			$('#quickActionsModal').addClass('hidden');
+		}
+
+		function randomSurah() {
+			if (allSurahs.length === 0) return;
+
+			const randomIndex = Math.floor(Math.random() * allSurahs.length);
+			const randomSurah = allSurahs[randomIndex];
+			hideQuickActions();
+			goToSurah(randomSurah.number);
+		}
+
+		function continuReading() {
+			const lastSurah = localStorage.getItem('lastReadSurah');
+			if (lastSurah) {
+				hideQuickActions();
+				goToSurah(parseInt(lastSurah));
+			} else {
+				showToast('Henüz okumaya başlamadınız', 'info');
+			}
+		}
+
+		function showBookmarks() {
+			hideQuickActions();
+			$('.filter-btn').removeClass('active');
+			$('.filter-btn[data-filter="favorited"]').addClass('active');
+			currentFilter = 'favorited';
+			applyFilter();
+		}
+
+		// Add clear filters to quick actions
+		function clearAllFilters() {
+			hideQuickActions();
+			resetAllFilters();
+		}
+
+		// Settings and other functions
+		function toggleBookmarks() {
+			showBookmarks();
+		}
+
+		function showSettings() {
+			window.location.href = 'settings.html';
+		}
+
+		function showError(message) {
+			$('#list').html(`
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-2xl mb-2"></i>
+                    <p class="text-red-700">${message}</p>
+                    <button class="mt-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition" onclick="location.reload()">
+                        Tekrar Dene
+                    </button>
+                </div>
+            `);
+		}
+
+		// Toast notification
+		function showToast(message, type = 'info') {
+			const colors = {
+				success: 'bg-green-500',
+				info: 'bg-blue-500',
+				warning: 'bg-yellow-500',
+				error: 'bg-red-500'
+			};
+
+			const toast = $(`
+                <div class="fixed top-4 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <span>${message}</span>
+                    </div>
+                </div>
+            `);
+
+			$('body').append(toast);
+
+			setTimeout(() => toast.removeClass('translate-x-full'), 100);
+			setTimeout(() => {
+				toast.addClass('translate-x-full');
+				setTimeout(() => toast.remove(), 300);
+			}, 3000);
+		}
+
+		// Initialize page
+		$(document).ready(function () {
+			// Run original function if exists
+			if (typeof quranPage === 'function') {
+				quranPage();
+			}
+
+			// Run enhanced version - FIX: Now function is defined
+			quranPageEnhanced();
+
+			// Quick actions modal click outside
+			$('#quickActionsModal').click(function (e) {
+				if (e.target === this) {
+					hideQuickActions();
+				}
+			});
+		});
 	</script>
-
-
-
 </body>
 
 </html>

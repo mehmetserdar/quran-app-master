@@ -1,41 +1,542 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" dir="ltr">
 
 <head>
-    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title class="title">Bismillahirrahmanirrahim</title>
-    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Dua - Kuran-ı Kerim</title>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="İslami dua, günlük dualar ve zikirler">
+    <meta name="keywords" content="dua, dualar, islami dua, günlük dua, zikir">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #e53e3e;
+            --arabic-font: 'Amiri', 'Scheherazade New', serif;
+            --main-font: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--main-font);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .dua-header {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 8px 32px rgba(26, 147, 111, 0.1);
+            border: 1px solid rgba(26, 147, 111, 0.1);
+            text-align: center;
+        }
+
+        .dua-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .dua-description {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .dua-category {
+            display: inline-block;
+            background: rgba(26, 147, 111, 0.1);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .dua-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 147, 111, 0.1);
+        }
+
+        .dua-arabic {
+            font-family: var(--arabic-font);
+            font-size: 1.8rem;
+            line-height: 2.2;
+            direction: rtl;
+            text-align: right;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .dua-turkish {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .dua-meaning {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #6b7280;
+            font-style: italic;
+            padding: 1rem;
+            background: #fef3c7;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .dua-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .action-btn.primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-btn.primary:hover {
+            background: var(--accent-color);
+        }
+
+        .reading-controls {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(26, 147, 111, 0.1);
+        }
+
+        .control-group {
+            margin-bottom: 1rem;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .control-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e2e8f0;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .control-slider:hover {
+            opacity: 1;
+        }
+
+        .control-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .control-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .dua-header {
+                padding: 1.5rem;
+            }
+            
+            .dua-title {
+                font-size: 1.5rem;
+            }
+            
+            .dua-content {
+                padding: 1.5rem;
+            }
+            
+            .dua-arabic {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .dua-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-light">
-    <header class="header-quran bg-dark text-light m-0">
-        <a class="text-white pb-1 pl-3 pt-1" href='javascript:history.back();'><i class="fas fa-arrow-left    "></i></a>  <span class="baslik">Dua </span>
+<body>
+    <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div>
+                        <h1 id="header-title" class="text-2xl font-bold">Dua</h1>
+                        <p id="header-subtitle" class="text-green-100 text-sm">Yükleniyor...</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button id="settingsBtn" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button id="favoriteBtn" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
-    <main class="">
-        <div class="container p-2">
-            <div class="yazi-arab mt-5">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div>
-            <br>
-            <div class="yazi-en">Alhamdu lillaahi Rabbilalemin</div>
-            <br>
-            <div class="yazi-turk">Alemlerin Rabbi Allah'a hamdolsun!</div>
-            <br>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Dua Header -->
+        <div class="dua-header">
+            <div class="dua-title" id="dua-title">Yükleniyor...</div>
+            <div class="dua-description" id="dua-description">Dua bilgileri yükleniyor...</div>
+            <div class="dua-category" id="dua-category">Genel</div>
+        </div>
+
+        <!-- Reading Controls -->
+        <div class="reading-controls" id="readingControls" style="display: none;">
+            <h3 class="text-lg font-semibold mb-4">Okuma Ayarları</h3>
+            
+            <div class="control-group">
+                <label class="control-label">Arapça Metin Boyutu</label>
+                <input type="range" min="1" max="3" step="0.1" value="1.8" class="control-slider" id="arabicFontSize">
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Türkçe Metin Boyutu</label>
+                <input type="range" min="0.8" max="1.6" step="0.1" value="1.1" class="control-slider" id="turkishFontSize">
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Satır Aralığı</label>
+                <input type="range" min="1.4" max="2.8" step="0.1" value="2.2" class="control-slider" id="lineHeight">
+            </div>
+        </div>
+
+        <!-- Dua Content -->
+        <div class="dua-content">
+            <div class="dua-arabic" id="dua-arabic">Arapça metin yükleniyor...</div>
+            <div class="dua-turkish" id="dua-turkish">Türkçe okunuş yükleniyor...</div>
+            <div class="dua-meaning" id="dua-meaning">Anlam yükleniyor...</div>
+            
+            <div class="dua-actions">
+                <button class="action-btn primary" onclick="readAloud()">
+                    <i class="fas fa-volume-up"></i>
+                    Sesli Oku
+                </button>
+                <button class="action-btn" onclick="copyDua()">
+                    <i class="fas fa-copy"></i>
+                    Kopyala
+                </button>
+                <button class="action-btn" onclick="shareDua()">
+                    <i class="fas fa-share"></i>
+                    Paylaş
+                </button>
+                <button class="action-btn" onclick="toggleFavorite()">
+                    <i class="fas fa-heart"></i>
+                    Favorile
+                </button>
+            </div>
         </div>
     </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="./assets/data/dua.js"></script>
     <script src="./assets/script.js"></script>
+    
     <script>
-        duaPage();
+        // Enhanced Dua Page
+        let currentDua = null;
+        let currentAudio = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const duaId = urlParams.get('id');
+            
+            if (duaId) {
+                loadDua(duaId);
+            } else {
+                showToast('Geçersiz dua ID', 'error');
+            }
+            
+            setupEventListeners();
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Settings button
+            document.getElementById('settingsBtn').addEventListener('click', function() {
+                const controls = document.getElementById('readingControls');
+                controls.style.display = controls.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Font size controls
+            document.getElementById('arabicFontSize').addEventListener('input', function(e) {
+                const size = e.target.value;
+                document.getElementById('dua-arabic').style.fontSize = size + 'rem';
+            });
+
+            document.getElementById('turkishFontSize').addEventListener('input', function(e) {
+                const size = e.target.value;
+                document.getElementById('dua-turkish').style.fontSize = size + 'rem';
+            });
+
+            document.getElementById('lineHeight').addEventListener('input', function(e) {
+                const height = e.target.value;
+                document.getElementById('dua-arabic').style.lineHeight = height;
+            });
+        }
+
+        // Load dua data
+        function loadDua(duaId) {
+            // Check if dua data is available
+            if (typeof duaData !== 'undefined') {
+                currentDua = duaData.find(dua => dua.id == duaId);
+                
+                if (currentDua) {
+                    renderDua();
+                } else {
+                    showToast('Dua bulunamadı', 'error');
+                }
+            } else {
+                // Fallback: Wait for data to load
+                setTimeout(() => loadDua(duaId), 100);
+            }
+        }
+
+        // Render dua content
+        function renderDua() {
+            const categoryNames = {
+                'daily': 'Günlük Dua',
+                'prayer': 'Namaz Duası',
+                'special': 'Özel Dua',
+                'protection': 'Koruma Duası'
+            };
+
+            // Update header
+            document.getElementById('header-title').textContent = currentDua.title;
+            document.getElementById('header-subtitle').textContent = currentDua.description;
+            document.title = `${currentDua.title} - Dualar`;
+
+            // Update content
+            document.getElementById('dua-title').textContent = currentDua.title;
+            document.getElementById('dua-description').textContent = currentDua.description;
+            document.getElementById('dua-category').textContent = categoryNames[currentDua.category] || 'Genel';
+            document.getElementById('dua-arabic').textContent = currentDua.arabic || currentDua.text;
+            document.getElementById('dua-turkish').textContent = currentDua.turkish || currentDua.pronunciation || 'Türkçe okunuş mevcut değil';
+            document.getElementById('dua-meaning').textContent = currentDua.meaning || currentDua.translation || 'Anlam mevcut değil';
+        }
+
+        // Read aloud function
+        function readAloud() {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(currentDua.meaning || currentDua.text);
+                utterance.lang = 'tr-TR';
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                
+                speechSynthesis.speak(utterance);
+                showToast('Sesli okuma başladı', 'success');
+            } else {
+                showToast('Tarayıcınız sesli okumayı desteklemiyor', 'error');
+            }
+        }
+
+        // Copy dua
+        function copyDua() {
+            const text = `${currentDua.title}\n\n${currentDua.arabic || currentDua.text}\n\n${currentDua.turkish || ''}\n\n${currentDua.meaning || ''}`;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Dua kopyalandı', 'success');
+            }).catch(() => {
+                showToast('Kopyalama başarısız', 'error');
+            });
+        }
+
+        // Share dua
+        function shareDua() {
+            const text = `${currentDua.title}\n\n${currentDua.arabic || currentDua.text}\n\n${currentDua.meaning || ''}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: currentDua.title,
+                    text: text
+                });
+            } else {
+                copyDua();
+                showToast('Dua kopyalandı, paylaşabilirsiniz', 'info');
+            }
+        }
+
+        // Toggle favorite
+        function toggleFavorite() {
+            const favorites = JSON.parse(localStorage.getItem('favoriteDuas') || '[]');
+            const duaId = currentDua.id;
+            
+            if (favorites.includes(duaId)) {
+                const index = favorites.indexOf(duaId);
+                favorites.splice(index, 1);
+                showToast('Favorilerden kaldırıldı', 'info');
+            } else {
+                favorites.push(duaId);
+                showToast('Favorilere eklendi', 'success');
+            }
+            
+            localStorage.setItem('favoriteDuas', JSON.stringify(favorites));
+        }
+
+        // Show toast message
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.className = `toast show ${type}`;
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Run original function if exists
+        if (typeof duaPage === 'function') {
+            duaPage();
+        }
     </script>
 </body>
-
 </html>

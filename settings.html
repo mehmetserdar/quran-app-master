@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayarlar - Kuran-ı Kerim</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Kuran-ı Kerim uygulaması ayarları. Dil seçimi, meal seçimi ve uygulama tercihleri.">
+    <meta name="keywords" content="kuran ayarları, meal seçimi, dil seçimi, kuran-ı kerim ayarları">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #e53e3e;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(26, 147, 111, 0.1);
+        }
+
+        .settings-card:hover {
+            box-shadow: 0 8px 20px rgba(26, 147, 111, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .setting-content {
+            flex: 1;
+        }
+
+        .setting-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.25rem;
+        }
+
+        .setting-description {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modern-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: white;
+            font-size: 1rem;
+            color: #1a202c;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+
+        .modern-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 147, 111, 0.1);
+        }
+
+        .modern-select option {
+            padding: 10px;
+            background: white;
+            color: #1a202c;
+        }
+
+        .update-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .update-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #1a936f, #8FD19E);
+        }
+
+        .update-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .update-item::before {
+            content: '';
+            position: absolute;
+            left: -1.75rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+
+        .update-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .update-content {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            color: #1a202c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .link-item:hover {
+            background: #e2e8f0;
+            transform: translateX(4px);
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .link-item i {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+
+        .success-message {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            color: #276749;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .version-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .version-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .version-date {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .settings-card {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.75rem 0;
+            }
+            
+            .setting-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .version-info {
+                padding: 1.5rem;
+            }
+            
+            .version-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left text-white"></i>
+                    </button>
+                    <div>
+                        <h1 class="text-2xl font-bold">Ayarlar</h1>
+                        <p class="text-green-100 text-sm">Uygulama tercihlerinizi yönetin</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition" onclick="resetSettings()">
+                        <i class="fas fa-undo text-white"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Version Info -->
+        <div class="version-info">
+            <div class="version-number">v2.1.0</div>
+            <div class="version-date">Son Güncelleme: 08 Temmuz 2025</div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">114</div>
+                <div class="stat-label">Sureler</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6236</div>
+                <div class="stat-label">Ayetler</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Dil Seçeneği</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Meal Seçeneği</div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="successText">Ayarlar başarıyla kaydedildi!</span>
+        </div>
+
+        <!-- Language Settings -->
+        <div class="settings-card">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">
+                <i class="fas fa-language text-green-600 mr-2"></i>
+                Dil Ayarları
+            </h2>
+            
+            <div class="setting-item">
+                <div class="setting-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="setting-content">
+                    <div class="setting-title">Dil</div>
+                    <div class="setting-description">Kura'an-ı Kerim çevirisi seçin</div>
+                    <select class="modern-select" id="lang" onchange="setLang()">
+                        <option selected disabled>Dil seçiniz</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ru">🇷🇺 Русский</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="bs">🇧🇦 Bosanski</option>
+                        <option value="az">🇦🇿 Azərbaycan</option>
+                        <option value="id">🇮🇩 Indonesian</option>
+                        <option value="hi">🇮🇳 हिंदी</option>
+                        <option value="ur">🇵🇰 اردو</option>
+                        <option value="ug">🇨🇳 ئۇيغۇر</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meal Settings -->
+        <div class="settings-card" id="mealSettings">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">
+                <i class="fas fa-book-open text-green-600 mr-2"></i>
+                Meal Ayarları
+            </h2>
+            
+            <div class="setting-item">
+                <div class="setting-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="setting-content">
+                    <div class="setting-title">Kuran-ı Kerim Meali</div>
+                    <div class="setting-description">Tercih ettiğiniz meal yazarını seçin</div>
+                    <select class="modern-select" id="meal" onchange="setMeal()">
+                        <option selected disabled>Meal seçiniz</option>
+                        <option value="diyanet">📖 Diyanet İşleri Başkanlığı</option>
+                        <option value="vakfi">📚 Diyanet Vakfı</option>
+                        <option value="yazir">✍️ Elmalılı Hamdi Yazır</option>
+                        <option value="ates">📝 Süleyman Ateş</option>
+                        <option value="ozturk">🖊️ Yaşar Nuri Öztürk</option>
+                        <option value="golpinar">📜 Abdülbaki Gölpınarlı</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Translation Settings -->
+        <div class="settings-card" id="translationSettings">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">
+                <i class="fas fa-language text-green-600 mr-2"></i>
+                Çeviri Ayarları
+            </h2>
+            
+            <div class="setting-item">
+                <div class="setting-icon">
+                    <i class="fas fa-translate"></i>
+                </div>
+                <div class="setting-content">
+                    <div class="setting-title">Kuran Çevirisi</div>
+                    <div class="setting-description">Seçilen dil için çeviri</div>
+                    <div class="modern-select" style="display: flex; align-items: center; justify-content: space-between; cursor: default;">
+                        <span id="transl">Varsayılan</span>
+                        <span class="badge">Otomatik</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Info -->
+        <div class="settings-card">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">
+                <i class="fas fa-info-circle text-green-600 mr-2"></i>
+                Uygulama Bilgileri
+            </h2>
+            
+            <div class="space-y-2">
+                <a href="https://play.google.com/store/apps/dev?id=7123957245789156225" target="_blank" class="link-item">
+                    <i class="fab fa-google-play text-green-600"></i>
+                    <span id="other">Diğer Uygulamalarımız</span>
+                    <i class="fas fa-external-link-alt ml-auto text-gray-400"></i>
+                </a>
+                
+                <a href="mailto:applistsoft@gmail.com" class="link-item">
+                    <i class="fas fa-envelope text-blue-600"></i>
+                    <span id="contact">İletişim</span>
+                    <i class="fas fa-external-link-alt ml-auto text-gray-400"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Update History -->
+        <div class="settings-card" id="updateHistory">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">
+                <i class="fas fa-history text-green-600 mr-2"></i>
+                Güncelleme Geçmişi
+            </h2>
+            
+            <div class="update-timeline">
+                <div class="update-item">
+                    <div class="update-date">08.07.2025 - v2.1.0</div>
+                    <div class="update-content">
+                        • Modern arayüz tasarımı<br>
+                        • Gelişmiş arama özellikleri<br>
+                        • Sesli dinleme desteği<br>
+                        • Performans iyileştirmeleri
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-date">11.06.2023 - v2.0.1</div>
+                    <div class="update-content">
+                        • Ayarlarda iyileştirmeler<br>
+                        • Küçük hata düzeltmeleri<br>
+                        • Stabilite artırıldı
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-date">04.06.2023 - v2.0.0</div>
+                    <div class="update-content">
+                        • Bosnakça, Azerice ve Uygurca dil desteği<br>
+                        • Yeni meal seçenekleri<br>
+                        • Hata düzeltmeleri
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-date">29.05.2023 - v1.5.0</div>
+                    <div class="update-content">
+                        • Türkçe'ye yeni mealler eklendi<br>
+                        • Arayüz iyileştirmeleri<br>
+                        • Performans optimizasyonu
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-date">11.05.2023 - v1.0.1</div>
+                    <div class="update-content">
+                        • Yeni dil seçenekleri<br>
+                        • Çeviri iyileştirmeleri<br>
+                        • Genel düzeltmeler
+                    </div>
+                </div>
+                
+                <div class="update-item">
+                    <div class="update-date">05.05.2023 - v1.0.0</div>
+                    <div class="update-content">
+                        • İlk sürüm yayınlandı<br>
+                        • Google Play Store'da mevcut<br>
+                        • Temel özellikler tamamlandı
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Check if User Agent is Android
+        const isAndroid = /Android/i.test(navigator.userAgent);
+        
+        // Hide Navigation Menu on Android Devices
+        if (isAndroid) {
+            const nav = document.querySelector('header');
+            nav.style.display = 'none';
+        }
+
+        const selectElementMeal = document.getElementById('meal');
+        const selectElementLang = document.getElementById('lang');
+        const transElement = document.getElementById('transl');
+
+        // Load saved settings
+        function loadSettings() {
+            // Load meal setting
+            if (localStorage.getItem('mealValue')) {
+                const selectedMeal = localStorage.getItem('mealValue');
+                selectElementMeal.value = selectedMeal;
+            }
+            
+            // Load language setting
+            if (localStorage.getItem('langValue')) {
+                const selectedLang = localStorage.getItem('langValue');
+                selectElementLang.value = selectedLang;
+            }
+        }
+
+        // Initialize page based on language
+        function initializePage() {
+            const lang = localStorage.getItem("langValue") || "tr";
+            
+            if (lang === "tr") {
+                document.querySelector('#other').innerHTML = "Diğer Uygulamalarımız";
+                document.querySelector('#contact').innerHTML = "İletişim";
+                document.querySelector('#translationSettings').style.display = "none";
+                document.querySelector('#mealSettings').style.display = "block";
+            } else {
+                document.querySelector('#updateHistory').style.display = "none";
+                document.querySelector('#mealSettings').style.display = "none";
+                document.querySelector('#translationSettings').style.display = "block";
+                
+                // Set translation based on language
+                const translations = {
+                    en: "Muhammad Asad",
+                    id: "Bahasa Indonesia",
+                    de: "Adel Theodor Khoury",
+                    es: "Julio Cortes",
+                    ru: "Elmir Kuliev",
+                    fr: "Muhammad Hamidullah",
+                    ur: "Ahmed Ali",
+                    hi: "Muhammad Farooq Khan",
+                    bs: "Besim Korkut",
+                    az: "Alikhan Musayev",
+                    ug: "Muhammad Saleh"
+                };
+                
+                transElement.innerHTML = translations[lang] || "Default";
+            }
+        }
+
+        // Set language
+        function setLang() {
+            const langnew = document.getElementById('lang').value;
+            localStorage.setItem("langValue", langnew);
+            
+            showSuccessMessage("Dil ayarları kaydedildi!");
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        }
+
+        // Set meal
+        function setMeal() {
+            const mealnew = document.getElementById('meal').value;
+            localStorage.setItem("mealValue", mealnew);
+            
+            showSuccessMessage("Meal ayarları kaydedildi!");
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        }
+
+        // Show success message
+        function showSuccessMessage(message) {
+            const successDiv = document.getElementById('successMessage');
+            const successText = document.getElementById('successText');
+            
+            successText.textContent = message;
+            successDiv.style.display = 'block';
+            
+            // Scroll to top to show message
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Reset settings
+        function resetSettings() {
+            if (confirm('Tüm ayarları sıfırlamak istediğinizden emin misiniz?')) {
+                localStorage.removeItem('mealValue');
+                localStorage.removeItem('langValue');
+                
+                showSuccessMessage("Ayarlar sıfırlandı!");
+                
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            }
+        }
+
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            const colors = {
+                success: 'bg-green-500',
+                info: 'bg-blue-500',
+                warning: 'bg-yellow-500',
+                error: 'bg-red-500'
+            };
+
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 ${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full`;
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.remove('translate-x-full'), 100);
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSettings();
+            initializePage();
+        });
+    </script>
+</body>
+</html>

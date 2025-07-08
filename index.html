@@ -1,87 +1,962 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" dir="ltr">
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Kur'an-ı Kerim</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kuran-ı Kerim - Online Kuran Okuma, Meal ve Tefsir</title>
+
+	<!-- SEO Meta Tags -->
+	<meta name="description"
+		content="Kuran-ı Kerim'i online okuyun. Türkçe meal, tefsir, ses kaydı, zikirmatik ve İslami içerikler. Ücretsiz Kuran uygulaması.">
+	<meta name="keywords"
+		content="kuran, quran, kuran-ı kerim, meal, tefsir, zikirmatik, namaz duaları, İslami uygulama">
+	<meta name="author" content="Kuran-ı Kerim Uygulaması">
+	<meta name="robots" content="index, follow">
+	<meta name="language" content="Turkish">
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content="Kuran-ı Kerim - Online Kuran Okuma">
+	<meta property="og:description"
+		content="Kuran-ı Kerim'i online okuyun. Türkçe meal, tefsir, ses kaydı ve zikirmatik özellikleri.">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://yourwebsite.com">
+	<meta property="og:image" content="./assets/image/og-image.jpg">
+
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Kuran-ı Kerim - Online Kuran Okuma">
+	<meta name="twitter:description"
+		content="Kuran-ı Kerim'i online okuyun. Türkçe meal, tefsir, ses kaydı ve zikirmatik özellikleri.">
+
+	<!-- Favicon -->
 	<link rel="manifest" href="manifest.json">
 	<link rel="shortcut icon" href="assets/web/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-	<link rel="stylesheet" href="assets/style.css">
+
+	<!-- Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+	<!-- Styles -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		:root {
+			--primary-color: #1a936f;
+			--secondary-color: #8FD19E;
+			--accent-color: #2d4a3e;
+			--text-dark: #1a202c;
+			--text-light: #718096;
+			--bg-light: #f7fafc;
+		}
+
+		body {
+			font-family: 'Inter', sans-serif;
+			line-height: 1.6;
+		}
+
+		.arabic-text {
+			font-family: 'Amiri', 'Scheherazade New', serif;
+			font-size: 1.8rem;
+			line-height: 3rem;
+			direction: rtl;
+			text-align: center;
+			font-weight: 400;
+			color: #2d3748;
+		}
+
+		.hero-bg {
+			background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero-bg::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			opacity: 0.1;
+		}
+
+		.feature-card {
+			transition: all 0.3s ease;
+			background: white;
+			border-radius: 16px;
+			padding: 2rem;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+		}
+
+		.feature-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 20px 40px rgba(26, 147, 111, 0.15);
+		}
+
+		.nav-item {
+			transition: all 0.3s ease;
+			position: relative;
+		}
+
+		.nav-item:hover {
+			color: var(--primary-color);
+		}
+
+		.nav-item.active::after {
+			content: '';
+			position: absolute;
+			bottom: -2px;
+			left: 0;
+			width: 100%;
+			height: 3px;
+			background: var(--primary-color);
+			border-radius: 2px;
+		}
+
+		.btn-primary {
+			background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+			border: none;
+			border-radius: 12px;
+			padding: 12px 24px;
+			font-weight: 600;
+			transition: all 0.3s ease;
+		}
+
+		.btn-primary:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(26, 147, 111, 0.3);
+		}
+
+		.stats-card {
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 16px;
+			padding: 1.5rem;
+			text-align: center;
+			color: white;
+		}
+
+		.loading-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 9999;
+			opacity: 1;
+			transition: opacity 0.5s ease;
+		}
+
+		.loading-overlay.fade-out {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.spinner {
+			width: 60px;
+			height: 60px;
+			border: 4px solid rgba(255, 255, 255, 0.3);
+			border-top: 4px solid white;
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+		}
+
+		/* Button fixes */
+		#startReadingBtn,
+		#tasbeehBtn {
+			position: relative;
+			z-index: 100;
+			pointer-events: auto;
+			cursor: pointer;
+		}
+
+		.hero-bg {
+			background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+			position: relative;
+			overflow: hidden;
+			z-index: 1;
+		}
+
+		.hero-bg * {
+			position: relative;
+			z-index: 2;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		.floating-animation {
+			animation: float 6s ease-in-out infinite;
+		}
+
+		@keyframes float {
+
+			0%,
+			100% {
+				transform: translateY(0px);
+			}
+
+			50% {
+				transform: translateY(-20px);
+			}
+		}
+
+		.testimonial-card {
+			background: white;
+			border-radius: 16px;
+			padding: 2rem;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+			position: relative;
+		}
+
+		.testimonial-card::before {
+			content: '"';
+			position: absolute;
+			top: -10px;
+			left: 20px;
+			font-size: 4rem;
+			color: var(--primary-color);
+			opacity: 0.3;
+		}
+
+		/* Toast Notification Styles */
+		.toast-notification {
+			animation: slideInRight 0.3s ease-out;
+		}
+
+		@keyframes slideInRight {
+			from {
+				transform: translateX(100%);
+				opacity: 0;
+			}
+
+			to {
+				transform: translateX(0);
+				opacity: 1;
+			}
+		}
+
+		/* Loading Spinner */
+		.spinner-border {
+			display: inline-block;
+			width: 2rem;
+			height: 2rem;
+			vertical-align: text-bottom;
+			border: 0.25em solid currentColor;
+			border-right-color: transparent;
+			border-radius: 50%;
+			animation: spin 0.75s linear infinite;
+		}
+
+		/* Improved Arabic Text */
+		.arabic-text {
+			font-family: 'Amiri', 'Scheherazade New', serif;
+			font-size: 1.8rem;
+			line-height: 3rem;
+			direction: rtl;
+			text-align: center;
+			font-weight: 400;
+			color: #2d3748;
+		}
+
+		/* Responsive adjustments */
+		@media (max-width: 768px) {
+			.arabic-text {
+				font-size: 1.4rem;
+				line-height: 2.5rem;
+			}
+
+			.toast-notification {
+				right: 1rem;
+				left: 1rem;
+			}
+		}
+	</style>
 </head>
 
-<body class="body background">
-	<main class="main-container">
-		<div class="container">
-			<div class="main-grid">
-				<div class="menu-card" id="bookmark">
-					<div class="menu-icon">
-						<img src="./assets/image/1.png" alt="Favorites" style="width: 100%; height: 100%; object-fit: contain;">
+<body class="bg-gray-50">
+	<!-- Loading Screen -->
+	<div class="loading-overlay" id="loadingOverlay">
+		<div class="text-center">
+			<div class="spinner mx-auto mb-4"></div>
+			<p class="text-white text-lg">Kuran-ı Kerim Yükleniyor...</p>
+		</div>
+	</div>
+
+	<!-- Header -->
+	<header class="bg-white shadow-sm sticky top-0 z-50">
+		<div class="container mx-auto px-4 py-4">
+			<div class="flex items-center justify-between">
+				<div class="flex items-center space-x-3">
+					<div
+						class="w-12 h-12 bg-gradient-to-br from-green-600 to-green-400 rounded-full flex items-center justify-center">
+						<i class="fas fa-book-quran text-white text-xl"></i>
 					</div>
-					<h4 class="menu-title" id="bookmarkT">Favorites</h4>
+					<div>
+						<h1 class="text-2xl font-bold text-gray-900">Kuran-ı Kerim</h1>
+						<p class="text-sm text-gray-600">Online Kuran Oku</p>
+					</div>
 				</div>
-				<div class="menu-card" id="quran">
-					<div class="menu-icon">
-						<img src="./assets/image/2.png" alt="Quran" style="width: 100%; height: 100%; object-fit: contain;">
-					</div>
-					<h4 class="menu-title" id="quranT">Quran</h4>
-				</div>
-				<div class="menu-card" id="sayac">
-					<div class="menu-icon">
-						<img src="./assets/image/3.png" alt="Tasbeeh" style="width: 100%; height: 100%; object-fit: contain;">
-					</div>
-					<h4 class="menu-title" id="sayacT">Tasbeeh</h4>
-				</div>
-				<div class="menu-card" id="dua">
-					<div class="menu-icon">
-						<img src="./assets/image/4.png" alt="Prayers" style="width: 100%; height: 100%; object-fit: contain;">
-					</div>
-					<h4 class="menu-title" id="duaT">Namaz Duaları</h4>
-				</div>
-				<div class="menu-card" id="sure">
-					<div class="menu-icon">
-						<img src="./assets/image/5.png" alt="Surahs" style="width: 100%; height: 100%; object-fit: contain;">
-					</div>
-					<h4 class="menu-title" id="sureT">Namaz Sûreleri</h4>
-				</div>
-				<div class="menu-card" id="abdest">
-					<div class="menu-icon">
-						<img src="./assets/image/6.png" alt="Ablution" style="width: 100%; height: 100%; object-fit: contain;">
-					</div>
-					<h4 class="menu-title" id="abdestT">Abdest</h4>
-				</div>
-				<div class="menu-card" id="about">
-					<div class="menu-icon">
-						<img src="./assets/image/7.png" alt="Settings" style="width: 100%; height: 100%; object-fit: contain;">
-					</div>
-					<h4 class="menu-title" id="aboutT">Settings</h4>
-				</div>
-				<div class="menu-card" id="app">
-					<div class="menu-icon">
-						<img src="./assets/image/8.png" alt="Download App" style="width: 100%; height: 100%; object-fit: contain;">
-					</div>
-					<h4 class="menu-title" id="appT">Download App</h4>
-				</div>
-				<div class="menu-card" id="other">
-					<div class="menu-icon">
-						<img src="./assets/image/9.png" alt="Other Apps" style="width: 100%; height: 100%; object-fit: contain;">
-					</div>
-					<h4 class="menu-title" id="otherT">Our Other Apps</h4>
+
+				<nav class="hidden md:flex items-center space-x-8">
+					<a href="#home" class="nav-item active text-gray-700 hover:text-green-600 font-medium">Ana Sayfa</a>
+					<a href="#features" class="nav-item text-gray-700 hover:text-green-600 font-medium">Özellikler</a>
+					<a href="#about" class="nav-item text-gray-700 hover:text-green-600 font-medium">Hakkımızda</a>
+					<a href="#footer" class="nav-item text-gray-700 hover:text-green-600 font-medium">İletişim</a>
+					<a href="settings.html" class="nav-item text-gray-700 hover:text-green-600 font-medium"><i
+							class="fas fa-cog"></i> Ayarlar</a>
+
+				</nav>
+
+				<div class="flex items-center space-x-4">
+					<button class="btn-primary text-white px-6 py-2 rounded-lg" id="downloadBtn">
+						<i class="fas fa-download mr-2"></i>
+						Uygulamayı İndir
+					</button>
+					<button class="md:hidden text-gray-700" id="mobileMenuBtn">
+						<i class="fas fa-bars text-xl"></i>
+					</button>
 				</div>
 			</div>
 		</div>
-	</main>
+	</header>
 
+	<!-- Hero Section -->
+	<section id="home" class="hero-bg py-20">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+				<div class="text-white">
+					<h2 class="text-5xl font-bold mb-6 leading-tight">
+						Kuran-ı Kerim'i<br>
+						<span class="text-green-200">Online Okuyun</span>
+					</h2>
+					<p class="text-xl mb-8 text-green-100 leading-relaxed">
+						Türkçe meal, tefsir, ses kaydı ve zikirmatik özellikleri ile
+						tam kapsamlı İslami uygulama. Ücretsiz ve reklamsız deneyim.
+					</p>
+
+					<div class="flex flex-wrap gap-4 mb-8">
+						<button
+							class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition"
+							id="startReadingBtn">
+							<i class="fas fa-book-open mr-2"></i>
+							Okumaya Başla
+						</button>
+						<button
+							class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition"
+							id="tasbeehBtn">
+							<i class="fas fa-pray mr-2"></i>
+							Zikirmatik
+						</button>
+					</div>
+
+					<div class="grid grid-cols-3 gap-6">
+						<div class="stats-card">
+							<div class="text-2xl font-bold mb-1">114</div>
+							<div class="text-sm opacity-90">Sure</div>
+						</div>
+						<div class="stats-card">
+							<div class="text-2xl font-bold mb-1">6236</div>
+							<div class="text-sm opacity-90">Ayet</div>
+						</div>
+						<div class="stats-card">
+							<div class="text-2xl font-bold mb-1">30</div>
+							<div class="text-sm opacity-90">Cüz</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="relative">
+					<div class="floating-animation">
+						<div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-auto" id="dailyVerseCard">
+							<!-- Günün ayeti buraya dinamik olarak yüklenecek -->
+							<div class="text-center py-8">
+								<div class="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4">
+								</div>
+								<p class="text-gray-600">Günün ayeti yükleniyor...</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- Features Section -->
+	<section id="features" class="py-20">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-16">
+				<h2 class="text-4xl font-bold text-gray-900 mb-4">Özellikler</h2>
+				<p class="text-xl text-gray-600 max-w-2xl mx-auto">
+					Kuran-ı Kerim uygulaması ile İslami yaşamınızı kolaylaştıracak
+					modern ve kullanışlı özellikler
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="featuresGrid">
+				<div class="feature-card" data-page="quran">
+					<div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+						<i class="fas fa-book-quran text-2xl text-green-600"></i>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Kuran-ı Kerim</h3>
+					<p class="text-gray-600 mb-4">
+						Tam Kuran metni, Türkçe meal, tefsir ve ses kaydı ile
+						kapsamlı okuma deneyimi
+					</p>
+					<button class="text-green-600 font-semibold hover:text-green-800 transition">
+						Okumaya Başla <i class="fas fa-arrow-right ml-2"></i>
+					</button>
+				</div>
+
+				<div class="feature-card" data-page="counter">
+					<div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+						<i class="fas fa-praying-hands text-2xl text-blue-600"></i>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Zikirmatik</h3>
+					<p class="text-gray-600 mb-4">
+						Dijital zikirmatik ile günlük zikirlerinizi takip edin
+						ve ruhsal gelişiminizi destekleyin
+					</p>
+					<button class="text-green-600 font-semibold hover:text-green-800 transition">
+						Zikirmatik Aç <i class="fas fa-arrow-right ml-2"></i>
+					</button>
+				</div>
+
+				<div class="feature-card" data-page="bookmark">
+					<div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+						<i class="fas fa-bookmark text-2xl text-purple-600"></i>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Favoriler</h3>
+					<p class="text-gray-600 mb-4">
+						Beğendiğiniz ayetleri işaretleyin ve daha sonra
+						kolayca erişim sağlayın
+					</p>
+					<button class="text-green-600 font-semibold hover:text-green-800 transition">
+						Favoriler <i class="fas fa-arrow-right ml-2"></i>
+					</button>
+				</div>
+
+				<div class="feature-card" data-page="dua-list">
+					<div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mb-6">
+						<i class="fas fa-pray text-2xl text-orange-600"></i>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Namaz Duaları</h3>
+					<p class="text-gray-600 mb-4">
+						Namaz kılarken ihtiyaç duyacağınız tüm dualar
+						ve zikirler tek yerde
+					</p>
+					<button class="text-green-600 font-semibold hover:text-green-800 transition">
+						Duaları Gör <i class="fas fa-arrow-right ml-2"></i>
+					</button>
+				</div>
+
+				<div class="feature-card" data-page="sure-list">
+					<div class="w-16 h-16 bg-red-100 rounded-lg flex items-center justify-center mb-6">
+						<i class="fas fa-scroll text-2xl text-red-600"></i>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Namaz Sureleri</h3>
+					<p class="text-gray-600 mb-4">
+						Namazda okuyabileceğiniz sureler ve
+						bunların Türkçe anlamları
+					</p>
+					<button class="text-green-600 font-semibold hover:text-green-800 transition">
+						Sureleri Gör <i class="fas fa-arrow-right ml-2"></i>
+					</button>
+				</div>
+
+				<div class="feature-card" data-page="abdest">
+					<div class="w-16 h-16 bg-teal-100 rounded-lg flex items-center justify-center mb-6">
+						<i class="fas fa-hand-sparkles text-2xl text-teal-600"></i>
+					</div>
+					<h3 class="text-xl font-bold text-gray-900 mb-4">Abdest Rehberi</h3>
+					<p class="text-gray-600 mb-4">
+						Abdest alma adımları ve duaları ile
+						tam rehber
+					</p>
+					<button class="text-green-600 font-semibold hover:text-green-800 transition">
+						Abdest Rehberi <i class="fas fa-arrow-right ml-2"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- About Section -->
+	<section id="about" class="py-20 bg-gray-100">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+				<div>
+					<h2 class="text-4xl font-bold text-gray-900 mb-6">
+						Neden Kuran-ı Kerim Uygulamamızı Tercih Etmelisiniz?
+					</h2>
+					<p class="text-lg text-gray-600 mb-8">
+						Modern teknoloji ile İslami değerleri bir araya getiren uygulamamız,
+						Kuran-ı Kerim'i okuma ve anlama konusunda size rehberlik eder.
+					</p>
+
+					<div class="space-y-6">
+						<div class="flex items-start space-x-4">
+							<div
+								class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+								<i class="fas fa-check text-green-600 text-xl"></i>
+							</div>
+							<div>
+								<h3 class="text-xl font-semibold text-gray-900 mb-2">Ücretsiz ve Reklamsız</h3>
+								<p class="text-gray-600">Tamamen ücretsiz kullanım ve rahatsız edici reklamlar olmadan
+									temiz arayüz</p>
+							</div>
+						</div>
+
+						<div class="flex items-start space-x-4">
+							<div
+								class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+								<i class="fas fa-mobile-alt text-green-600 text-xl"></i>
+							</div>
+							<div>
+								<h3 class="text-xl font-semibold text-gray-900 mb-2">Responsive Tasarım</h3>
+								<p class="text-gray-600">Tüm cihazlarda mükemmel çalışan, mobil uyumlu modern tasarım
+								</p>
+							</div>
+						</div>
+
+						<div class="flex items-start space-x-4">
+							<div
+								class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+								<i class="fas fa-volume-up text-green-600 text-xl"></i>
+							</div>
+							<div>
+								<h3 class="text-xl font-semibold text-gray-900 mb-2">Ses Kaydı</h3>
+								<p class="text-gray-600">Profesyonel hafızlar tarafından okunan yüksek kaliteli ses
+									kayıtları</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-2 gap-6">
+					<div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+						<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+							<i class="fas fa-users text-2xl text-green-600"></i>
+						</div>
+						<div class="text-2xl font-bold text-gray-900 mb-2">1B+</div>
+						<div class="text-gray-600">Aktif Kullanıcı</div>
+					</div>
+
+					<div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+						<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+							<i class="fas fa-star text-2xl text-blue-600"></i>
+						</div>
+						<div class="text-2xl font-bold text-gray-900 mb-2">4.8</div>
+						<div class="text-gray-600">Uygulama Puanı</div>
+					</div>
+
+					<div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+						<div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+							<i class="fas fa-download text-2xl text-purple-600"></i>
+						</div>
+						<div class="text-2xl font-bold text-gray-900 mb-2">5B+</div>
+						<div class="text-gray-600">İndirme</div>
+					</div>
+
+					<div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+						<div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+							<i class="fas fa-globe text-2xl text-orange-600"></i>
+						</div>
+						<div class="text-2xl font-bold text-gray-900 mb-2">50+</div>
+						<div class="text-gray-600">Ülke</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Testimonials Section -->
+	<section class="py-20">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-16">
+				<h2 class="text-4xl font-bold text-gray-900 mb-4">Kullanıcı Yorumları</h2>
+				<p class="text-xl text-gray-600">Uygulamamızı kullanan binlerce kullanıcımızın görüşleri</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<div class="testimonial-card">
+					<div class="flex items-center mb-4">
+						<img src="https://ui-avatars.com/api/?name=Ahmet+Yılmaz&background=1a936f&color=fff"
+							class="w-12 h-12 rounded-full mr-4" alt="Ahmet Yılmaz">
+						<div>
+							<h4 class="font-semibold text-gray-900">Ahmet Yılmaz</h4>
+							<div class="text-yellow-500">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+							</div>
+						</div>
+					</div>
+					<p class="text-gray-600">
+						Harika bir uygulama! Kuran okumak hiç bu kadar kolay olmamıştı.
+						Ses kaydı özelliği çok kaliteli ve meal çevirisi çok anlaşılır.
+					</p>
+				</div>
+
+				<div class="testimonial-card">
+					<div class="flex items-center mb-4">
+						<img src="https://ui-avatars.com/api/?name=Fatma+Kaya&background=1a936f&color=fff"
+							class="w-12 h-12 rounded-full mr-4" alt="Fatma Kaya">
+						<div>
+							<h4 class="font-semibold text-gray-900">Fatma Kaya</h4>
+							<div class="text-yellow-500">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+							</div>
+						</div>
+					</div>
+					<p class="text-gray-600">
+						Zikirmatik özelliği günlük ibadetlerimi takip etmek için
+						mükemmel. Favoriler bölümü sayesinde sevdiğim ayetleri hep yanımda taşıyorum.
+					</p>
+				</div>
+
+				<div class="testimonial-card">
+					<div class="flex items-center mb-4">
+						<img src="https://ui-avatars.com/api/?name=Mehmet+Demir&background=1a936f&color=fff"
+							class="w-12 h-12 rounded-full mr-4" alt="Mehmet Demir">
+						<div>
+							<h4 class="font-semibold text-gray-900">Mehmet Demir</h4>
+							<div class="text-yellow-500">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+							</div>
+						</div>
+					</div>
+					<p class="text-gray-600">
+						Namaz duaları ve sureleri bölümü çok faydalı.
+						Çocuklarıma namaz öğretirken sürekli kullanıyorum. Teşekkürler!
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- App Download Section -->
+	<section class="py-20 bg-gradient-to-r from-green-600 to-green-400">
+		<div class="container mx-auto px-4">
+			<div class="text-center text-white">
+				<h2 class="text-4xl font-bold mb-6">Mobil Uygulamamızı İndirin</h2>
+				<p class="text-xl mb-8 max-w-2xl mx-auto">
+					Kuran-ı Kerim'i her zaman yanınızda taşıyın. Offline erişim,
+					gelişmiş arama ve daha fazla özellik için mobil uygulamamızı indirin.
+				</p>
+
+				<div class="flex flex-wrap justify-center gap-4 mb-8">
+					<button
+						class="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-semibold transition flex items-center">
+						<i class="fab fa-apple text-2xl mr-3"></i>
+						<div class="text-left">
+							<div class="text-xs">Download on the</div>
+							<div class="text-lg">App Store</div>
+						</div>
+					</button>
+					<button
+						class="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-semibold transition flex items-center"
+						id="playStoreBtn">
+						<i class="fab fa-google-play text-2xl mr-3"></i>
+						<div class="text-left">
+							<div class="text-xs">Get it on</div>
+							<div class="text-lg">Google Play</div>
+						</div>
+					</button>
+				</div>
+
+				<div class="flex justify-center items-center space-x-8 text-green-100">
+					<div class="flex items-center">
+						<i class="fas fa-download mr-2"></i>
+						<span>5B+ İndirme</span>
+					</div>
+					<div class="flex items-center">
+						<i class="fas fa-star mr-2"></i>
+						<span>4.8 Puan</span>
+					</div>
+					<div class="flex items-center">
+						<i class="fas fa-users mr-2"></i>
+						<span>1B+ Kullanıcı</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="bg-gray-900 text-white py-12" id="footer">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+				<div>
+					<div class="flex items-center space-x-3 mb-6">
+						<div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+							<i class="fas fa-mosque text-white"></i>
+						</div>
+						<h3 class="text-xl font-bold">Kuran-ı Kerim</h3>
+					</div>
+					<p class="text-gray-400 mb-4">
+						Modern teknoloji ile İslami değerleri buluşturan,
+						Kuran-ı Kerim okuma ve anlama uygulaması.
+					</p>
+					<div class="flex space-x-4">
+						<a href="https://github.com/mehmetserdar"
+							class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition">
+							<i class="fab fa-github"></i>
+						</a>
+						<a href="https://www.instagram.com/mehserdar"
+							class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a href="https://www.linkedin.com/in/mehmet-serdar-633702309/"
+							class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition">
+							<i class="fab fa-linkedin-in"></i> </a>
+					</div>
+				</div>
+
+				<div>
+					<h4 class="text-lg font-semibold mb-6">Hızlı Linkler</h4>
+					<ul class="space-y-3">
+						<li><a href="#" class="text-gray-400 hover:text-white transition">Ana Sayfa</a></li>
+						<li><a href="quran.html" class="text-gray-400 hover:text-white transition">Kuran-ı Kerim</a>
+						</li>
+						<li><a href="counter.html" class="text-gray-400 hover:text-white transition">Zikirmatik</a></li>
+						<li><a href="bookmark.html" class="text-gray-400 hover:text-white transition">Favoriler</a></li>
+						<li><a href="settings.html" class="text-gray-400 hover:text-white transition">Ayarlar</a></li>
+					</ul>
+				</div>
+
+				<div>
+					<h4 class="text-lg font-semibold mb-6">Özellikler</h4>
+					<ul class="space-y-3">
+						<li><a href="settings.html" class="text-gray-400 hover:text-white transition">12 Dilde Meal</a>
+						</li>
+						<li><a href="sure-list.html" class="text-gray-400 hover:text-white transition">Namaz
+								Sureleri</a></li>
+						<li><a href="dua-list.html" class="text-gray-400 hover:text-white transition">Namaz Duaları</a>
+						</li>
+						<li><a href="abdest.html" class="text-gray-400 hover:text-white transition">Abdest Rehberi</a>
+						</li>
+					</ul>
+				</div>
+
+				<div>
+					<h4 class="text-lg font-semibold mb-6">İletişim</h4>
+					<ul class="space-y-3">
+						<li class="flex items-center text-gray-400">
+							<i class="fas fa-envelope mr-3"></i>
+							info@kuranapp.com
+						</li>
+						<li class="flex items-center text-gray-400">
+							<i class="fas fa-phone mr-3"></i>
+							+90 (555) 123 45 67
+						</li>
+						<li class="flex items-center text-gray-400">
+							<i class="fas fa-map-marker-alt mr-3"></i>
+							İstanbul, Türkiye
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+				<p>&copy; 2025 Kuran-ı Kerim. Tüm hakları saklıdır.</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="./assets/script.js"></script>
 	<script>
-
 		$(document).ready(function () {
+			// Loading screen
+			setTimeout(function () {
+				$('#loadingOverlay').addClass('fade-out');
+				setTimeout(function () {
+					$('#loadingOverlay').remove();
+				}, 500);
+			}, 1500);
+
+			// Initialize language
+			loadLanguage();
+			loadMeal();
+
+			// Smooth scrolling for navigation
+			$('a[href^="#"]').on('click', function (event) {
+				var target = $(this.getAttribute('href'));
+				if (target.length) {
+					event.preventDefault();
+					$('html, body').stop().animate({
+						scrollTop: target.offset().top - 80
+					}, 1000);
+				}
+			});
+
+			// Navigation active state
+			$(window).scroll(function () {
+				var scrollPos = $(window).scrollTop();
+				$('nav a').each(function () {
+					var currLink = $(this);
+					var refElement = $(currLink.attr("href"));
+					if (refElement.position().top - 100 <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+						$('nav a').removeClass("active");
+						currLink.addClass("active");
+					}
+				});
+			});
+
+			// Feature cards click events with page navigation
+			$('.feature-card[data-page="quran"]').on('click', function () {
+				window.location.href = 'quran.html';
+			});
+
+			$('.feature-card[data-page="counter"]').on('click', function () {
+				window.location.href = 'counter.html';
+			});
+
+			$('.feature-card[data-page="bookmark"]').on('click', function () {
+				window.location.href = 'bookmark.html';
+			});
+
+			$('.feature-card[data-page="dua-list"]').on('click', function () {
+				window.location.href = 'dua-list.html';
+			});
+
+			$('.feature-card[data-page="sure-list"]').on('click', function () {
+				window.location.href = 'sure-list.html';
+			});
+
+			$('.feature-card[data-page="abdest"]').on('click', function () {
+				window.location.href = 'abdest.html';
+			});
+
+			// Individual feature buttons
+			$('.feature-card button').on('click', function (e) {
+				e.stopPropagation(); // Prevent card click
+				const card = $(this).closest('.feature-card');
+				const page = card.data('page');
+
+				switch (page) {
+					case 'quran':
+						window.location.href = 'quran.html';
+						break;
+					case 'counter':
+						window.location.href = 'counter.html';
+						break;
+					case 'bookmark':
+						window.location.href = 'bookmark.html';
+						break;
+					case 'dua-list':
+						window.location.href = 'dua-list.html';
+						break;
+					case 'sure-list':
+						window.location.href = 'sure-list.html';
+						break;
+					case 'abdest':
+						window.location.href = 'abdest.html';
+						break;
+				}
+			});
+
+			// Hero section main buttons
+			$('#startReadingBtn').on('click', function () {
+				window.location.href = 'quran.html';
+			});
+
+			$('#tasbeehBtn').on('click', function () {
+				window.location.href = 'counter.html';
+			});
+
+			// App download buttons
+			$('#downloadBtn').on('click', function () {
+				window.open('https://play.google.com/store/apps/details?id=com.mobuyg.kuran', '_blank');
+			});
+
+			$('#playStoreBtn').on('click', function () {
+				window.open('https://play.google.com/store/apps/details?id=com.mobuyg.kuran', '_blank');
+			});
+
+			// App Store button (iOS)
+			$('.bg-black').first().on('click', function () {
+				window.open('https://apps.apple.com/tr/app/kuran-i-kerim/id1234567890', '_blank');
+			});
+
+			// Mobile menu toggle
+			$('#mobileMenuBtn').on('click', function () {
+				const nav = $('header nav');
+				nav.toggleClass('hidden');
+			});
+
+			// Error handling for missing pages
+			const handlePageNavigation = (url) => {
+				// Check if page exists before navigating
+				const link = document.createElement('a');
+				link.href = url;
+
+				// For demo purposes, just navigate directly
+				// In production, you might want to check if page exists first
+				window.location.href = url;
+			};
+
+			// Add loading states for buttons
+			$('button[id$="Btn"]').on('click', function () {
+				const btn = $(this);
+				const originalText = btn.html();
+
+				btn.html('<i class="fas fa-spinner fa-spin mr-2"></i>Yükleniyor...');
+				btn.prop('disabled', true);
+
+				setTimeout(() => {
+					btn.html(originalText);
+					btn.prop('disabled', false);
+				}, 1000);
+			});
+
+			// Initialize original script functions
+			if (typeof indexPage === 'function') {
+				indexPage();
+			}
+
+			// Language specific adjustments
+			const langValue = localStorage.getItem("langValue");
+			if (langValue !== "tr") {
+				// Hide Turkish-specific features for other languages
+				$('[data-page="dua-list"]').hide();
+				$('[data-page="sure-list"]').hide();
+				$('[data-page="abdest"]').hide();
+			}
+
+			// Hide app download for Android devices
+			if (typeof isAndroid !== 'undefined' && isAndroid) {
+				$('#downloadBtn').hide();
+			}
+
+			// Dynamic background
 			const bgImages = [
 				"./assets/image/m0.jpg",
 				"./assets/image/m1.jpg",
@@ -97,47 +972,71 @@
 				"./assets/image/m11.jpg",
 				"./assets/image/m12.jpg",
 				"./assets/image/m13.jpg"
-				// Add more image paths as needed
 			];
 
-			const randomIndex = Math.floor(Math.random(0,14) * bgImages.length);
+			const randomIndex = Math.floor(Math.random() * bgImages.length);
 			const randomImage = bgImages[randomIndex];
 
-			$(".background").css({
-				"background-image": `url('${randomImage}')`,
+			$('.hero-bg').css({
+				"background-image": `linear-gradient(135deg, rgba(26, 147, 111, 0.9) 0%, rgba(143, 209, 158, 0.9) 100%), url('${randomImage}')`,
+				"background-size": "cover",
+				"background-position": "center"
+			});
+
+			// Intersection Observer for animations
+			const observerOptions = {
+				threshold: 0.1,
+				rootMargin: '0px 0px -100px 0px'
+			};
+
+			const observer = new IntersectionObserver(function (entries) {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('animate-fade-in');
+					}
+				});
+			}, observerOptions);
+
+			// Observe all feature cards
+			document.querySelectorAll('.feature-card').forEach(card => {
+				observer.observe(card);
 			});
 		});
-		const langValue = localStorage.getItem("langValue");
-		loadLanguage();
-		if (langValue == "tr") {
-			indexPage();
-			document.querySelector('#quranT').innerHTML = "Kur'an-ı Kerim";
-			document.querySelector('#sayacT').innerHTML = "Zikirmatik";
-			document.querySelector('#bookmarkT').innerHTML = "Favoriler";
-			document.querySelector('#aboutT').innerHTML = "Ayarlar";
-			document.querySelector('#appT').innerHTML = "Uygulamayı İndirin";
-			document.querySelector('#otherT').innerHTML = "Diğer Uygulamalarımız";
 
-
-		} else {
-			indexPage();
-			document.querySelector('#dua').style.display = "none";
-			document.querySelector('#sure').style.display = "none";
-			document.querySelector('#abdest').style.display = "none";
-
-		}
-
-
-
-		if (isAndroid) {
-			document.querySelector('#app').style.display = "none";
-			document.querySelector('#about').style.display = "none";
-			document.querySelector('#other').style.display = "none";
-		}
-
-
-
-
+		// Add some CSS animations
+		const style = document.createElement('style');
+		style.textContent = `
+            .animate-fade-in {
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .feature-card {
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(26, 147, 111, 0.15);
+            }
+            
+            button:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+            }
+        `;
+		document.head.appendChild(style);
 	</script>
 </body>
 

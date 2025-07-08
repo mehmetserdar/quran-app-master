@@ -1,144 +1,823 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr" dir="ltr">
 
 <head>
-    <title>Counter</title>
-    <link rel="stylesheet" type="text/css" href="./assets/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zikirmatik - Kuran-ı Kerim</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="İslami zikirler için dijital zikirmatik, dua ve tesbih sayacı">
+    <meta name="keywords" content="zikirmatik, tesbih, dua sayacı, zikir, tesbih sayacı">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --success-color: #48bb78;
+            --warning-color: #ed8936;
+            --error-color: #e53e3e;
+            --main-font: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--main-font);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .counter-display {
+            text-align: center;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .counter-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 2rem;
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            transition: all 0.3s ease;
+        }
+
+        .counter-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        .counter-button {
+            transition: all 0.2s ease;
+            transform: translateY(0);
+        }
+
+        .counter-button:active {
+            transform: translateY(3px);
+        }
+
+        .circular-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .circular-button:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+     
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            transform: translate(-50%, -10px);
+        }
+
+        .counter-action-button {
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .counter-action-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .haptic-feedback {
+            animation: pulse 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .counter-presets {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .preset-button {
+            background: rgba(26, 147, 111, 0.1);
+            color: var(--primary-color);
+            border: 1px solid rgba(26, 147, 111, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .preset-button:hover {
+            background: rgba(26, 147, 111, 0.2);
+        }
+
+        .counter-history {
+            margin-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .history-item:hover {
+            background: #f1f5f9;
+        }
+
+        .target-indicator {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .target-progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .vibration-active {
+            position: relative;
+        }
+
+        .vibration-active::after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 10px;
+            height: 10px;
+            background: var(--success-color);
+            border-radius: 50%;
+        }
+
+        @media (max-width: 640px) {
+            .counter-display {
+                font-size: 7rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="header-quran bg-dark text-light m-0">
-        <a class="text-white pb-1 pl-3 pt-1" href='javascript:history.back();'><i class="fas fa-arrow-left    "></i></a>
-        <span class="baslik">Zikirmatik</span>
-    </header>
-    <div id="counterContainer" class="container d-flex align-items-center justify-content-center">
-
-        <div id="counterButtons" class="row">
-            <button class="btn btn-dark" id="clear-counter">New Counter</button>
-            <button class="btn btn-dark" id="save-counter">Save</button>
-            <button class="btn btn-dark" id="load-counter">Load</button>
-        </div>
-        <!-- Counter Number -->
-        <h1 id="counterNumber">0</h1>
-
-        <!-- Counter Buttons -->
-        <div id="counterButtons">
-            <button class="btn btn-dark" id="decrementButton">&nbsp;-&nbsp;</button>
-            <button class="btn btn-dark" id="incrementButton">+</button>
-
-            <br>
-
-        </div>
-
-    </div>
-    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center">
-
-        <!-- Then put toasts within -->
-        <div class="toast bg-dark" role="alert" aria-live="assertive" aria-atomic="true" data-delay="1000">
-            <div class="toast-body text-light">
-                Done
+    <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div>
+                        <h1 class="text-2xl font-bold">Zikirmatik</h1>
+                        <p class="text-green-100 text-sm">Tesbih ve dua sayacı</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button id="settingsBtn" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
             </div>
         </div>
+    </header>
 
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6 flex flex-col items-center justify-center min-h-[calc(100vh-100px)]">
+        <!-- Counter Container -->
+        <div class="counter-container relative">
+            <!-- Main Counter -->
+            <div class="text-center mb-8">
+                <div class="counter-display text-9xl" id="counterNumber">0</div>
+                
+                <!-- Target Indicator (optional) -->
+                <div class="target-indicator mt-4">
+                    <div class="target-progress" id="targetProgress" style="width: 0%"></div>
+                </div>
+                
+                <div class="text-sm text-gray-500 mt-2">
+                    <span id="targetText">0 / 33</span>
+                </div>
+            </div>
+            
+            <!-- Counter Controls -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <button id="decrementButton" class="counter-button counter-action-button bg-red-50 text-red-600 hover:bg-red-100">
+                    <i class="fas fa-minus mr-2"></i> Azalt
+                </button>
+                <button id="incrementButton" class="counter-button counter-action-button bg-green-50 text-green-600 hover:bg-green-100">
+                    <i class="fas fa-plus mr-2"></i> Artır
+                </button>
+            </div>
+            
+            <!-- Counter Actions -->
+            <div class="grid grid-cols-3 gap-2">
+                <button id="save-counter" class="counter-action-button bg-blue-50 text-blue-600 hover:bg-blue-100">
+                    <i class="fas fa-save mr-2"></i> Kaydet
+                </button>
+                <button id="load-counter" class="counter-action-button bg-purple-50 text-purple-600 hover:bg-purple-100">
+                    <i class="fas fa-history mr-2"></i> Yükle
+                </button>
+                <button id="clear-counter" class="counter-action-button bg-gray-50 text-gray-600 hover:bg-gray-100">
+                    <i class="fas fa-trash-alt mr-2"></i> Sıfırla
+                </button>
+            </div>
+            
+            <!-- Common Presets -->
+            <div class="mt-6">
+                <h3 class="text-gray-500 text-sm font-semibold mb-2">Hızlı Ayarlar</h3>
+                <div class="counter-presets">
+                    <button class="preset-button" onclick="setTarget(33, event)">33 Tesbih</button>
+                    <button class="preset-button" onclick="setTarget(99, event)">99 Esma</button>
+                    <button class="preset-button" onclick="setTarget(100, event)">100 Salavat</button>
+                    <button class="preset-button" onclick="setTarget(500, event)">500 Zikir</button>
+                    <button class="preset-button" onclick="setTarget(1000, event)">1000 Zikir</button>
+                    <button class="preset-button" onclick="setTarget(0, event)">Sınırsız</button>
+                </div>
+            </div>
+            
+            <!-- For Android - Create a big clickable area for increment -->
+            <button class="increment-area" id="mobileIncrement"></button>
+        </div>
+        
+        <!-- Floating Action Button for mobile -->
+        <button id="mobileMenuBtn" class="fixed bottom-6 right-6 w-14 h-14 bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center lg:hidden z-40">
+            <i class="fas fa-ellipsis-v text-xl"></i>
+        </button>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 m-4 max-w-sm w-full">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Zikirmatik Ayarları</h3>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="flex items-center space-x-3 mb-3">
+                        <input type="checkbox" id="vibrationToggle" class="h-5 w-5 text-green-600">
+                        <span>Titreşim</span>
+                    </label>
+                    
+                    <label class="flex items-center space-x-3 mb-3">
+                        <input type="checkbox" id="soundToggle" class="h-5 w-5 text-green-600">
+                        <span>Ses</span>
+                    </label>
+                    
+                    <label class="flex items-center space-x-3">
+                        <input type="checkbox" id="autoSaveToggle" class="h-5 w-5 text-green-600">
+                        <span>Otomatik Kayıt</span>
+                    </label>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Hedef Sayı
+                    </label>
+                    <input type="number" id="targetInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                
+                <div class="pt-4 border-t border-gray-200">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Renk Seçimi
+                    </label>
+                    <div class="flex space-x-2">
+                        <button class="w-8 h-8 rounded-full bg-green-600" onclick="changeTheme('green', event)"></button>
+                        <button class="w-8 h-8 rounded-full bg-blue-600" onclick="changeTheme('blue', event)"></button>
+                        <button class="w-8 h-8 rounded-full bg-purple-600" onclick="changeTheme('purple', event)"></button>
+                        <button class="w-8 h-8 rounded-full bg-red-600" onclick="changeTheme('red', event)"></button>
+                        <button class="w-8 h-8 rounded-full bg-yellow-600" onclick="changeTheme('yellow', event)"></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-end mt-6 space-x-3">
+                <button class="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200 transition" onclick="closeSettingsModal()">
+                    İptal
+                </button>
+                <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition" onclick="saveSettings()">
+                    Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu Modal -->
+    <div id="mobileMenuModal" class="fixed inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-xl z-50 transform translate-y-full transition-transform duration-300 ease-in-out lg:hidden">
+        <div class="flex justify-center pt-2 pb-4">
+            <div class="w-12 h-1 bg-gray-300 rounded-full"></div>
+        </div>
+        <div class="p-4 space-y-4">
+            <div class="grid grid-cols-3 gap-3 pb-4">
+                <button class="counter-action-button bg-blue-50 text-blue-600 hover:bg-blue-100 flex flex-col items-center py-3" onclick="saveCounter()">
+                    <i class="fas fa-save text-xl mb-1"></i>
+                    <span class="text-xs">Kaydet</span>
+                </button>
+                <button class="counter-action-button bg-purple-50 text-purple-600 hover:bg-purple-100 flex flex-col items-center py-3" onclick="loadCounter()">
+                    <i class="fas fa-history text-xl mb-1"></i>
+                    <span class="text-xs">Yükle</span>
+                </button>
+                <button class="counter-action-button bg-gray-50 text-gray-600 hover:bg-gray-100 flex flex-col items-center py-3" onclick="clearCounter()">
+                    <i class="fas fa-trash-alt text-xl mb-1"></i>
+                    <span class="text-xs">Sıfırla</span>
+                </button>
+            </div>
+            
+            <div class="counter-presets grid grid-cols-3 gap-2">
+                <button class="preset-button" onclick="setTarget(33, event)">33 Tesbih</button>
+                <button class="preset-button" onclick="setTarget(99, event)">99 Esma</button>
+                <button class="preset-button" onclick="setTarget(100, event)">100 Salavat</button>
+                <button class="preset-button" onclick="setTarget(500, event)">500 Zikir</button>
+                <button class="preset-button" onclick="setTarget(1000, event)">1000 Zikir</button>
+                <button class="preset-button" onclick="setTarget(0, event)">Sınırsız</button>
+            </div>
+        </div>
     </div>
 
-</body>
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toast">
+        <span id="toastMessage">İşlem Başarılı</span>
+    </div>
+
+    <!-- Sound Effects -->
+    <audio id="clickSound" preload="auto">
+        <source src="assets/sound/click.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="completionSound" preload="auto">
+        <source src="assets/sound/completion.mp3" type="audio/mpeg">
+    </audio>
 
 
 <script>
-    // Check if User Agent is Android
-    const isAndroid = /Android/i.test(navigator.userAgent);
-    // Hide Navigation Menu on Android Devices
-    if (isAndroid) {
-        const nav = document.querySelector('header');
-        nav.style.display = 'none';
-    }
-    // Get DOM Elements
-    const counterNumber = document.querySelector('#counterNumber');
-    const incrementButton = document.querySelector('#incrementButton');
-    const decrementButton = document.querySelector('#decrementButton');
-    document.getElementById("save-counter").addEventListener("click", saveCounter);
-    document.getElementById("clear-counter").addEventListener("click", clearCounter);
-    document.getElementById("load-counter").addEventListener("click", loadCounter);
-
-
-
-    // Define Counter Variable
+    // Global variables
     let counter = 0;
+    let currentTarget = 33; // Default target
+    let vibrationEnabled = false;
+    let soundEnabled = false;
+    let autoSaveEnabled = false;
+    let currentTheme = 'green';
+    let isModalOpen = false;
 
-    // Create Function to Update Counter
+    // DOM elements
+    const counterNumber = document.getElementById('counterNumber');
+    const incrementButton = document.getElementById('incrementButton');
+    const decrementButton = document.getElementById('decrementButton');
+    const saveButton = document.getElementById('save-counter');
+    const loadButton = document.getElementById('load-counter');
+    const clearButton = document.getElementById('clear-counter');
+    const targetProgress = document.getElementById('targetProgress');
+    const targetText = document.getElementById('targetText');
+    const mobileIncrement = document.getElementById('mobileIncrement');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenuModal = document.getElementById('mobileMenuModal');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsModal = document.getElementById('settingsModal');
+    const toast = document.getElementById('toast');
+    const clickSound = document.getElementById('clickSound');
+    const completionSound = document.getElementById('completionSound');
+    const counterContainer = document.querySelector('.counter-container');
 
-
-    // Create Event Listeners for Counter Buttons
-    incrementButton.addEventListener('click', () => {
-        counter++;
-        increaseCounter();
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+        loadSavedCounter();
+        loadSettings();
+        setupEventListeners();
+        updateTargetDisplay();
     });
 
-    decrementButton.addEventListener('click', () => {
-        counter--;
-        decreaseCounter();
-    });
+    // Setup event listeners - KRİTİK DÜZELTME BURADA
+    function setupEventListeners() {
+        // ÖNEMLİ: Container tıklamasını kaldırıyoruz
+        // Sadece mobileIncrement için increment işlevi çalışacak
+        mobileIncrement.addEventListener('click', function(event) {
+            event.stopPropagation();
+            increaseCounter();
+        });
 
-    function decreaseCounter() {
-        const counterValue = parseInt(document.querySelector("#counterNumber").textContent);
-        if (counterValue > 0) {
-            document.querySelector("#counterNumber").textContent = counterValue - 1;
+        // Düğmelere olay dinleyiciler ekle
+        incrementButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            increaseCounter();
+        });
+        
+        decrementButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            decreaseCounter();
+        });
+
+        // Action buttons
+        saveButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            saveCounter();
+        });
+        
+        loadButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            loadCounter();
+        });
+        
+        clearButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            clearCounter();
+        });
+
+        // Mobile menu
+        mobileMenuBtn.addEventListener('click', function(event) {
+            event.stopPropagation();
+            toggleMobileMenu();
+        });
+        
+        // Settings
+        settingsBtn.addEventListener('click', function(event) {
+            event.stopPropagation();
+            openSettingsModal();
+        });
+
+        // Preset buttons
+        document.querySelectorAll('.preset-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.stopPropagation();
+                // Hedef değerini doğrudan butonun metninden al
+                const target = parseInt(this.textContent) || 0;
+                setTarget(target);
+            });
+        });
+
+        // Modal dışına tıklama kontrolü
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuModal.contains(e.target) && !mobileMenuBtn.contains(e.target) && !mobileMenuModal.classList.contains('translate-y-full')) {
+                closeMobileMenu();
+            }
+
+            if (settingsModal && !settingsModal.classList.contains('hidden') && !settingsBtn.contains(e.target) && (!e.composedPath || !e.composedPath().includes(settingsModal.querySelector('.bg-white')))) {
+                closeSettingsModal();
+            }
+        });
+
+        // Modallardaki olay yayılmasını engelle
+        if (mobileMenuModal) {
+            mobileMenuModal.addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
+        }
+
+        if (settingsModal && settingsModal.querySelector('.bg-white')) {
+            settingsModal.querySelector('.bg-white').addEventListener('click', function(event) {
+                event.stopPropagation();
+            });
         }
     }
 
+    // Increase counter
     function increaseCounter() {
-        const counterValue = parseInt(document.querySelector("#counterNumber").textContent);
-        document.querySelector("#counterNumber").textContent = counterValue + 1;
-
+        counter++;
+        counterNumber.textContent = counter;
+        
+        // Add haptic feedback animation
+        counterNumber.classList.add('haptic-feedback');
+        setTimeout(() => counterNumber.classList.remove('haptic-feedback'), 300);
+        
+        // Vibration
+        if (vibrationEnabled && 'vibrate' in navigator) {
+            navigator.vibrate(20);
+        }
+        
+        // Sound
+        if (soundEnabled) {
+            playSound('click');
+        }
+        
+        // Check if target reached
+        if (currentTarget > 0 && counter >= currentTarget) {
+            targetReached();
+        }
+        
+        // Auto save
+        if (autoSaveEnabled) {
+            localStorage.setItem('savedCounterValue', counter);
+        }
+        
+        updateTargetDisplay();
     }
 
-
-
-    const savedCounterValue = localStorage.getItem("savedCounterValue");
-    if (savedCounterValue) {
-        document.querySelector('#counterNumber').textContent = savedCounterValue;
-    }
-
-    function saveCounter() {
-        const counterValue = document.querySelector('#counterNumber').textContent;
-        localStorage.setItem("savedCounterValue", counterValue);
-        $('.toast').toast('show');
-    }
-
-
-
-    function clearCounter() {
-        document.querySelector('#counterNumber').textContent = "0";
-        $('.toast').toast('show');
-    }
-
-    function loadCounter() {
-        const savedCounterValue = localStorage.getItem("savedCounterValue");
-        if (savedCounterValue) {
-            document.querySelector('#counterNumber').textContent = savedCounterValue;
-            $('.toast').toast('show');
-        } else {
-            $('.toast').toast('show');
+    // Decrease counter
+    function decreaseCounter() {
+        if (counter > 0) {
+            counter--;
+            counterNumber.textContent = counter;
+            
+            // Vibration
+            if (vibrationEnabled && 'vibrate' in navigator) {
+                navigator.vibrate(10);
+            }
+            
+            // Sound
+            if (soundEnabled) {
+                playSound('click');
+            }
+            
+            // Auto save
+            if (autoSaveEnabled) {
+                localStorage.setItem('savedCounterValue', counter);
+            }
+            
+            updateTargetDisplay();
         }
     }
-    const lang = localStorage.getItem("langValue");
 
-    if (lang == "tr") {
-        document.querySelector('#clear-counter').innerHTML = "Yeni Sayaç";
-        document.querySelector('#save-counter').innerHTML = "Kaydet";
-        document.querySelector('#load-counter').innerHTML = "Yükle";
-        document.querySelector('.toast-body').innerHTML = "İşlem Başarılı";
+    // Save counter
+    function saveCounter() {
+        localStorage.setItem('savedCounterValue', counter);
+        showToast('Sayaç kaydedildi');
     }
 
+    // Load counter
+    function loadCounter() {
+        const savedCounterValue = localStorage.getItem('savedCounterValue');
+        if (savedCounterValue) {
+            counter = parseInt(savedCounterValue);
+            counterNumber.textContent = counter;
+            updateTargetDisplay();
+            showToast('Sayaç yüklendi');
+        } else {
+            showToast('Kaydedilmiş sayaç bulunamadı', 'warning');
+        }
+    }
 
+    // Clear counter
+    function clearCounter() {
+        counter = 0;
+        counterNumber.textContent = counter;
+        updateTargetDisplay();
+        showToast('Sayaç sıfırlandı');
+    }
+
+    // Load saved counter
+    function loadSavedCounter() {
+        const savedCounterValue = localStorage.getItem('savedCounterValue');
+        if (savedCounterValue) {
+            counter = parseInt(savedCounterValue);
+            counterNumber.textContent = counter;
+        }
+    }
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        mobileMenuModal.classList.toggle('translate-y-full');
+        isModalOpen = !mobileMenuModal.classList.contains('translate-y-full');
+    }
+
+    // Close mobile menu
+    function closeMobileMenu() {
+        mobileMenuModal.classList.add('translate-y-full');
+        isModalOpen = false;
+    }
+
+    // Open settings modal
+    function openSettingsModal() {
+        // Update form values
+        document.getElementById('vibrationToggle').checked = vibrationEnabled;
+        document.getElementById('soundToggle').checked = soundEnabled;
+        document.getElementById('autoSaveToggle').checked = autoSaveEnabled;
+        document.getElementById('targetInput').value = currentTarget === 0 ? '' : currentTarget;
+        
+        settingsModal.classList.remove('hidden');
+        isModalOpen = true;
+    }
+
+    // Close settings modal
+    function closeSettingsModal() {
+        settingsModal.classList.add('hidden');
+        isModalOpen = false;
+    }
+
+    // Save settings
+    function saveSettings() {
+        vibrationEnabled = document.getElementById('vibrationToggle').checked;
+        soundEnabled = document.getElementById('soundToggle').checked;
+        autoSaveEnabled = document.getElementById('autoSaveToggle').checked;
+        
+        const targetValue = document.getElementById('targetInput').value;
+        currentTarget = targetValue ? parseInt(targetValue) : 0;
+        
+        // Save settings to localStorage
+        const settings = {
+            vibration: vibrationEnabled,
+            sound: soundEnabled,
+            autoSave: autoSaveEnabled,
+            target: currentTarget,
+            theme: currentTheme
+        };
+        
+        localStorage.setItem('counterSettings', JSON.stringify(settings));
+        
+        updateTargetDisplay();
+        closeSettingsModal();
+        showToast('Ayarlar kaydedildi', 'success');
+    }
+
+    // Set target with event parameter and fix
+    function setTarget(target, event) {
+        if (event) event.stopPropagation();
+        
+        currentTarget = target;
+        
+        // Update settings
+        const settings = JSON.parse(localStorage.getItem('counterSettings') || '{}');
+        settings.target = target;
+        localStorage.setItem('counterSettings', JSON.stringify(settings));
+        
+        updateTargetDisplay();
+        showToast(target === 0 ? 'Hedef kaldırıldı' : `Hedef ${target} olarak ayarlandı`);
+        
+        // Close mobile menu if open
+        closeMobileMenu();
+    }
+
+    // Load settings
+    function loadSettings() {
+        const settingsStr = localStorage.getItem('counterSettings');
+        if (settingsStr) {
+            try {
+                const settings = JSON.parse(settingsStr);
+                vibrationEnabled = settings.vibration !== undefined ? settings.vibration : false;
+                soundEnabled = settings.sound !== undefined ? settings.sound : false;
+                autoSaveEnabled = settings.autoSave !== undefined ? settings.autoSave : false;
+                currentTarget = settings.target !== undefined ? settings.target : 33;
+                
+                if (settings.theme) {
+                    changeTheme(settings.theme, null);
+                }
+            } catch (e) {
+                console.error('Settings parsing error:', e);
+            }
+        }
+    }
+
+    // Update target display
+    function updateTargetDisplay() {
+        if (currentTarget > 0) {
+            const progress = Math.min((counter / currentTarget) * 100, 100);
+            targetProgress.style.width = `${progress}%`;
+            targetText.textContent = `${counter} / ${currentTarget}`;
+        } else {
+            targetProgress.style.width = '0%';
+            targetText.textContent = `${counter} / ∞`;
+        }
+    }
+
+    // Target reached
+    function targetReached() {
+        if (vibrationEnabled && 'vibrate' in navigator) {
+            navigator.vibrate([100, 50, 100, 50, 100]);
+        }
+        
+        if (soundEnabled) {
+            playSound('completion');
+        }
+        
+        showToast(`Hedef tamamlandı: ${currentTarget}`, 'success');
+    }
+
+    // Show toast
+    function showToast(message, type = 'info') {
+        const toastMessage = document.getElementById('toastMessage');
+        toastMessage.textContent = message;
+        
+        // Set toast color
+        if (type === 'success') {
+            toast.style.background = '#48bb78';
+        } else if (type === 'error') {
+            toast.style.background = '#e53e3e';
+        } else if (type === 'info') {
+            toast.style.background = '#4299e1';
+        } else if (type === 'warning') {
+            toast.style.background = '#ed8936';
+        }
+        
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2000);
+    }
+
+    // Play sound
+    function playSound(type) {
+        if (type === 'click') {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(e => console.log('Sound play error:', e));
+        } else if (type === 'completion') {
+            completionSound.currentTime = 0;
+            completionSound.play().catch(e => console.log('Sound play error:', e));
+        }
+    }
+
+    // Change theme with event parameter
+    function changeTheme(theme, event) {
+        if (event) event.stopPropagation();
+        
+        const root = document.documentElement;
+        
+        switch(theme) {
+            case 'green':
+                root.style.setProperty('--primary-color', '#1a936f');
+                root.style.setProperty('--secondary-color', '#8FD19E');
+                break;
+            case 'blue':
+                root.style.setProperty('--primary-color', '#3182ce');
+                root.style.setProperty('--secondary-color', '#90cdf4');
+                break;
+            case 'purple':
+                root.style.setProperty('--primary-color', '#805ad5');
+                root.style.setProperty('--secondary-color', '#b794f4');
+                break;
+            case 'red':
+                root.style.setProperty('--primary-color', '#e53e3e');
+                root.style.setProperty('--secondary-color', '#fc8181');
+                break;
+            case 'yellow':
+                root.style.setProperty('--primary-color', '#d69e2e');
+                root.style.setProperty('--secondary-color', '#fbd38d');
+                break;
+        }
+        
+        currentTheme = theme;
+    }
 </script>
-
+</body>
 </html>

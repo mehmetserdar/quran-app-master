@@ -1,37 +1,694 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" dir="ltr">
 
 <head>
-    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Namaz Sureleri</title>
-    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namaz Sureleri - Kuran-ı Kerim</title>
     
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Namazda okunan sureler ve Türkçe anlamları. Fatiha, İhlas, Nas, Felak ve diğer namaz sureleri.">
+    <meta name="keywords" content="namaz sureleri, kuran sureleri, fatiha, ihlas, nas, felak, namaz">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        }
+
+        .arabic-text {
+            font-family: 'Amiri', 'Scheherazade New', serif;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            direction: rtl;
+            text-align: center;
+            font-weight: 400;
+            color: #2d3748;
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .surah-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(26, 147, 111, 0.1);
+        }
+
+        .surah-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(26, 147, 111, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .surah-number {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .surah-info {
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        .surah-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.25rem;
+        }
+
+        .surah-meaning {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .surah-icon {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .surah-card:hover .surah-icon {
+            transform: scale(1.1);
+            color: var(--secondary-color);
+        }
+
+        .special-card {
+            background: linear-gradient(135deg, rgba(26, 147, 111, 0.1) 0%, rgba(143, 209, 158, 0.1) 100%);
+            border: 2px solid var(--primary-color);
+        }
+
+        .special-card .surah-number {
+            background: var(--primary-color);
+        }
+
+        .loading-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .search-box {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 147, 111, 0.1);
+        }
+
+        .floating-add-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(26, 147, 111, 0.3);
+            transition: all 0.3s ease;
+            z-index: 40;
+        }
+
+        .floating-add-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(26, 147, 111, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .surah-card {
+                padding: 1rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .surah-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .surah-name {
+                font-size: 1.1rem;
+            }
+            
+            .arabic-text {
+                font-size: 1.3rem;
+                line-height: 2rem;
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-light">
-    <header class="header-quran bg-dark text-light m-0">
-        <a class="text-white pb-1 pl-3 pt-1" href='javascript:history.back();'><i class="fas fa-arrow-left    "></i></a> <span class="baslik">Namaz Sûreleri</span>
+<body>
+    <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left text-white"></i>
+                    </button>
+                    <div>
+                        <h1 class="text-2xl font-bold">Namaz Sureleri</h1>
+                        <p class="text-green-100 text-sm">Namazda okunan sureler ve anlamları</p>
+                    </div>
+                </div>
+                
+               
+            </div>
+        </div>
     </header>
-    <main class="">
-        <ul id="list-sure" class="list-group">
-            <li class="sure list-group-item list-group-item-dark "><a class="list-group-item-dark" style="text-decoration: none; color: #212529; cursor:auto;" href="sure-sira.html">Namaz Sûreleri Sırası</a></li>
-        </ul>
-       
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Search Box -->
+        <div class="search-box">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-search text-gray-400"></i>
+                <input type="text" class="search-input" placeholder="Sure ara..." id="searchInput">
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white rounded-lg p-4 text-center shadow-sm">
+                <div class="text-2xl font-bold text-gray-900" id="totalSurah">-</div>
+                <div class="text-sm text-gray-600">Toplam Sure</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-sm">
+                <div class="text-2xl font-bold text-green-600" id="favoriteSurah">-</div>
+                <div class="text-sm text-gray-600">Favori</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-sm">
+                <div class="text-2xl font-bold text-blue-600" id="shortSurah">-</div>
+                <div class="text-sm text-gray-600">Kısa Sureler</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center shadow-sm">
+                <div class="text-2xl font-bold text-purple-600" id="completedSurah">-</div>
+                <div class="text-sm text-gray-600">Okunan</div>
+            </div>
+        </div>
+
+        <!-- Surah List -->
+        <div class="space-y-4" id="list-sure">
+            <!-- Loading placeholder -->
+            <div id="loadingPlaceholder" class="space-y-4">
+                <div class="animate-pulse">
+                    <div class="bg-gray-200 rounded-lg h-20"></div>
+                </div>
+                <div class="animate-pulse">
+                    <div class="bg-gray-200 rounded-lg h-20"></div>
+                </div>
+                <div class="animate-pulse">
+                    <div class="bg-gray-200 rounded-lg h-20"></div>
+                </div>
+            </div>
+        </div>
     </main>
+
+    <!-- Floating Action Button -->
+    <button class="floating-add-btn" onclick="showQuickActions()">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Quick Actions Modal (Hidden by default) -->
+    <div id="quickActionsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-6 m-4 max-w-sm w-full">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Hızlı İşlemler</h3>
+            <div class="space-y-3">
+                <button class="w-full bg-green-50 text-green-700 p-3 rounded-lg flex items-center space-x-3 hover:bg-green-100 transition">
+                    <i class="fas fa-random"></i>
+                    <span>Rastgele Sure</span>
+                </button>
+                <button class="w-full bg-blue-50 text-blue-700 p-3 rounded-lg flex items-center space-x-3 hover:bg-blue-100 transition">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Favorilerim</span>
+                </button>
+                <button class="w-full bg-purple-50 text-purple-700 p-3 rounded-lg flex items-center space-x-3 hover:bg-purple-100 transition">
+                    <i class="fas fa-list-ol"></i>
+                    <span>Sure Sırası</span>
+                </button>
+                <button class="w-full bg-gray-50 text-gray-700 p-3 rounded-lg flex items-center space-x-3 hover:bg-gray-100 transition" onclick="hideQuickActions()">
+                    <i class="fas fa-times"></i>
+                    <span>Kapat</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="./assets/data/sure.js"></script>
-    <script src="./assets/script.js"></script>
     <script>
+     // Enhanced Sure List Page functionality
+const sureListPageEnhanced = () => {
+    console.log('Enhanced Sure List Page loading...');
+    
+    // Clear loading placeholder
+    $('#loadingPlaceholder').hide();
+    
+    let sureCount = 0;
+    let favoriteCount = 0;
+    let shortSureCount = 0;
+    
+    // Check if data is available
+    if (typeof sureData === 'undefined' && typeof sure === 'undefined') {
+        console.error('Sure data not found!');
+        showErrorMessage();
+        return;
+    }
+    
+    // Use the available data
+    const sureList = sureData || sure;
+    console.log('Using sure data:', sureList.length, 'items');
+    
+    // Namaz Sureleri Sırası kartı
+    const orderCard = `
+        <div class="surah-card special-card loading-animation" style="animation-delay: 0.1s" onclick="showSureOrder()">
+            <div class="flex items-center">
+                <div class="surah-number">
+                    <i class="fas fa-list-ol"></i>
+                </div>
+                <div class="surah-info">
+                    <div class="surah-name">Namaz Sureleri Sırası</div>
+                    <div class="surah-meaning">Namazda hangi sırayla okunacağını öğrenin</div>
+                </div>
+                <div class="surah-icon">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    $('#list-sure').append(orderCard);
+
+    // Sure listesini oluştur
+    sureList.forEach((s, index) => {
+        sureCount++;
+        
+        // Kısa sure kontrolü (7 ayetten az)
+        if (s.ayat && parseInt(s.ayat) < 7) {
+            shortSureCount++;
+        }
+
+        const animationDelay = (index + 2) * 0.1;
+        
+        // Kategori ikonları
+        const categoryIcons = {
+            'prayer': 'fas fa-pray',
+            'protection': 'fas fa-shield-alt',
+            'daily': 'fas fa-sun',
+            'victory': 'fas fa-trophy',
+            'warning': 'fas fa-exclamation-triangle'
+        };
+        
+        const categoryColors = {
+            'prayer': 'text-blue-600',
+            'protection': 'text-green-600',
+            'daily': 'text-yellow-600',
+            'victory': 'text-purple-600',
+            'warning': 'text-red-600'
+        };
+        
+        const difficultyBadge = s.difficulty === 'easy' ? 
+            '<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Kolay</span>' :
+            s.difficulty === 'medium' ?
+            '<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Orta</span>' :
+            '<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">Zor</span>';
+
+        const sureCard = `
+            <div class="sure surah-card loading-animation" 
+                 style="animation-delay: ${animationDelay}s" 
+                 data-sure-id="${s.id}"
+                 data-sure-name="${s.name}"
+                 data-category="${s.category}"
+                 onclick="goToSure(${s.id})">
+                <div class="flex items-center">
+                    <div class="surah-number">
+                        ${s.id}
+                    </div>
+                    <div class="surah-info flex-1">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="surah-name">${s.name}</div>
+                            <div class="flex items-center space-x-2">
+                                <i class="${categoryIcons[s.category] || 'fas fa-book'} ${categoryColors[s.category] || 'text-gray-600'}"></i>
+                                ${difficultyBadge}
+                            </div>
+                        </div>
+                        <div class="surah-meaning">
+                            ${s.meaning || 'Namaz Suresi'} 
+                            ${s.ayat ? `• ${s.ayat} Ayet` : ''}
+                            ${s.readingTime ? `• ${s.readingTime} dk` : ''}
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        `;
+        
+        $('#list-sure').append(sureCard);
+    });
+
+    // İstatistikleri güncelle
+    updateStats(sureCount, shortSureCount);
+
+    // Favori durumlarını yükle
+    loadFavoriteStates();
+
+    // Arama fonksiyonunu ekle
+    setupSearch();
+    
+    // Kategori filtrelerini ekle
+    setupCategoryFilters();
+
+    console.log('Enhanced Sure List Page loaded successfully');
+};
+
+// İstatistikleri güncelle
+const updateStats = (sureCount, shortSureCount) => {
+    const favoriteCount = JSON.parse(localStorage.getItem('favoriteSures') || '[]').length;
+    const completedCount = JSON.parse(localStorage.getItem('completedSures') || '[]').length;
+    
+    $('#totalSurah').text(sureCount);
+    $('#favoriteSurah').text(favoriteCount);
+    $('#shortSurah').text(shortSureCount);
+    $('#completedSurah').text(completedCount);
+};
+
+// Sure'ye git
+const goToSure = (sureId) => {
+    // Loading state
+    const card = $(`[data-sure-id="${sureId}"]`);
+    const originalContent = card.html();
+    
+    card.html(`
+        <div class="flex items-center justify-center py-4">
+            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-green-600 mr-3"></div>
+            <span class="text-green-600">Yükleniyor...</span>
+        </div>
+    `);
+    
+    // Mark as completed
+    const completed = JSON.parse(localStorage.getItem('completedSures') || '[]');
+    if (!completed.includes(sureId)) {
+        completed.push(sureId);
+        localStorage.setItem('completedSures', JSON.stringify(completed));
+    }
+    
+    setTimeout(() => {
+        window.location.href = `sure.html?${sureId}`;
+    }, 500);
+};
+
+// Audio çal
+const playAudio = (sureId) => {
+    const btn = $(`.audio-btn[data-sure-id="${sureId}"] i`);
+    btn.removeClass('fa-play').addClass('fa-pause');
+    
+    // Simulate audio playing
+    setTimeout(() => {
+        btn.removeClass('fa-pause').addClass('fa-play');
+        showToast('Ses dosyası oynatıldı', 'success');
+    }, 2000);
+};
+
+// Favori toggle
+const toggleFavorite = (sureId) => {
+    const btn = $(`.favorite-btn[data-sure-id="${sureId}"] i`);
+    const favorites = JSON.parse(localStorage.getItem('favoriteSures') || '[]');
+    
+    if (favorites.includes(sureId)) {
+        // Remove from favorites
+        const index = favorites.indexOf(sureId);
+        favorites.splice(index, 1);
+        btn.removeClass('text-red-500').addClass('text-gray-300');
+        showToast('Favorilerden çıkarıldı', 'info');
+    } else {
+        // Add to favorites
+        favorites.push(sureId);
+        btn.removeClass('text-gray-300').addClass('text-red-500');
+        showToast('Favorilere eklendi', 'success');
+    }
+    
+    localStorage.setItem('favoriteSures', JSON.stringify(favorites));
+    updateStats(sureData?.length || sure?.length || 0, 0);
+};
+
+// Favori durumlarını yükle
+const loadFavoriteStates = () => {
+    const favorites = JSON.parse(localStorage.getItem('favoriteSures') || '[]');
+    
+    favorites.forEach(sureId => {
+        $(`.favorite-btn[data-sure-id="${sureId}"] i`)
+            .removeClass('text-gray-300')
+            .addClass('text-red-500');
+    });
+};
+
+// Arama kurulumu
+const setupSearch = () => {
+    $('#searchInput').on('input', function() {
+        const searchTerm = $(this).val().toLowerCase().trim();
+        
+        if (searchTerm === '') {
+            $('.surah-card').show();
+            return;
+        }
+        
+        $('.surah-card').each(function() {
+            const sureName = $(this).data('sure-name');
+            const sureNameLower = sureName ? sureName.toLowerCase() : '';
+            
+            if (sureNameLower.includes(searchTerm)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+        
+        // İlk kartı (Namaz Sureleri Sırası) her zaman göster
+        $('.special-card').show();
+    });
+};
+
+// Kategori filtreleri kurulumu
+const setupCategoryFilters = () => {
+    // Kategori filter butonları ekle
+    const categoryFilters = `
+        <div class="bg-white rounded-lg p-4 mb-4 shadow-sm">
+            <h3 class="text-lg font-semibold mb-3">Kategoriler</h3>
+            <div class="flex flex-wrap gap-2">
+                <button class="category-filter active" data-category="all">Tümü</button>
+                <button class="category-filter" data-category="prayer">Namaz</button>
+                <button class="category-filter" data-category="protection">Koruma</button>
+                <button class="category-filter" data-category="daily">Günlük</button>
+                <button class="category-filter" data-category="victory">Zafer</button>
+                <button class="category-filter" data-category="warning">Uyarı</button>
+            </div>
+        </div>
+    `;
+    
+    $('.search-box').after(categoryFilters);
+    
+    // Kategori filter butonlarına stil ekle
+    $('<style>').text(`
+        .category-filter {
+            background: #f8f9fa;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #4a5568;
+        }
+        .category-filter:hover {
+            background: rgba(26, 147, 111, 0.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .category-filter.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+    `).appendTo('head');
+    
+    // Kategori filter event listeners
+    $('.category-filter').on('click', function() {
+        $('.category-filter').removeClass('active');
+        $(this).addClass('active');
+        
+        const category = $(this).data('category');
+        filterByCategory(category);
+    });
+};
+
+// Kategoriye göre filtrele
+const filterByCategory = (category) => {
+    if (category === 'all') {
+        $('.surah-card').show();
+    } else {
+        $('.surah-card').each(function() {
+            const cardCategory = $(this).data('category');
+            if (cardCategory === category) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+    
+    // İlk kartı (Namaz Sureleri Sırası) her zaman göster
+    $('.special-card').show();
+};
+
+// Sure sırasını göster
+const showSureOrder = () => {
+    const modal = `
+        <div id="sureOrderModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-2xl p-6 m-4 max-w-md w-full max-h-96 overflow-y-auto">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Namaz Sureleri Önerilen Sıra</h3>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <span class="font-medium">1. Fatiha</span>
+                        <span class="text-sm text-gray-600">Her rekata</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <span class="font-medium">2. Asr</span>
+                        <span class="text-sm text-gray-600">Kısa</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <span class="font-medium">3. İhlas</span>
+                        <span class="text-sm text-gray-600">En kolay</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <span class="font-medium">4. Felak</span>
+                        <span class="text-sm text-gray-600">Koruma</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                        <span class="font-medium">5. Nas</span>
+                        <span class="text-sm text-gray-600">Koruma</span>
+                    </div>
+                    
+                </div>
+                <button class="w-full mt-4 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition" onclick="$('#sureOrderModal').remove()">
+                    Tamam
+                </button>
+            </div>
+        </div>
+    `;
+    
+    $('body').append(modal);
+};
+
+// Hata mesajı göster
+const showErrorMessage = () => {
+    $('#list-sure').html(`
+        <div class="text-center py-12">
+            <i class="fas fa-exclamation-triangle text-6xl text-red-500 mb-4"></i>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Veri Yüklenemedi</h3>
+            <p class="text-gray-600 mb-4">Sure verileri yüklenirken bir hata oluştu.</p>
+            <button onclick="location.reload()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+                Tekrar Dene
+            </button>
+        </div>
+    `);
+};
+
+// Quick Actions (önceki fonksiyonlar)
+const showQuickActions = () => {
+    $('#quickActionsModal').removeClass('hidden');
+};
+
+const hideQuickActions = () => {
+    $('#quickActionsModal').addClass('hidden');
+};
+
+
+// Sayfa yüklendiğinde çalıştır
+$(document).ready(function() {
+    console.log('DOM ready, loading sure list...');
+    
+    // Original function'ı çalıştır
+    if (typeof sureListPage === 'function') {
         sureListPage();
+    }
+    
+    // Enhanced version'ı çalıştır
+    sureListPageEnhanced();
+    
+    // Quick actions modal için click outside
+    $('#quickActionsModal').click(function(e) {
+        if (e.target === this) {
+            hideQuickActions();
+        }
+    });
+});
     </script>
 </body>
-
 </html>

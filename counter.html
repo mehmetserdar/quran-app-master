@@ -30,8 +30,9 @@
 
         <!-- Counter Buttons -->
         <div id="counterButtons">
-            <button class="btn btn-dark" id="incrementButton">+</button>
             <button class="btn btn-dark" id="decrementButton">&nbsp;-&nbsp;</button>
+            <button class="btn btn-dark" id="incrementButton">+</button>
+
             <br>
 
         </div>
@@ -54,11 +55,11 @@
 <script>
     // Check if User Agent is Android
     const isAndroid = /Android/i.test(navigator.userAgent);
-        // Hide Navigation Menu on Android Devices
-        if (isAndroid) {
-            const nav = document.querySelector('header');
-            nav.style.display = 'none';
-        }
+    // Hide Navigation Menu on Android Devices
+    if (isAndroid) {
+        const nav = document.querySelector('header');
+        nav.style.display = 'none';
+    }
     // Get DOM Elements
     const counterNumber = document.querySelector('#counterNumber');
     const incrementButton = document.querySelector('#incrementButton');
@@ -73,7 +74,7 @@
     let counter = 0;
 
     // Create Function to Update Counter
-    
+
 
     // Create Event Listeners for Counter Buttons
     incrementButton.addEventListener('click', () => {
@@ -96,10 +97,10 @@
     function increaseCounter() {
         const counterValue = parseInt(document.querySelector("#counterNumber").textContent);
         document.querySelector("#counterNumber").textContent = counterValue + 1;
-        
+
     }
 
-    
+
 
     const savedCounterValue = localStorage.getItem("savedCounterValue");
     if (savedCounterValue) {
@@ -112,7 +113,7 @@
         $('.toast').toast('show');
     }
 
-    
+
 
     function clearCounter() {
         document.querySelector('#counterNumber').textContent = "0";
@@ -128,14 +129,14 @@
             $('.toast').toast('show');
         }
     }
-        const lang = localStorage.getItem("langValue");
-		
-		if (lang == "tr" ){
-			document.querySelector('#clear-counter').innerHTML = "Yeni Sayaç";
-			document.querySelector('#save-counter').innerHTML = "Kaydet";
-			document.querySelector('#load-counter').innerHTML = "Yükle";
-            document.querySelector('.toast-body').innerHTML = "İşlem Başarılı";
-		}
+    const lang = localStorage.getItem("langValue");
+
+    if (lang == "tr") {
+        document.querySelector('#clear-counter').innerHTML = "Yeni Sayaç";
+        document.querySelector('#save-counter').innerHTML = "Kaydet";
+        document.querySelector('#load-counter').innerHTML = "Yükle";
+        document.querySelector('.toast-body').innerHTML = "İşlem Başarılı";
+    }
 
 
 </script>

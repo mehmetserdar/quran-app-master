@@ -1129,11 +1129,11 @@ const bookmarkPage = () => {
 // Check if User Agent is Android
 const isAndroid = /Android/i.test(navigator.userAgent);
 
-// Hide Navigation Menu on Android Devices
-if (isAndroid) {
-  const nav = document.querySelector("header");
-  nav.style.display = "none";
-}
+// // Hide Navigation Menu on Android Devices
+// if (isAndroid) {
+//   const nav = document.querySelector("header");
+//   nav.style.display = "none";
+// }
 
 $(document).ready(function() {
     // Loading screen

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Kur'an-ı Kerim</title>
+	<link rel="manifest" href="manifest.json">
+	<link rel="shortcut icon" href="assets/web/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="body background">
+	<main class="main-container">
+		<div class="container">
+			<div class="main-grid">
+				<div class="menu-card" id="bookmark">
+					<div class="menu-icon">
+						<img src="./assets/image/1.png" alt="Favorites" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="bookmarkT">Favorites</h4>
+				</div>
+				<div class="menu-card" id="quran">
+					<div class="menu-icon">
+						<img src="./assets/image/2.png" alt="Quran" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="quranT">Quran</h4>
+				</div>
+				<div class="menu-card" id="sayac">
+					<div class="menu-icon">
+						<img src="./assets/image/3.png" alt="Tasbeeh" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="sayacT">Tasbeeh</h4>
+				</div>
+				<div class="menu-card" id="dua">
+					<div class="menu-icon">
+						<img src="./assets/image/4.png" alt="Prayers" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="duaT">Namaz Duaları</h4>
+				</div>
+				<div class="menu-card" id="sure">
+					<div class="menu-icon">
+						<img src="./assets/image/5.png" alt="Surahs" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="sureT">Namaz Sûreleri</h4>
+				</div>
+				<div class="menu-card" id="abdest">
+					<div class="menu-icon">
+						<img src="./assets/image/6.png" alt="Ablution" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="abdestT">Abdest</h4>
+				</div>
+				<div class="menu-card" id="about">
+					<div class="menu-icon">
+						<img src="./assets/image/7.png" alt="Settings" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="aboutT">Settings</h4>
+				</div>
+				<div class="menu-card" id="app">
+					<div class="menu-icon">
+						<img src="./assets/image/8.png" alt="Download App" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="appT">Download App</h4>
+				</div>
+				<div class="menu-card" id="other">
+					<div class="menu-icon">
+						<img src="./assets/image/9.png" alt="Other Apps" style="width: 100%; height: 100%; object-fit: contain;">
+					</div>
+					<h4 class="menu-title" id="otherT">Our Other Apps</h4>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="./assets/script.js"></script>
+	<script>
+
+		$(document).ready(function () {
+			const bgImages = [
+				"./assets/image/m0.jpg",
+				"./assets/image/m1.jpg",
+				"./assets/image/m2.jpg",
+				"./assets/image/m3.jpg",
+				"./assets/image/m4.jpg",
+				"./assets/image/m5.jpg",
+				"./assets/image/m6.jpg",
+				"./assets/image/m7.jpg",
+				"./assets/image/m8.jpg",
+				"./assets/image/m9.jpg",
+				"./assets/image/m10.jpg",
+				"./assets/image/m11.jpg",
+				"./assets/image/m12.jpg",
+				"./assets/image/m13.jpg"
+				// Add more image paths as needed
+			];
+
+			const randomIndex = Math.floor(Math.random(0,14) * bgImages.length);
+			const randomImage = bgImages[randomIndex];
+
+			$(".background").css({
+				"background-image": `url('${randomImage}')`,
+			});
+		});
+		const langValue = localStorage.getItem("langValue");
+		loadLanguage();
+		if (langValue == "tr") {
+			indexPage();
+			document.querySelector('#quranT').innerHTML = "Kur'an-ı Kerim";
+			document.querySelector('#sayacT').innerHTML = "Zikirmatik";
+			document.querySelector('#bookmarkT').innerHTML = "Favoriler";
+			document.querySelector('#aboutT').innerHTML = "Ayarlar";
+			document.querySelector('#appT').innerHTML = "Uygulamayı İndirin";
+			document.querySelector('#otherT').innerHTML = "Diğer Uygulamalarımız";
+
+
+		} else {
+			indexPage();
+			document.querySelector('#dua').style.display = "none";
+			document.querySelector('#sure').style.display = "none";
+			document.querySelector('#abdest').style.display = "none";
+
+		}
+
+
+
+		if (isAndroid) {
+			document.querySelector('#app').style.display = "none";
+			document.querySelector('#about').style.display = "none";
+			document.querySelector('#other').style.display = "none";
+		}
+
+
+
+
+	</script>
+</body>
+
+</html>

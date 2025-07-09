@@ -93,6 +93,9 @@ ServerSignature Off
     # Dua listesi için yönlendirme
     RewriteRule ^dualar/?$ dua-list.html [NC,L]
     
+    #gililik için yönlendirme
+    RewriteRule ^gizlilik-politikasi/?$ gizlilik-politikasi.html [NC,L]
+
     # Sure listesi için yönlendirme
     RewriteRule ^sureler/?$ sure-list.html [NC,L]
     

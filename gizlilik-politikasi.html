@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gizlilik Politikası - Kuran-ı Kerim</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Kuran-ı Kerim uygulamasının gizlilik politikası ve kişisel verilerin korunması hakkında bilgiler">
+    <meta name="keywords" content="gizlilik, politika, çerezler, kişisel veri, kvkk, kuran-ı kerim">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .policy-section {
+            margin-bottom: 2rem;
+        }
+
+        .policy-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .policy-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .policy-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .policy-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .policy-card-icon {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(26, 147, 111, 0.3);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-bottom: 0.25rem;
+        }
+
+        .toc-link:hover {
+            background-color: rgba(26, 147, 111, 0.1);
+            color: var(--primary-color);
+        }
+
+        .toc-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .toc-container {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .highlight-text {
+            background: linear-gradient(transparent 70%, rgba(143, 209, 158, 0.5) 70%);
+            padding: 0 2px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: var(--primary-color);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div>
+                        <h1 class="text-2xl font-bold">Gizlilik Politikası</h1>
+                        <p class="text-green-100 text-sm">Son güncelleme: 09 Temmuz 2025</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button id="shareBtn" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Left Sidebar - Table of Contents -->
+            <div class="md:w-1/4">
+                <div class="content-card toc-container">
+                    <h3 class="font-bold text-lg mb-4 text-gray-800">İçindekiler</h3>
+                    <nav id="toc">
+                        <a href="#giris" class="toc-link">1. Giriş</a>
+                        <a href="#toplanan-bilgiler" class="toc-link">2. Toplanan Bilgiler</a>
+                        <a href="#kullanim-amaclari" class="toc-link">3. Kullanım Amaçları</a>
+                        <a href="#veri-guvenlik" class="toc-link">4. Veri Saklama ve Güvenlik</a>
+                        <a href="#cerez-politikasi" class="toc-link">5. Çerez Politikası</a>
+                        <a href="#ucuncu-taraf" class="toc-link">6. Üçüncü Taraf Hizmetleri</a>
+                        <a href="#kullanici-haklari" class="toc-link">7. Kullanıcı Hakları</a>
+                        <a href="#veri-transferi" class="toc-link">8. Veri Transferi</a>
+                        <a href="#cocuk-gizliligi" class="toc-link">9. Çocukların Gizliliği</a>
+                        <a href="#uluslararasi-transfer" class="toc-link">10. Uluslararası Veri Transferi</a>
+                        <a href="#degisiklikler" class="toc-link">11. Politika Değişiklikleri</a>
+                        <a href="#iletisim" class="toc-link">12. İletişim</a>
+                        <a href="#yururluk" class="toc-link">13. Yürürlük</a>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="md:w-3/4">
+                <div class="content-card">
+                    <p class="text-sm text-gray-600 mb-6">Bu politika, kuranikerim.com.tc web sitesinin kişisel verilerin toplanması, işlenmesi ve korunması süreçlerini şeffaflık ve güven esasına dayanarak açıklar.</p>
+                    
+                    <section id="giris" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">1. Giriş</h2>
+                        <p class="mb-4">kuranikerim.com.tc ("Biz", "Bizim", "Site") olarak, kullanıcılarımızın gizliliğine saygı duyar ve kişisel verilerinizin korunmasını öncelik olarak görürüz. Bu Gizlilik Politikası, web sitemizi kullanırken toplanan bilgilerin nasıl işlendiğini, saklandığını ve korunduğunu açıklar.</p>
+                    </section>
+                    
+                    <section id="toplanan-bilgiler" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">2. Toplanan Bilgiler</h2>
+                        
+                        <div class="policy-card">
+                            <div class="policy-card-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">2.1 Otomatik Olarak Toplanan Bilgiler</h3>
+                            <ul class="policy-list">
+                                <li><span class="font-medium">Teknik Bilgiler:</span> IP adresi, tarayıcı türü, işletim sistemi, cihaz bilgileri</li>
+                                <li><span class="font-medium">Kullanım Bilgileri:</span> Ziyaret edilen sayfalar, oturum süresi, tıklanan bağlantılar</li>
+                                <li><span class="font-medium">Çerezler:</span> Site performansını artırmak için teknik çerezler kullanılır</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="policy-card">
+                            <div class="policy-card-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">2.2 Gönüllü Olarak Sağlanan Bilgiler</h3>
+                            <ul class="policy-list">
+                                <li><span class="font-medium">Favoriler:</span> Kullanıcıların işaretlediği ayetler (yerel olarak saklanır)</li>
+                                <li><span class="font-medium">Zikirmatik Verileri:</span> Günlük zikir sayıları (yerel olarak saklanır)</li>
+                                <li><span class="font-medium">Geri Bildirim:</span> İletişim formları aracılığıyla gönderilen mesajlar</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <section id="kullanim-amaclari" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">3. Bilgilerin Kullanım Amaçları</h2>
+                        <p class="mb-3">Toplanan bilgiler aşağıdaki amaçlarla kullanılır:</p>
+                        <ul class="policy-list">
+                            <li>Site performansını iyileştirmek</li>
+                            <li>Kullanıcı deneyimini geliştirmek</li>
+                            <li>Teknik sorunları tespit etmek ve çözmek</li>
+                            <li>Site güvenliğini sağlamak</li>
+                            <li>Yasal yükümlülükleri yerine getirmek</li>
+                        </ul>
+                    </section>
+                    
+                    <section id="veri-guvenlik" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">4. Veri Saklama ve Güvenlik</h2>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-lg mb-2">4.1 Veri Saklama</h3>
+                            <ul class="policy-list">
+                                <li><span class="font-medium">Yerel Veriler:</span> Favoriler ve zikirmatik verileri kullanıcının cihazında saklanır</li>
+                                <li><span class="font-medium">Sunucu Verileri:</span> Teknik loglar maksimum 30 gün saklanır</li>
+                                <li><span class="font-medium">Geri Bildirim:</span> Kullanıcı mesajları 1 yıl süreyle saklanır</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3 class="font-semibold text-lg mb-2">4.2 Güvenlik Önlemleri</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-3">
+                                            <i class="fas fa-lock"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium">SSL Şifreleme</h4>
+                                            <p class="text-sm">HTTPS protokolü ile güvenli iletişim</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-3">
+                                            <i class="fas fa-server"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium">Güvenli Sunucu</h4>
+                                            <p class="text-sm">Güncel güvenlik protokolleri</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-3">
+                                            <i class="fas fa-sync"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium">Düzenli Güncellemeler</h4>
+                                            <p class="text-sm">Sürekli güvenlik iyileştirmeleri</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-3">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium">Erişim Kontrolü</h4>
+                                            <p class="text-sm">Yetkisiz erişime karşı koruma</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="cerez-politikasi" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">5. Çerez Politikası</h2>
+                        
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-lg mb-2">5.1 Kullanılan Çerez Türleri</h3>
+                            
+                            <div class="overflow-x-auto mb-6">
+                                <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-600">Çerez Türü</th>
+                                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-600">Amaç</th>
+                                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-600">Saklama Süresi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100">
+                                        <tr>
+                                            <td class="py-3 px-4 text-sm">Gerekli Çerezler</td>
+                                            <td class="py-3 px-4 text-sm">Sitenin çalışması için zorunludur</td>
+                                            <td class="py-3 px-4 text-sm">Oturum süresi</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3 px-4 text-sm">Performans Çerezleri</td>
+                                            <td class="py-3 px-4 text-sm">Kullanım istatistiklerini ölçer</td>
+                                            <td class="py-3 px-4 text-sm">1 ay</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3 px-4 text-sm">Fonksiyonel Çerezler</td>
+                                            <td class="py-3 px-4 text-sm">Kullanıcı tercihlerini hatırlar</td>
+                                            <td class="py-3 px-4 text-sm">6 ay</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">5.2 Çerez Yönetimi</h3>
+                            <p class="mb-4">Tarayıcı ayarlarınızdan çerezleri yönetebilir, silebilir veya engelleyebilirsiniz. Her tarayıcı için çerez ayarları farklıdır.</p>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                                <div class="bg-white border border-gray-200 rounded p-3 text-center">
+                                    <i class="fab fa-chrome text-xl mb-1"></i>
+                                    <p class="text-sm font-medium">Google Chrome</p>
+                                    <a href="https://support.google.com/chrome/answer/95647" class="text-xs text-green-600 hover:underline" target="_blank">Çerezleri Yönet</a>
+                                </div>
+                                
+                                <div class="bg-white border border-gray-200 rounded p-3 text-center">
+                                    <i class="fab fa-firefox-browser text-xl mb-1"></i>
+                                    <p class="text-sm font-medium">Mozilla Firefox</p>
+                                    <a href="https://support.mozilla.org/tr/kb/cerezler-web-sitelerinin-bilgisayarinizda-depoladi" class="text-xs text-green-600 hover:underline" target="_blank">Çerezleri Yönet</a>
+                                </div>
+                                
+                                <div class="bg-white border border-gray-200 rounded p-3 text-center">
+                                    <i class="fab fa-safari text-xl mb-1"></i>
+                                    <p class="text-sm font-medium">Safari</p>
+                                    <a href="https://support.apple.com/tr-tr/guide/safari/sfri11471/mac" class="text-xs text-green-600 hover:underline" target="_blank">Çerezleri Yönet</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="ucuncu-taraf" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">6. Üçüncü Taraf Hizmetleri</h2>
+                        
+                        <div class="mb-4">
+                            <h3 class="font-semibold text-lg mb-2">6.1 Ses Dosyaları</h3>
+                            <p>Kuran-ı Kerim ses kayıtları güvenli CDN hizmetleri aracılığıyla sunulmaktadır. Bu hizmetler yalnızca içerik dağıtımı amacıyla kullanılır ve herhangi bir kişisel veri toplamamaktadır.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">6.2 Analitik Hizmetler</h3>
+                            <p>Site trafiğini analiz etmek için anonim istatistiksel veriler kullanılabilir. Bu analizler tamamen anonimleştirilmiş veriler üzerinden yapılmaktadır.</p>
+                        </div>
+                    </section>
+                    
+                    <section id="kullanici-haklari" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">7. Kullanıcı Hakları</h2>
+                        
+                        <p class="mb-4">KVKK (Kişisel Verilerin Korunması Kanunu) kapsamında aşağıdaki haklara sahipsiniz:</p>
+                        
+                        <div class="bg-green-50 rounded-lg p-5 mb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <div class="flex items-center mb-3">
+                                        <div class="bg-green-100 p-2 rounded mr-3">
+                                            <i class="fas fa-info-circle text-green-600"></i>
+                                        </div>
+                                        <span class="font-medium">Bilgi Alma Hakkı</span>
+                                    </div>
+                                    <ul class="text-sm space-y-2">
+                                        <li>• Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+                                        <li>• İşlenme amacını ve bu amaca uygun kullanılıp kullanılmadığını öğrenme</li>
+                                        <li>• Yurt içinde/dışında aktarıldığı üçüncü kişileri bilme</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex items-center mb-3">
+                                        <div class="bg-green-100 p-2 rounded mr-3">
+                                            <i class="fas fa-edit text-green-600"></i>
+                                        </div>
+                                        <span class="font-medium">Düzeltme Hakkı</span>
+                                    </div>
+                                    <ul class="text-sm space-y-2">
+                                        <li>• Eksik veya yanlış işlenmişse düzeltilmesini isteme</li>
+                                        <li>• Düzeltme işlemlerinin üçüncü kişilere bildirilmesini isteme</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex items-center mb-3">
+                                        <div class="bg-green-100 p-2 rounded mr-3">
+                                            <i class="fas fa-trash-alt text-green-600"></i>
+                                        </div>
+                                        <span class="font-medium">Silme ve Unutulma Hakkı</span>
+                                    </div>
+                                    <ul class="text-sm space-y-2">
+                                        <li>• Silinmesini veya yok edilmesini isteme</li>
+                                        <li>• Silme/yok etme işlemlerinin üçüncü kişilere bildirilmesini isteme</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex items-center mb-3">
+                                        <div class="bg-green-100 p-2 rounded mr-3">
+                                            <i class="fas fa-gavel text-green-600"></i>
+                                        </div>
+                                        <span class="font-medium">Yasal Haklar</span>
+                                    </div>
+                                    <ul class="text-sm space-y-2">
+                                        <li>• İşleme faaliyetine itiraz etme</li>
+                                        <li>• Zararın giderilmesini talep etme</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="veri-transferi" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">8. Veri Transferi</h2>
+                        
+                        <p class="mb-3">Kişisel verileriniz yalnızca aşağıdaki durumlarda üçüncü kişilerle paylaşılabilir:</p>
+                        <ul class="policy-list mb-4">
+                            <li><span class="highlight-text">Yasal zorunluluklar</span> olması halinde</li>
+                            <li><span class="highlight-text">Mahkeme kararları</span> kapsamında istenmesi durumunda</li>
+                            <li>Açık <span class="highlight-text">kullanıcı izni</span> bulunması şartıyla</li>
+                        </ul>
+                    </section>
+                    
+                    <section id="cocuk-gizliligi" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">9. Çocukların Gizliliği</h2>
+                        
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-child text-blue-500"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-800">
+                                        Sitemiz 13 yaş altı çocuklardan bilerek kişisel veri toplamaz. 13 yaş altı çocukların siteyi kullanması için ebeveyn izni gereklidir.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="uluslararasi-transfer" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">10. Uluslararası Veri Transferi</h2>
+                        
+                        <div class="bg-white border border-gray-200 rounded-lg p-4 flex items-center mb-4">
+                            <div class="mr-4 text-2xl text-green-600">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Verileriniz Türkiye sınırları içinde saklanır ve işlenir. Yurt dışına veri transferi yapılmaz.</p>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="degisiklikler" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">11. Gizlilik Politikası Değişiklikleri</h2>
+                        
+                        <p>Bu gizlilik politikasında yapılan değişiklikler web sitesinde yayınlanır. Önemli değişiklikler için kullanıcılar bilgilendirilir.</p>
+                    </section>
+                    
+                    <section id="iletisim" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">12. İletişim</h2>
+                        
+                        <p class="mb-4">Gizlilik ile ilgili sorularınız için:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white rounded-lg shadow-sm p-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3">
+                                        <i class="fas fa-envelope text-green-600"></i>
+                                    </div>
+                                    <h4 class="font-medium text-sm mb-1">E-posta</h4>
+                                    <a href="mailto:info@kuranikerim.com.tc" class="text-green-600 text-sm">info@kuranikerim.com.tc</a>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg shadow-sm p-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3">
+                                        <i class="fas fa-map-marker-alt text-green-600"></i>
+                                    </div>
+                                    <h4 class="font-medium text-sm mb-1">Adres</h4>
+                                    <p class="text-center text-sm">İstanbul, Türkiye</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg shadow-sm p-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3">
+                                        <i class="fas fa-phone text-green-600"></i>
+                                    </div>
+                                    <h4 class="font-medium text-sm mb-1">Telefon</h4>
+                                    <a href="tel:+902121234567" class="text-green-600 text-sm">+90 (212) 123 45 67</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="yururluk" class="policy-section">
+                        <h2 class="text-2xl font-bold policy-title">13. Yürürlük</h2>
+                        
+                        <p>Bu Gizlilik Politikası, sitemizi kullanmaya başladığınız andan itibaren geçerlidir.</p>
+                        
+                        <div class="mt-6 p-4 bg-gray-50 border rounded-lg">
+                            <p class="text-sm text-gray-600"><strong>Not:</strong> Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve ilgili mevzuata uygun olarak hazırlanmıştır.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-gray-600">&copy; 2025 Kuran-ı Kerim. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="/" class="text-gray-600 hover:text-green-600">Ana Sayfa</a>
+                    <a href="/sureler" class="text-gray-600 hover:text-green-600">Sureler</a>
+                    <a href="/dualar" class="text-gray-600 hover:text-green-600">Dualar</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="./assets/script.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // TOC aktif link takibi
+            const sections = document.querySelectorAll('.policy-section');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const backToTop = document.getElementById('backToTop');
+            
+            // Kaydırma konumuna göre aktif bölümü işaretle
+            function setActiveLink() {
+                let found = false;
+                
+                sections.forEach((section) => {
+                    const rect = section.getBoundingClientRect();
+                    const id = section.getAttribute('id');
+                    
+                    // Ekranda görünür olan ilk bölümü işaretle
+                    if (rect.top <= 100 && rect.bottom >= 100 && !found) {
+                        tocLinks.forEach((link) => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                            }
+                        });
+                        found = true;
+                    }
+                });
+                
+                // Yukarı çık butonu görünürlüğü
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+            
+            // Sayfa yüklendiğinde ve kaydırıldığında aktif bağlantıyı kontrol et
+            window.addEventListener('scroll', setActiveLink);
+            setActiveLink(); // Sayfa yüklendiğinde ilk kontrol
+            
+            // Toc bağlantılarına tıklama olayı
+            tocLinks.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // URL'yi güncelle (isteğe bağlı)
+                    history.pushState(null, null, targetId);
+                });
+            });
+            
+            // Yukarı çık butonu
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Share button functionality
+            document.getElementById('shareBtn').addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Gizlilik Politikası - Kuran-ı Kerim',
+                        text: 'Kuran-ı Kerim uygulamasının gizlilik politikası',
+                        url: window.location.href
+                    }).then(() => {
+                        console.log('Paylaşım başarılı');
+                    }).catch(error => {
+                        console.log('Paylaşım hatası:', error);
+                    });
+                } else {
+                    // Fallback
+                    alert('Tarayıcınız paylaşım özelliğini desteklemiyor. Linki kopyalayıp paylaşabilirsiniz.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

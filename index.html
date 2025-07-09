@@ -285,9 +285,11 @@
 				left: 1rem;
 			}
 
-			nav{display: none;}
+			nav {
+				display: none;
+			}
 
-			#downloadBtn{
+			#downloadBtn {
 				display: none;
 			}
 		}
@@ -394,9 +396,25 @@
 		}
 
 		@media (min-width: 768px) {
+
 			.mobile-menu,
 			.menu-overlay {
 				display: none;
+			}
+		}
+
+		#cookieBanner {
+			transform: translateY(100%);
+			z-index: 1000;
+			/* Daha yüksek z-index */
+			bottom: 0;
+			position: fixed;
+			/* Sabit pozisyon */
+		}
+
+		@media (max-width: 768px) {
+			#cookieBanner {
+				padding-bottom: env(safe-area-inset-bottom);
 			}
 		}
 	</style>
@@ -431,7 +449,7 @@
 					<a href="#features" class="nav-item text-gray-700 hover:text-green-600 font-medium">Özellikler</a>
 					<a href="#about" class="nav-item text-gray-700 hover:text-green-600 font-medium">Hakkımızda</a>
 					<a href="#footer" class="nav-item text-gray-700 hover:text-green-600 font-medium">İletişim</a>
-					<a href="settings.html" class="nav-item text-gray-700 hover:text-green-600 font-medium"><i
+					<a href="/ayarlar" class="nav-item text-gray-700 hover:text-green-600 font-medium"><i
 							class="fas fa-cog"></i> Ayarlar</a>
 
 				</nav>
@@ -837,7 +855,7 @@
 						Modern teknoloji ile İslami değerleri buluşturan,
 						Kuran-ı Kerim okuma ve anlama uygulaması.
 					</p>
-					
+
 				</div>
 
 				<div>
@@ -846,9 +864,11 @@
 						<li><a href="#" class="text-gray-400 hover:text-white transition">Ana Sayfa</a></li>
 						<li><a href="quran.html" class="text-gray-400 hover:text-white transition">Kuran-ı Kerim</a>
 						</li>
-						<li><a href="/zikirmatik" class="text-gray-400 hover:text-white transition">Zikirmatik</a></li>
+
 						<li><a href="/favoriler" class="text-gray-400 hover:text-white transition">Favoriler</a></li>
 						<li><a href="/ayarlar" class="text-gray-400 hover:text-white transition">Ayarlar</a></li>
+						<li><a href="/gizlilik-politikasi"
+								class="text-gray-400 hover:text-white transition">Gizlilik</a></li>
 					</ul>
 				</div>
 
@@ -861,7 +881,9 @@
 								Sureleri</a></li>
 						<li><a href="/dualar" class="text-gray-400 hover:text-white transition">Namaz Duaları</a>
 						</li>
-						<li><a href="/abdest-rehberi" class="text-gray-400 hover:text-white transition">Abdest Rehberi</a>
+						<li><a href="/zikirmatik" class="text-gray-400 hover:text-white transition">Zikirmatik</a></li>
+						<li><a href="/abdest-rehberi" class="text-gray-400 hover:text-white transition">Abdest
+								Rehberi</a>
 						</li>
 					</ul>
 				</div>
@@ -900,7 +922,8 @@
 		</button>
 
 		<div class="mobile-menu-header">
-			<div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-400 rounded-full flex items-center justify-center">
+			<div
+				class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-400 rounded-full flex items-center justify-center">
 				<i class="fas fa-book-quran text-white text-lg"></i>
 			</div>
 			<div class="mobile-menu-title">Kuran-ı Kerim</div>
@@ -995,6 +1018,40 @@
 		</div>
 	</div>
 
+	<!-- Çerez Bilgilendirme Banner'ı - index.html dosyasında </body> etiketinden hemen önce ekleyin -->
+	<div id="cookieBanner"
+		class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg transform transition-transform duration-300 z-50">
+		<div class="container mx-auto p-4">
+			<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+				<div class="flex items-start md:items-center gap-3">
+					<div class="text-green-600 text-2xl mt-1 md:mt-0">
+						<i class="fas fa-cookie-bite"></i>
+					</div>
+					<div>
+						<p class="text-sm text-gray-600">
+							Bu site, size daha iyi bir deneyim sunmak için çerezleri kullanır. Sitemizi kullanarak,
+							<a href="/gizlilik-politikasi"
+								class="text-green-600 underline hover:text-green-700">Gizlilik Politikamız</a>'da
+							açıklandığı şekilde çerez kullanımını kabul etmiş olursunuz.
+						</p>
+					</div>
+				</div>
+				<div class="flex gap-3">
+					<button id="cookieReject"
+						class="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-100 transition">
+						Reddet
+					</button>
+					<button id="cookieAccept"
+						class="px-4 py-2 text-sm text-white bg-green-600 rounded-lg hover:bg-green-700 transition">
+						Kabul Et
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 	<!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="./assets/script.js"></script>
@@ -1020,6 +1077,41 @@
 					$('html, body').stop().animate({
 						scrollTop: target.offset().top - 80
 					}, 1000);
+				}
+			});
+
+			$(document).ready(function () {
+				// Çerez tercihini kontrol et
+				if (!localStorage.getItem('cookieConsent')) {
+					// Transform özelliğini doğrudan kaldıralım, setTimeout ile değil
+					$('#cookieBanner').css('transform', 'translateY(0)');
+				}
+
+				// Çerez kabul etme
+				$('#cookieAccept').on('click', function () {
+					localStorage.setItem('cookieConsent', 'accepted');
+					$('#cookieBanner').css('transform', 'translateY(100%)');
+					showToast('Çerez tercihiniz kaydedildi. Teşekkür ederiz!');
+				});
+
+				// Çerez reddetme
+				$('#cookieReject').on('click', function () {
+					localStorage.setItem('cookieConsent', 'rejected');
+					$('#cookieBanner').css('transform', 'translateY(100%)');
+					showToast('Çerez tercihiniz kaydedildi. Sadece gerekli çerezler kullanılacak.');
+				});
+
+				// Basit bir toast bildirimi gösterme fonksiyonu
+				function showToast(message) {
+					const toast = $('<div class="fixed bottom-20 right-4 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg z-50 toast-notification"></div>');
+					toast.text(message);
+					$('body').append(toast);
+
+					setTimeout(function () {
+						toast.fadeOut(function () {
+							toast.remove();
+						});
+					}, 3000);
 				}
 			});
 
@@ -1072,19 +1164,19 @@
 						window.location.href = 'quran.html';
 						break;
 					case 'counter':
-						window.location.href = 'counter.html';
+						window.location.href = '/zikirmatik';
 						break;
 					case 'bookmark':
-						window.location.href = 'bookmark.html';
+						window.location.href = '/favoriler';
 						break;
 					case 'dua-list':
-						window.location.href = 'dua-list.html';
+						window.location.href = '/dualar';
 						break;
 					case 'sure-list':
-						window.location.href = 'sure-list.html';
+						window.location.href = '/sureler';
 						break;
 					case 'abdest':
-						window.location.href = 'abdest.html';
+						window.location.href = '/abdest-rehberi';
 						break;
 				}
 			});

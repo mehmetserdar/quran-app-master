@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayfa Bulunamadı - 404 | Kuran-ı Kerim</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Aradığınız sayfa bulunamadı. Ana sayfaya dönün veya diğer içeriklere göz atın.">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/image/favicon.png" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #1a936f;
+            --secondary-color: #8FD19E;
+            --accent-color: #2d4a3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-modern {
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            box-shadow: 0 4px 20px rgba(26, 147, 111, 0.2);
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #1a936f 0%, #8FD19E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .suggested-link {
+            transition: all 0.3s ease;
+        }
+
+        .suggested-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-bg {
+            background: rgba(26, 147, 111, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header-modern text-white">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-book-quran"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">Kuran-ı Kerim</h1>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center py-12 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <!-- Left Column - Error Info -->
+                <div class="w-full md:w-1/2 text-center md:text-left">
+                    <h2 class="error-code mb-4">404</h2>
+                    <h3 class="text-3xl font-bold mb-3">Sayfa Bulunamadı</h3>
+                    <p class="text-gray-600 mb-8">Aradığınız sayfa taşınmış, kaldırılmış veya hiç var olmamış olabilir.</p>
+                    
+                    <div class="space-y-4">
+                        <a href="index.html" class="inline-block bg-gradient-to-r from-green-600 to-green-500 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all">
+                            <i class="fas fa-home mr-2"></i> Ana Sayfaya Dön
+                        </a>
+                        
+                        <div class="flex items-center justify-center md:justify-start mt-6">
+                            <span class="text-gray-500 mr-3">Veya</span>
+                            <a href="javascript:history.back()" class="text-green-600 hover:text-green-700 font-medium flex items-center">
+                                <i class="fas fa-arrow-left mr-2"></i> Önceki Sayfaya Dön
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Illustration -->
+                <div class="w-full md:w-1/2">
+                    <div class="floating-element text-center">
+                        <!-- Örnek bir 404 görseli -->
+                        <div class="mx-auto w-64 h-64 bg-gradient-to-br from-green-50 to-green-100 rounded-full flex items-center justify-center pulse-animation">
+                            <i class="fas fa-compass text-8xl text-green-600 opacity-70"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggested Content -->
+            <div class="mt-20">
+                <h4 class="text-xl font-semibold mb-6 text-center">Bunlar ilginizi çekebilir:</h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="quran.html" class="bg-white p-5 rounded-xl flex items-start suggested-link">
+                        <div class="icon-bg">
+                            <i class="fas fa-book-quran"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold mb-1">Kuran Oku</h5>
+                            <p class="text-sm text-gray-600">Sure ve ayetlere göz atın</p>
+                        </div>
+                    </a>
+
+                    <a href="dua-list.html" class="bg-white p-5 rounded-xl flex items-start suggested-link">
+                        <div class="icon-bg">
+                            <i class="fas fa-praying-hands"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold mb-1">Dualar</h5>
+                            <p class="text-sm text-gray-600">Namaz dualarını öğrenin</p>
+                        </div>
+                    </a>
+
+                    <a href="counter.html" class="bg-white p-5 rounded-xl flex items-start suggested-link">
+                        <div class="icon-bg">
+                            <i class="fas fa-counter"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold mb-1">Zikirmatik</h5>
+                            <p class="text-sm text-gray-600">Dijital tesbih çekin</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-gray-600">&copy; 2025 Kuran-ı Kerim. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="index.html" class="text-gray-600 hover:text-green-600">Ana Sayfa</a>
+                    <a href="sure-list.html" class="text-gray-600 hover:text-green-600">Sureler</a>
+                    <a href="dua-list.html" class="text-gray-600 hover:text-green-600">Dualar</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Track page not found for analytics -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Günlüğe hatalı URL'yi kaydet
+            const currentPath = window.location.pathname;
+            const referrer = document.referrer;
+            
+            // Eğer analytics kullanıyorsanız, 404 olayını kaydedebilirsiniz
+            if (typeof gtag === 'function') {
+                gtag('event', '404_error', {
+                    'page_path': currentPath,
+                    'referrer': referrer
+                });
+            }
+            
+            console.log('404 Error - Path: ' + currentPath + ' | Referrer: ' + referrer);
+            
+            // Arama çubuğunu otomatik odaklama
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
